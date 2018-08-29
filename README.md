@@ -8,7 +8,7 @@ In order to use the code in this repository, you need to download a Stack Overfl
 
 ## Structure
 
-Baseline.py is a script to identify sentences from Stack Overflow text that match any of the word patterns that are included in patterns.txt. This is the word patterns that were based on Martin's paper of finding "useful sentences" (indispensible knowledge) in documentation. This was supposed to be the baseline we compare to, but actually didn't really work out in the end.
+Baseline.py is a script to identify sentences from Stack Overflow text that match any of the word patterns that are included in patterns.txt. This is the word patterns that were based on Martin's paper of finding "useful sentences" (indispensible knowledge) in documentation. This was supposed to be the baseline we compare to, but actually didn't really work out in the end. To try to generalize from there, the current script ignores order in the pattersn and the CW term. However, that still did not improve the results much.
 
 read_db.py is a script that needs a database file called "Witt.db" to work. I did not include the file here since it's too large (~1.4GB) but it's available on Google drive. This script extracts all the Stack Overflow tags (included in Tags.xml) and identifies their classification from the Witt.db database. It returns a dictionaty that other scripts use but can be modified to do anything you want with those classifications. 
 
