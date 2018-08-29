@@ -1,0 +1,361 @@
+should, re-check, caller
+CW, must, recommend, alternative
+class, implementers, only, CW
+CW, compose, following
+must, specify, object
+subclass, must, CW
+pass, must, CW
+must, address, subclass
+ignore, should, CW
+class, specify, should
+class, obsolete, is
+CW, must, determine
+CW, cannot, pass
+recommend, synchronize, thread
+specify, should, argument
+not, exceed, number, should
+danger, lead, CW, might
+call, be, should
+return, will, implementation
+may cause, should, load, not
+must, not, CW, null
+specify, object, should
+store, must, CW
+subclass, override, should
+will, object, not, warning
+cannot, need, action, use
+CW, should, value, not
+call, override, subclass, should
+attribute, CW, should
+CW, must, external, object
+permission, warning, CW
+array, null, cannot, be
+should, represent, CW, specify
+conditions, mandatory, be
+implement, CW, must, not
+override, CW, must, implementor
+stop, have, CW
+CW, transmit, cannot
+not, equal, lower, must
+conditions, must, mandatory
+implementor, should, not, delete
+should, be, CW
+implementation, should, update
+return, should, value
+at least, have, must
+not, should, initialize
+provide, implementor, should
+not, supported, value, should
+only, may, one
+should, alter, CW
+CW, leak, lead, could
+not, CW, value, valid
+should, specify, implementer
+immutable, instance
+oppose, could, use
+send, must, information
+CW, must, object, process
+CW, lie, must
+provide, method, should
+warning, could, CW, lead
+will, compatible, warning, object
+arguments, must
+alter must, implementer
+not, obsolete, class
+subclass, address, should
+unspecified, behavior
+specify, following, justify
+verify, should, CW
+get, call, should
+must, possess, field
+user, must, refer
+should, size, array, match
+delegate, must, not
+permission, CW, danger
+CW, must, begin, not
+CW, not, must, retain
+behavior, CW, unpredictable
+should, arguments
+cannot, nest, be
+must, provide, implementor
+implementation, has, provide
+should, value, CW
+convention, CW, usually
+order, define, not
+serialize, split, must
+install, method, component
+should, implement, specify
+should, not, method, return
+override, must, implementor
+CW, access, synchronize
+has, component, instance, provide
+will, compatible, object, not
+override, implementor, should
+interface, specify, should
+CW, not, should, change
+must, deserialize, split
+not, must, value, supported
+must, data, support, format
+should, implementor, concurrent, not
+invoke, must, never, CW
+must, subclass, implementor, override
+CW, must, be, not
+override, subclass, must
+should, not, empty
+must, CW, implemente, method
+not, synchronize, concurrent, CW
+not, CW, thread-safe, object
+ignore, CW, must
+danger, secret, access, keep
+may, differ, behavior
+synchronize, CW, not, instance
+implementor, override, must, interface
+contain, CW, immutable
+should, lock, change, threads
+direct, not, access, do
+warning, thread, unsafe
+cannot, alter, CW
+possess, implementation, must
+null, not, CW
+CW, should, subclass, not
+specification, syntax, use, consist
+should, CW, adjust
+delete, concurrent, should, implementor
+not, does, guarantee
+only, should, CW, use
+implement, deny, should
+reject, CW, must
+following, specify, relation
+empty, cannot
+use, CW, should, method
+never, CW, invoke, will
+could, CW, pass
+CW, must, distinguish
+array, must, size, match
+lead, could, lead
+process, should, implementation
+use, might, aware, oppose
+have, only, use, CW
+should, store, CW
+CW, know, must
+update, CW, cannot
+lock, recommend, thread
+number, must, exceed, not
+CW, should, refuse
+CW, support, null, not
+cannot, use, CW
+possess, must, CW
+CW, recommend, could, alternative
+initialize, be, cannot
+require, is, CW
+object, CW, not, must
+leak, will, CW, lead
+access, threads, lock, CW
+wrap, should, CW
+should, give, implementor
+should, not, override
+must, make, CW, feature
+thread, not, safe
+use, must, CW, only
+could, return, implementation
+may, steal, malicious
+must, ignore, CW, contain
+must, retain, CW
+CW, component, provide, has
+should, equal, not
+synchronized, multithreaded, CW, not
+not, user, refer, must
+should, return, CW
+application, encode, must
+specify, must, CW, represent
+CW, verify, must
+could, lead, warning
+may, flow, alter
+CW, invoke, should, never
+should, implement, permit
+null, string, may, return
+safe, warning, thread
+should, consult, obtain
+be, quote, must
+attribute, CW, should, contain
+responsibility, delete, implementation
+empty, not, must
+CW, reject, should
+must, obtain, consult
+must, CW, stop
+should, CW, modify, threads
+CW, guarantee, return
+must, implement, forbid
+CW, valid, value
+could, lead, CW, danger
+should, not, override
+threads, concurrent, should, lock
+implementor, give, must
+specify, implementer, must
+CW, must, adjust
+must, ensure, applications, CW
+specify, CW, could, include
+CW, hide, should
+behavior, differ, must
+equal, lower, must, be
+valid, should, value
+must, contain, not
+string, null, return, not
+should, behavior, differ
+be, should, CW, change
+elements, be, cannot, null
+CW, malicious, could
+danger, will, lead, CW
+must, not, CW
+subclass, must, not, CW
+conditions, should, mandatory
+CW, lead, warning, will
+must, refuse, CW
+number, exceed, must
+following, CW, contraint
+must, CW, close
+CW, adjust, have
+must, implement, interface, CW
+greater, CW, should
+behavior, undefine, CW
+should, threads, concurrent
+CW, for, should
+should, CW, delegate, implementation
+must, value, return
+valid, CW, should
+subclass, specify, should
+never, invoke, CW, can
+change, not, CW, should
+CW, method, return, not
+require, reader, not
+should, manipulate, not, CW
+blank, not, must
+should, CW, disallow
+CW, distinguish, should
+result, CW, value
+string, empty, return, may
+implementation, exception, raise, should
+must, greater, CW
+operation, include, should
+not, must, greater, equal
+must, implementation, alter
+should, value, CW, be
+call, should, not, be
+value, use, must, override
+recreate, responsibility, implementation
+value, invalid
+contain, not, should
+CW, override, subclass, should
+trust, affect, danger
+CW, be, must
+should, pass, CW
+affect, danger, relationship
+method, CW, return, must
+behavior, random, CW
+implement, deny, must
+alter, should, CW
+should, call, not, CW
+caller, re-check, must
+not, should, update, CW
+permit, implement, must
+install, component, input
+CW, object, not, should
+threads, synchronize, should, concurrent
+update, implementation, must
+return, not, null, must
+at least, register, CW
+should, information, send
+CW, remove, should, separate
+must, disallow, CW
+know, should, CW
+override, methods, implementor, must
+CW, include, should, specify
+refer, should, not, user
+implement, refuse, should
+value, valid, not
+CW, remove, separate, must
+application, responsibility, CW
+implementation, return, should
+CW, must, begin
+grant, CW, permission, danger
+may, behavior, implementation, differ
+CW, determine, should
+must, include, operation
+recognize, CW, must
+concurrent, CW, instance, synchronize
+refuse, implement, could
+CW, push, should
+applications, use, not, expect
+does, takes, not, CW
+not, null, should
+serialize, should, split
+define, does, note, not
+must, threads, concurrent
+implement, forbid, should
+implement, be, must, object
+cause, should, not, load
+specify, must, field
+must, consistent, behavior
+must, CW, not, alter
+must, user, pass, CW
+return, not, implementation, should
+call, should, repeat
+lead, will, privacy, CW
+override, subclass, should, implementation
+implementation, support, require
+require, reader, should
+must, call, get
+CW, must, hide
+should, not, equivalent
+match, size, must
+implement, CW, should
+not, implementation, synchronize
+cannot, change, CW
+event, must, CW, contain
+must, CW, null
+call, CW, cannot
+provide, has, method
+CW, idenitfy, should, unique
+should, CW, close
+implement, CW, must
+not, should, delegate
+should, not, CW
+must, not, override
+must, initialize, not
+could, CW, lead, privacy
+CW, modify, cannot
+CW, adjust, must, not
+return, CW, must
+use, not, CW, should
+should, equivalent, be
+equal, be, must, greater
+not, will, implementation, return
+not, warning, compatible, object
+empty, return, string, not
+field, specify, should
+user, should, refer
+require, implementation, design
+CW, alter, lock, threads
+value, must, CW
+value, be, should, supported
+guarantee, not, may
+CW, should, stop
+null, not, must
+override, use, should, value
+must, repeat, call
+receive, must, non-null
+specify, must, CW, include
+should, lock, CW, thread
+implementation, must, provide
+CW, external, should, object
+not, equal, must
+subclass, CW, should
+unique, must, CW, identify
+null, support, CW
+should, size, match
+ignore, CW, should, contain
+return, CW, might, fail
+attribute, contain, must, CW
+should, implement, provide
+CW, should, null
+require, must, CW
