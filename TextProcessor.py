@@ -40,7 +40,7 @@ class TextProcessor:
 		for item in condition:
     			if item:
         			final += item + " "
-		
+
 		return final
 
 	def get_index(snippet):
@@ -56,21 +56,20 @@ class TextProcessor:
 		res = []
 		for item in items:
 			if "in if" in item.lower():
-            			index = get_index(item)
+				index = get_index(item)
 			else:
-            			if index:
-                			if "(, ,)" in item: 
+				if index:
+					if "(, ,)" in item:
 						return res
 
 					if get_index(item) >= index:
 						res.append(get_word(item))
-
 					elif get_index(item) < index:
                     				return res
-            			else:
-                			continue
+            	else:
+                	continue
 
-    		return res
+    	return res
 
 def main():
 	test = "Test is a common name for test code. Use a different name if you want to signify real code"
