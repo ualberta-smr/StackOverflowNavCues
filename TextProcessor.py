@@ -67,9 +67,9 @@ class TextProcessor:
 					elif get_index(item) < index:
                     				return res
 				else:
-                	continue
+					continue
 
-    	return res
+		return res
 
 def main():
 	test = "Test is a common name for test code. Use a different name if you want to signify real code"
