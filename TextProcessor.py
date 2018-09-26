@@ -20,3 +20,12 @@ class TextProcessor:
 
 	def get_annotations():
 		return annotations
+
+	def main():
+		test = "Test is a common name for test code. Use a different name if you want to signify real code"
+		TextProcessor text_processor(test)
+		text_processor.annotate_input()
+		print (text_processor.get_annotations)
+
+	if __name__== "__main__:
+		main()
