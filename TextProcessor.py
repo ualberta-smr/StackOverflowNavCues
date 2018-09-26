@@ -66,7 +66,7 @@ class TextProcessor:
 						res.append(get_word(item))
 					elif get_index(item) < index:
                     				return res
-            	else:
+				else:
                 	continue
 
     	return res
