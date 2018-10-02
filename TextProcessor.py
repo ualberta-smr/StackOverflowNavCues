@@ -1,8 +1,8 @@
 from stanfordcorenlp import StanfordCoreNLP
 from pycorenlp import StanfordCoreNLP as pycorenlp_StanfordCoreNLP
 
-class TextProcessor:
 
+class TextProcessor:
 
 	def __init__(self, input, properties = {
         'annotators': 'pos,parse',
@@ -31,6 +31,15 @@ class TextProcessor:
 			res += word['word'] + " "
 
 		return res
+
+	def get_conditional_sentences(self):
+		conditional_sentences = list()
+		index = 0
+		for index in len(self.get_sentences()):
+			if " if" in sentence_text.lower():
+				condition = get_condition_from_sentence(index)
+				if condition:
+
 
 	def get_condition_from_sentence(self, sentence_index):
 		sentence = self.annotations['sentences'][sentence_index]
