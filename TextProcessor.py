@@ -46,33 +46,35 @@ class TextProcessor:
 
 		return final
 
-	def get_index(snippet):
-		count = 0
-		for item in snippet:
-			if item == " ":
-				count += 1
+
+def get_index(snippet):
+	count = 0
+	for item in snippet:
+		if item == " ":
+			count += 1
+		else:
+			return count
+
+
+def get_tree_from_parse_items(items):
+	index = None
+	res = []
+	for item in items:
+		if "in if" in item.lower():
+			index = get_index(item)
+		else:
+			if index:
+				if "(, ,)" in item:
+					return res
+
+				if get_index(item) >= index:
+					res.append(get_word(item))
+				elif get_index(item) < index:
+                				return res
 			else:
-				return count
+				continue
 
-	def get_tree_from_parse_items(items):
-		index = None
-		res = []
-		for item in items:
-			if "in if" in item.lower():
-				index = get_index(item)
-			else:
-				if index:
-					if "(, ,)" in item:
-						return res
-
-					if get_index(item) >= index:
-						res.append(get_word(item))
-					elif get_index(item) < index:
-                    				return res
-				else:
-					continue
-
-		return res
+	return res
 
 def main():
 	test = "Test is a common name for test code. Use a different name if you want to signify real code"
