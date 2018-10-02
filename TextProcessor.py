@@ -18,6 +18,9 @@ class TextProcessor:
 	def get_sentences(self):
 		return self.annotations['sentences']
 
+	def get_num_sentences(self):
+		return self.annotations['sentences'].size()
+
 	def get_annotations(self):
 		return self.annotations
 
@@ -73,9 +76,7 @@ class TextProcessor:
 
 def main():
 	test = "Test is a common name for test code. Use a different name if you want to signify real code"
-	text_processor = TextProcessor(test, {
-        'annotators': 'pos,parse,ssplit',
-        'outputFormat': 'json'})
+	text_processor = TextProcessor(test)
 	text_processor.annotate_input()
 	print (text_processor.get_sentence_text(0))
 	print (text_processor.get_sentence_text(1))
