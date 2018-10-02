@@ -37,7 +37,7 @@ class TextProcessor:
 
 		parse_res = sentence['parse']
 		split = parse_res.split("\n")
-		condition = get_tree(split)
+		condition = get_tree_from_parse_items(split)
 
 		final = ""
 		for item in condition:
