@@ -76,6 +76,21 @@ def get_tree_from_parse_items(items):
 
 	return res
 
+
+def get_word(item):
+    res = ""
+    for char in item[::-1]:
+        if char == " ":
+            return res
+        elif char == ")":
+            continue
+        elif char == "(":
+            return None
+        else:
+            res = char + res
+
+    return res
+
 def main():
 	test = "Test is a common name for test code. Use a different name if you want to signify real code"
 	text_processor = TextProcessor(test)
