@@ -13,7 +13,9 @@ def get_paragraphs(post_content):
 
 
 SITE = StackAPI('stackoverflow')
-questions = SITE.fetch('questions', fromdate=datetime(2011,11,11), todate=datetime(2011,11,19), min=10, sort='votes', tagged='java')
+questions = SITE.fetch('questions', fromdate=datetime(2011,11,11), todate=datetime(2011,11,19), min=10, sort='votes', tagged='java', filter='withbody')
 for question in questions['items']:
 	print ("Question title: ", question['title'])
-	print ( get_paragraphs(question['body']))
+	for paragraph in get_paragraphs(question['body']):
+		text_processor = TextProcessor(paragraph)
+		text_processor.annotate_input()
