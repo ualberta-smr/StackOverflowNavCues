@@ -95,9 +95,10 @@ def main():
 	test = "Test is a common name for test code. Use a different name if you want to signify real code"
 	text_processor = TextProcessor(test)
 	text_processor.annotate_input()
-	print (text_processor.get_sentence_text(0))
-	print (text_processor.get_sentence_text(1))
-	print (text_processor.get_condition_from_sentence(0))
+	print ("sentence 1: " , text_processor.get_sentence_text(0))
+	print ("sentence 2: ",  text_processor.get_sentence_text(1))
+	print ("condition 1: " , text_processor.get_condition_from_sentence(0))
+	print ("condition 2: ", text_processor.get_condition_from_sentence(1))
 
 if __name__ == "__main__":
 	main()
