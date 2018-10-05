@@ -15,8 +15,11 @@ def find_cond_sentences(questions):
 
 def main():
 	SITE = StackAPI('stackoverflow')
-	questions = SITE.fetch('questions', fromdate=datetime(2011,11,11), todate=datetime(2011,11,19), min=10, sort='votes', tagged='java', filter='!-*jbN-o8P3E5')
+	questions = SITE.fetch('questions', fromdate=datetime(2011,11,11), todate=datetime(2011,11,11), min=10, sort='votes', tagged='java', filter='!-*jbN-o8P3E5')
+	#print(questions)
 	cond_sentences = find_cond_sentences(questions)
+	for cond_sentence in cond_sentences:
+		cond_sentence.print()
 
 
 if __name__ == "__main__":
