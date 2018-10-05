@@ -1,8 +1,8 @@
 from stackapi import StackAPI
 from datetime import datetime
 from so_helper import get_paragraphs
-import corenlp_helper
-import ConditionalSentence 
+from corenlp_helper import *
+from ConditionalSentence import ConditionalSentence
 
 def find_cond_sentences(questions):
 	all_cond_sentences = list()
