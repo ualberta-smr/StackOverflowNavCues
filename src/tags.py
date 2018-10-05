@@ -5,6 +5,7 @@ from pyquery import PyQuery
 TAGS_LIST = dict()
 
 def load_tags():
+    global TAGS_LIST
     for event, elem in etree.iterparse('Tags.xml', events=('start', 'end')):
         if event == "start":
             if elem.tag == "row":
