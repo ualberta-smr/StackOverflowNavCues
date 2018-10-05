@@ -13,14 +13,14 @@ def set_core_nlp_properties(properties):
 def init_corenlp():
 	corenlp = pycorenlp_StanfordCoreNLP('http://localhost:9000')
 
-def get_cond_sentences(paragraph, ques_d, answ_id, parag_index):
+def get_cond_sentences(paragraph, q_id, answ_id, parag_index):
 	cond_sentences = list()
 	annotations = corenlp.annotate(paragraph, corenlp_properties)
 	for sent_index in annotations['sentences'].size():
 		sentence_text = get_sentence_text(sentences[sent_index])
 		if " if" in sentence_text.lower():
 			#initialize conditional sentence with basic info
-			cond_sentence = ConditionalSentence(sentence=sentence_text, question_id=ques_id, answer_id=answ_id, sentence_index=sent_index, paragraph_index=parag_index)
+			cond_sentence = ConditionalSentence(sentence=sentence_text, question_id=q_id, answer_id=answ_id, sentence_index=sent_index, paragraph_index=parag_index)
 
 			#get information about condition, nfrs etc
 			cond_sentence.set_condition(get_condition(sentence))
