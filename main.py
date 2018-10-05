@@ -10,7 +10,7 @@ def find_cond_sentences(questions):
 		for answer in question['answers']:
 			paragraphs = get_paragraphs(answer['body'])
 			for paragraph_index, paragraph in enumerate(paragraphs):
-				cond_sentences = get_cond_sentences(paragraphs, question_id=question['id'], answer_id=answer['id'], paragraph_index=paragraph_index)
+				cond_sentences = get_cond_sentences(paragraphs, question_id=question['question_id'], answer_id=answer['answer_id'], paragraph_index=paragraph_index)
 				all_cond_sentences.append(cond_sentences)
 
 def main():
