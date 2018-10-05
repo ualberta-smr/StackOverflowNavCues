@@ -8,6 +8,7 @@ def find_cond_sentences(questions):
 	all_cond_sentences = list()
 	for question in questions['items']:
 		for answer in question['answers']:
+			print ("answer:", answer)
 			paragraphs = get_paragraphs(answer)
 			for paragraph_index in len(paragraphs):
 				cond_sentences = get_cond_sentences(parargaphs.get(paragraph_index), question_id=question['id'], answer_id=answer['id'], paragraph_index=paragraph_index)
