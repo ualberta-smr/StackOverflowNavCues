@@ -21,9 +21,7 @@ def get_cond_sentences(paragraph, ques_d, answ_id, parag_index):
 		sentence_text = get_sentence_text(sentences[sent_index])
 		if " if" in sentence_text.lower():
 			#initialize conditional sentence with basic info
-			ConditionalSentence cond_sentence(sentence=sentence_text, question_id=ques_id, answer_id=answ_id)
-			cond_sentences.set_sentence_index(sent_index)
-			cond_sentence.set_paragraph_index(parag_index)
+			cond_sentence = ConditionalSentence(sentence=sentence_text, question_id=ques_id, answer_id=answ_id, sentence_index=sent_index, paragraph_index=parag_index)
 
 			#get information about condition, nfrs etc
             cond_sentence.set_condition(get_condition(sentence))
