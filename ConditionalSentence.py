@@ -1,6 +1,6 @@
 class ConditionalSentence:
 
-	def __init__(self, sentence, question_id, answer_id, paragraph_index=None, sentence_index=None, condition=None, tags=None, nfreqs=None, nouns=None, baseline=True):
+	def __init__(self, sentence, question_id, answer_id, paragraph_index=None, sentence_pos=None, condition=None, tags=None, nfreqs=None, nouns=None, baseline=True):
 		self.sentence = sentence
 		self.question_id = question_id
 		self.answer_id = answer_id

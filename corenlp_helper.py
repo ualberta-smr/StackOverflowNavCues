@@ -1,30 +1,37 @@
-import ConditionalSentence
+from ConditionalSentence import ConditionalSentence
 from stanfordcorenlp import StanfordCoreNLP
 from pycorenlp import StanfordCoreNLP as pycorenlp_StanfordCoreNLP
-
+import re
+from regex import REGEX_LIST
+from tags import load_tags, TAGS_LIST, QUALITY_WORDS, NOUN_IDENTIFIERS
+import sys
 
 corenlp_properties={'annotators': 'pos,parse', 'outputFormat': 'json'}
 
 corenlp = None
 
 def set_core_nlp_properties(properties):
+	global corenlp_properties
 	corenlp_properties=properties
 
 def init_corenlp():
-	corenlp = pycorenlp_StanfordCoreNLP('http://localhost:9000')
+	print("init corenlp")
+	global corenlp
+	corenlp=pycorenlp_StanfordCoreNLP('http://localhost:9000')
 
 def get_cond_sentences(paragraph, q_id, answ_id, parag_index):
 	cond_sentences = list()
 	annotations = corenlp.annotate(paragraph, corenlp_properties)
-	for sent_index in annotations['sentences'].size():
-		sentence_text = get_sentence_text(sentences[sent_index])
+	for sent_index, sentence in enumerate(annotations['sentences']):
+		sentence_text = get_sentence_text(sentence)
 		if " if" in sentence_text.lower():
 			#initialize conditional sentence with basic info
-			cond_sentence = ConditionalSentence(sentence=sentence_text, question_id=q_id, answer_id=answ_id, sentence_index=sent_index, paragraph_index=parag_index)
+			cond_sentence = ConditionalSentence(sentence=sentence_text, question_id=q_id, answer_id=answ_id, sentence_pos=sent_index, paragraph_index=parag_index)
 
 			#get information about condition, nfrs etc
-			cond_sentence.set_condition(get_condition(sentence))
-			cond_sentence.set_nfreqs(get_non_func(condition))
+			condition = get_condition_from_sentence(sentence)
+			cond_sentence.set_condition(condition)
+			#cond_sentence.set_nfreqs(get_non_func(condition))
 			nouns_in_cond = list(set(get_nouns(sentence, condition) + get_regex_nouns(sentence_text)))
 			cond_sentence.set_nouns(nouns_in_cond)
 			tags_in_cond = get_tags(nouns_in_cond)
@@ -38,12 +45,32 @@ def get_cond_sentences(paragraph, q_id, answ_id, parag_index):
 
 	return cond_sentences
 
+def get_regex_nouns(sentence):
+	result = []
+	for pattern in REGEX_LIST:
+		for word in sentence.split():
+			if re.match(pattern, word):
+				result.append(word)
+
+	return result
+
 def get_tags(word_list):
 	res = []
 	for word in word_list:
 		if word.lower() in TAGS_LIST:
 			res.append(word.lower())
 
+	return res
+
+
+def get_non_func(string):
+	res = []
+
+	if string:
+		for word in re.sub("[^\w]", " ",  string).split():
+			if word.lower() in QUALITY_WORDS:
+				res.append(word)
+	
 	return res
 
 def get_sentence_text(sentence):
