@@ -44,6 +44,8 @@ class ConditionalSentence:
 	def get_nouns(self):
 		return self.nouns
 
+	def print(self, delimeter):
+		print(self.baseline, self.question_id, self.answer_id, self.paragraph_index, self.sentence_index, self.sentence, self.condition, self.tags, self.nfreqs, self.nouns, sep='|')
 
 
 
