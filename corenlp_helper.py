@@ -3,8 +3,7 @@ from stanfordcorenlp import StanfordCoreNLP
 from pycorenlp import StanfordCoreNLP as pycorenlp_StanfordCoreNLP
 
 
-corenlp_properties={'annotators': 'pos,parse',
-        'outputFormat': 'json'}
+corenlp_properties={'annotators': 'pos,parse', 'outputFormat': 'json'}
 
 corenlp = None
 
@@ -30,7 +29,7 @@ def get_cond_sentences(paragraph, ques_d, answ_id, parag_index):
 			cond_sentence.set_nouns(nouns_in_cond)
 			tags_in_cond = get_tags(nouns_in_cond)
 
-            #Our criteria for a "useful" conditional sentence is that it contains one of the SO tags in its condition
+			#Our criteria for a "useful" conditional sentence is that it contains one of the SO tags in its condition
 			if (len(tags_in_cond) != 0 ):
 				cond_sentence.set_not_baseline()
 				cond_sentence.set_tags(tags_in_cond)
@@ -40,12 +39,12 @@ def get_cond_sentences(paragraph, ques_d, answ_id, parag_index):
 	return cond_sentences
 
 def get_tags(word_list):
-    res = []
-    for word in word_list:
-        if word.lower() in TAGS_LIST:
-            res.append(word.lower())
+	res = []
+	for word in word_list:
+		if word.lower() in TAGS_LIST:
+			res.append(word.lower())
 
-    return res
+	return res
 
 def get_sentence_text(sentence):
 	res = ""
@@ -63,11 +62,11 @@ def get_condition_from_sentence(sentence):
 	final = ""
 	for item in condition:
 			if item:
-    			final += item + " "
+				final += item + " "
 
-    if (len(final) == 0):
-    	return None
-    else:
+	if (len(final) == 0):
+		return None
+	else:
 		return final
 
 
@@ -94,32 +93,32 @@ def get_tree_from_parse_items(items):
 				if get_index(item) >= index:
 					res.append(get_word(item))
 				elif get_index(item) < index:
-                				return res
+								return res
 			else:
 				continue
 
 	return res
 
 def get_nouns(sentence, condition):
-    res = []
-    words = set(re.sub("[^\w]", " ",  condition).split())
-    
-    for token in sentence["tokens"]:
-        if token["originalText"].lower() in words and token["pos"] in NOUN_IDENTIFIERS:
-            res.append(token["originalText"])
+	res = []
+	words = set(re.sub("[^\w]", " ",  condition).split())
 
-    return res
+	for token in sentence["tokens"]:
+		if token["originalText"].lower() in words and token["pos"] in NOUN_IDENTIFIERS:
+			res.append(token["originalText"])
+
+	return res
 
 def get_word(item):
-    res = ""
-    for char in item[::-1]:
-        if char == " ":
-            return res
-        elif char == ")":
-            continue
-        elif char == "(":
-            return None
-        else:
-            res = char + res
+	res = ""
+	for char in item[::-1]:
+		if char == " ":
+			return res
+		elif char == ")":
+			continue
+		elif char == "(":
+			return None
+		else:
+			res = char + res
 
-    return res
+	return res
