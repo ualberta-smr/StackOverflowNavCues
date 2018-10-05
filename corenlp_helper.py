@@ -20,8 +20,12 @@ def get_cond_sentences(paragraph, ques_d, answ_id, parag_index):
 	for sent_index in annotations['sentences'].size():
 		sentence_text = get_sentence_text(sentences[sent_index])
 		if " if" in sentence_text.lower():
-			ConditionalSentence cond_sentence(sentence=sentence_text, question_id=ques_id, answer_id=answ_id, sentence_index=sent_index)
+			#initialize conditional sentence with basic info
+			ConditionalSentence cond_sentence(sentence=sentence_text, question_id=ques_id, answer_id=answ_id)
+			cond_sentences.set_sentence_index(sent_index)
 			cond_sentence.set_paragraph_index(parag_index)
+
+			#get information about condition, nfrs etc
             cond_sentence.set_condition(get_condition(sentence))
             cond_sentence.set_nfreqs(get_non_func(condition))
             nouns_in_cond = list(set(get_nouns(sentence, condition) + get_regex_nouns(sentence_text)))
@@ -33,7 +37,9 @@ def get_cond_sentences(paragraph, ques_d, answ_id, parag_index):
             	cond_sentence.set_not_baseline()
             	cond_sentence.set_tags(tags_in_cond))
 
-            cond_sentence.append(cond_sentence)
+            cond_sentences.append(cond_sentence)
+
+    return cond_sentences
 
 def get_tags(word_list):
     res = []
