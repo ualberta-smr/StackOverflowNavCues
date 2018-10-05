@@ -32,10 +32,10 @@ def get_cond_sentences(paragraph, ques_d, answ_id, parag_index):
 
             #Our criteria for a "useful" conditional sentence is that it contains one of the SO tags in its condition
 			if (len(tags_in_cond) != 0 ):
-            	cond_sentence.set_not_baseline()
-            	cond_sentence.set_tags(tags_in_cond))
+				cond_sentence.set_not_baseline()
+				cond_sentence.set_tags(tags_in_cond))
 
-            cond_sentences.append(cond_sentence)
+			cond_sentences.append(cond_sentence)
 
     return cond_sentences
 
