@@ -24,14 +24,14 @@ def get_cond_sentences(paragraph, ques_d, answ_id, parag_index):
 			cond_sentence = ConditionalSentence(sentence=sentence_text, question_id=ques_id, answer_id=answ_id, sentence_index=sent_index, paragraph_index=parag_index)
 
 			#get information about condition, nfrs etc
-            cond_sentence.set_condition(get_condition(sentence))
-            cond_sentence.set_nfreqs(get_non_func(condition))
-            nouns_in_cond = list(set(get_nouns(sentence, condition) + get_regex_nouns(sentence_text)))
-            cond_sentence.set_nouns(nouns_in_cond)
-            tags_in_cond = get_tags(nouns_in_cond)
+			cond_sentence.set_condition(get_condition(sentence))
+			cond_sentence.set_nfreqs(get_non_func(condition))
+			nouns_in_cond = list(set(get_nouns(sentence, condition) + get_regex_nouns(sentence_text)))
+			cond_sentence.set_nouns(nouns_in_cond)
+			tags_in_cond = get_tags(nouns_in_cond)
 
             #Our criteria for a "useful" conditional sentence is that it contains one of the SO tags in its condition
-            if (len(tags_in_cond) != 0 ):
+			if (len(tags_in_cond) != 0 ):
             	cond_sentence.set_not_baseline()
             	cond_sentence.set_tags(tags_in_cond))
 
