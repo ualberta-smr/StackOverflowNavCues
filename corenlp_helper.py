@@ -37,7 +37,7 @@ def get_cond_sentences(paragraph, ques_d, answ_id, parag_index):
 
 			cond_sentences.append(cond_sentence)
 
-    return cond_sentences
+	return cond_sentences
 
 def get_tags(word_list):
     res = []
