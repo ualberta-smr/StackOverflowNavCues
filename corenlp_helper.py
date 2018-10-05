@@ -15,7 +15,6 @@ def set_core_nlp_properties(properties):
 	corenlp_properties=properties
 
 def init_corenlp():
-	print("init corenlp")
 	global corenlp
 	corenlp=pycorenlp_StanfordCoreNLP('http://localhost:9000')
 
@@ -31,14 +30,14 @@ def get_cond_sentences(paragraph, q_id, answ_id, parag_index):
 			#get information about condition, nfrs etc
 			condition = get_condition_from_sentence(sentence)
 			cond_sentence.set_condition(condition)
-			#cond_sentence.set_nfreqs(get_non_func(condition))
+			cond_sentence.set_nfreqs(get_non_func(condition))
 			nouns_in_cond = list(set(get_nouns(sentence, condition) + get_regex_nouns(sentence_text)))
 			cond_sentence.set_nouns(nouns_in_cond)
 			tags_in_cond = get_tags(nouns_in_cond)
 
 			#Our criteria for a "useful" conditional sentence is that it contains one of the SO tags in its condition
 			if (len(tags_in_cond) != 0 ):
-				cond_sentence.set_not_baseline()
+				cond_sentence.set_conditional()
 				cond_sentence.set_tags(tags_in_cond)
 
 			cond_sentences.append(cond_sentence)
@@ -67,7 +66,7 @@ def get_non_func(string):
 	res = []
 
 	if string:
-		for word in re.sub("[^\w]", " ",  string).split():
+		for word in re.sub("[^\w]", " ",  str(string)).split():
 			if word.lower() in QUALITY_WORDS:
 				res.append(word)
 	
@@ -128,7 +127,7 @@ def get_tree_from_parse_items(items):
 
 def get_nouns(sentence, condition):
 	res = []
-	words = set(re.sub("[^\w]", " ",  condition).split())
+	words = set(re.sub("[^\w]", " ",  str(condition)).split())
 
 	for token in sentence["tokens"]:
 		if token["originalText"].lower() in words and token["pos"] in NOUN_IDENTIFIERS:

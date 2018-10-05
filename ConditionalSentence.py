@@ -1,6 +1,6 @@
 class ConditionalSentence:
 
-	def __init__(self, sentence, question_id, answer_id, paragraph_index=None, sentence_pos=None, condition=None, tags=None, nfreqs=None, nouns=None, baseline=True):
+	def __init__(self, sentence, question_id, answer_id, paragraph_index=None, sentence_pos=None, condition=None, tags=None, nfreqs=None, nouns=None, conditional=False):
 		self.sentence = sentence
 		self.question_id = question_id
 		self.answer_id = answer_id
@@ -10,6 +10,7 @@ class ConditionalSentence:
 		self.tags = tags
 		self.nfreqs = nfreqs
 		self.nouns = nouns
+		self.conditional = conditional
 
 	def set_sentence(self, sentence):
 		self.sentence = sentence
@@ -26,8 +27,8 @@ class ConditionalSentence:
 	def set_nouns(self, nouns):
 		self.nouns = nouns
 
-	def set_not_baseline(self):
-		self.baseline = False
+	def set_conditional(self):
+		self.conditional = True
 
 	def get_sentence(self):
 		return self.sentence
@@ -45,7 +46,7 @@ class ConditionalSentence:
 		return self.nouns
 
 	def print(self, delimeter):
-		print(self.baseline, self.question_id, self.answer_id, self.paragraph_index, self.sentence_index, self.sentence, self.condition, self.tags, self.nfreqs, self.nouns, sep='|')
+		print(self.conditional, self.question_id, self.answer_id, self.paragraph_index, self.sentence_pos, self.sentence.replace("-LRB-", "(").replace("-RRB-", ")"), self.condition, self.tags, self.nfreqs, self.nouns, sep=delimeter)
 
 
 
