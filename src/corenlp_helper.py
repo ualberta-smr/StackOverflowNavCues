@@ -1,5 +1,4 @@
 from ConditionalSentence import ConditionalSentence
-from stanfordcorenlp import StanfordCoreNLP
 from pycorenlp import StanfordCoreNLP as pycorenlp_StanfordCoreNLP
 import re
 from regex import REGEX_LIST
