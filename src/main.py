@@ -22,6 +22,7 @@ def find_interesting_sentences(questions):
 				word_pattern_sentences = get_word_pattern_sentences(patterns,paragraph, q_id=question['question_id'], answ_id=answer['answer_id'], parag_index=paragraph_index)
 				all_interesting_sentences.extend(word_pattern_sentences)
 
+	return all_interesting_sentences
 
 def read_patterns_file():
     patterns = []
@@ -42,9 +43,9 @@ def main():
 
 	for interesting_sentence in interesting_sentences:
 		if isinstance(interesting_sentence, ConditionalSentence):
-			cond_sentence.print('|')
+			interesting_sentence.print('|')
 		else:
-			baseline_sentence.print("WordPatternBaseline", '|')
+			interesting_sentence.print("WordPatternBaseline", '|')
 
 
 if __name__ == "__main__":
