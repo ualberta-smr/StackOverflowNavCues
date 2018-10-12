@@ -6,7 +6,7 @@ from ConditionalSentence import ConditionalSentence
 from tags import load_tags
 
 
-def find_interesting_sentences(questions, patterns):
+def find_interesting_sentences(questions):
 	patterns = read_patterns_file()
 	all_interesting_sentences = list()
 	for question in questions['items']:
