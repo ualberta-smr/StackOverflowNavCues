@@ -1,19 +1,15 @@
-class ConditionalSentence:
+from SOSentence import SOSentence
+
+class ConditionalSentence(SOSentence):
 
 	def __init__(self, sentence, question_id, answer_id, paragraph_index=None, sentence_pos=None, condition=None, tags=None, nfreqs=None, nouns=None, conditional=False):
-		self.sentence = sentence
-		self.question_id = question_id
-		self.answer_id = answer_id
-		self.paragraph_index = paragraph_index
-		self.sentence_pos = sentence_pos
+		SOSentence.__init__(self, sentence, question_id, answer_id,paragraph_index, sentence_pos)
 		self.condition = condition
 		self.tags = tags
 		self.nfreqs = nfreqs
 		self.nouns = nouns
 		self.conditional = conditional
 
-	def set_sentence(self, sentence):
-		self.sentence = sentence
 
 	def set_condition(self, condition):
 		self.condition = condition
@@ -29,9 +25,6 @@ class ConditionalSentence:
 
 	def set_conditional(self):
 		self.conditional = True
-
-	def get_sentence(self):
-		return self.sentence
 
 	def get_condition(self):
 		return self.condition
