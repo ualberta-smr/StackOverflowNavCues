@@ -154,7 +154,7 @@ def get_nouns(sentence, condition):
 
 
 ## Baseline 1: Word Patterns
-def check_sentence(sentence, patterns):
+def check_word_pattern(sentence, patterns):
     sentence_text = get_sentence(sentence)
     found_match = False
 
@@ -170,10 +170,10 @@ def check_sentence(sentence, patterns):
         if all_found:
             return True
 
-def get_word_pattern_sentences(paragraph, q_id, answ_id, parag_index):
+def get_word_pattern_sentences(patterns, paragraph, q_id, answ_id, parag_index):
 	word_pattern_sentences = list()
 	annotations = corenlp.annotate(paragraph, corenlp_properties)
 	for sent_index, sentence in enumerate(annotations['sentences']):
-		if check_word_pattern(sentence):
+		if check_word_pattern(sentence, patterns):
 			so_sentence = SOSentence(sentence=sentence_text, question_id=q_id, answer_id=answ_id, sentence_pos=sent_index, paragraph_index=parag_index)
 			word_pattern_sentences.append(so_sentence)

@@ -24,16 +24,51 @@ def read_patterns_file():
     return patterns
 
 
+def parse_xml_line(el, patterns):
+    result = []
+    soup = BeautifulSoup(el.attrib["Body"], "lxml")
+    all_text = ""
+    for item in soup.find_all('p'):
+        all_text += item.get_text()
+
+    corenlp = get_core_obj()
+            
+    annotated = corenlp.annotate(all_text, properties = {
+        'annotators': 'pos,parse',
+        'outputFormat': 'json'
+    })
+
+    for sentence in annotated['sentences']:
+        if check_sentence(sentence, patterns):
+            result.append(sentence)
+        
+    return result
+
+def get_sentence(annotated):
+    res = ""
+    for word in annotated['tokens']:
+        res += word['word'] + " "
+    return res
 
 
-def main():
-    load_tags()
-    SITE = StackAPI('stackoverflow')
-    questions = SITE.fetch('questions', fromdate=datetime(2011,11,11), todate=datetime(2011,11,12), min=10, sort='votes', tagged='java', filter='!-*jbN-o8P3E5')
-    init_corenlp()
-    cond_sentences = find_cond_sentences(questions)
-    for cond_sentence in cond_sentences:
-        cond_sentence.print('|')
+def check_sentence(sentence, patterns):
+    sentence_text = get_sentence(sentence)
+    found_match = False
+
+    for pattern in patterns:
+        all_found = True
+        for item in pattern:
+            if item == "CW":
+                continue
+            if not item in sentence:
+                all_found = False
+                break
+
+        if all_found:
+            return True
+
+
+
 
 
 if __name__=="__main__":
