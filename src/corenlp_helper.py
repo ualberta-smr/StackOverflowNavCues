@@ -176,3 +176,5 @@ def get_word_pattern_sentences(patterns, paragraph, q_id, answ_id, parag_index):
 		if check_word_pattern(sentence, patterns):
 			so_sentence = SOSentence(sentence=sentence_text, question_id=q_id, answer_id=answ_id, sentence_pos=sent_index, paragraph_index=parag_index)
 			word_pattern_sentences.append(so_sentence)
+
+	return word_pattern_sentences
