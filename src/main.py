@@ -40,7 +40,7 @@ def main():
 	init_corenlp()
 	interesting_sentences = find_interesting_sentences(questions)
 
-	for interesting_sentence in interesting_sentences
+	for interesting_sentence in interesting_sentences:
 		if isinstance(interesting_sentence, ConditionalSentence):
 			cond_sentence.print('|')
 		else:
