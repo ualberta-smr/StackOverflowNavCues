@@ -155,7 +155,6 @@ def get_nouns(sentence, condition):
 
 ## Baseline 1: Word Patterns
 def check_word_pattern(sentence, patterns):
-    sentence_text = get_sentence(sentence)
     found_match = False
 
     for pattern in patterns:
