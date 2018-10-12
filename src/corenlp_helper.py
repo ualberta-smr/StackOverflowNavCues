@@ -1,4 +1,5 @@
 from ConditionalSentence import ConditionalSentence
+from SOSentence import SOSentence
 from pycorenlp import StanfordCoreNLP as pycorenlp_StanfordCoreNLP
 import re
 from regex import REGEX_LIST
@@ -171,9 +172,9 @@ def check_word_pattern(sentence, patterns):
 
 def get_word_pattern_sentences(patterns, paragraph, q_id, answ_id, parag_index):
 	word_pattern_sentences = list()
-	sentence_text = get_sentence_text(sentence)
 	annotations = corenlp.annotate(paragraph, corenlp_properties)
 	for sent_index, sentence in enumerate(annotations['sentences']):
+		sentence_text = get_sentence_text(sentence)
 		if check_word_pattern(sentence_text, patterns):
 			so_sentence = SOSentence(sentence=sentence_text, question_id=q_id, answer_id=answ_id, sentence_pos=sent_index, paragraph_index=parag_index)
 			word_pattern_sentences.append(so_sentence)
