@@ -86,7 +86,7 @@ def get_cond_sentences(paragraph, q_id, answ_id, parag_index):
 			condition = get_condition_from_sentence(sentence)
 			cond_sentence.set_condition(condition)
 			cond_sentence.set_nfreqs(get_non_func(condition))
-			nouns_in_cond = list(set(get_nouns(sentence, condition) + get_regex_nouns(sentence_text)))
+			nouns_in_cond = list(set(get_nouns(sentence, condition) + get_regex_code_elem(sentence_text)))
 			cond_sentence.set_nouns(nouns_in_cond)
 			tags_in_cond = get_tags(nouns_in_cond)
 
@@ -125,7 +125,7 @@ def get_non_func(string):
 	
 	return res
 
-def get_regex_nouns(sentence):
+def get_regex_code_elem(sentence):
 	result = []
 	for pattern in REGEX_LIST:
 		for word in sentence.split():
