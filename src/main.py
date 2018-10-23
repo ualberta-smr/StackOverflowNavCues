@@ -9,25 +9,25 @@ from tags import load_tags
 def find_interesting_sentences(questions):
 	patterns = read_patterns_file()
 	all_interesting_sentences = list()
-	for question in questions.get('items'):
 
-		if question == None:
-			continue
-			
-		for answer in question.get('answers'):
-			if answer == None:
-				continue
+	items = questions.get('items')
 
-			paragraphs = get_paragraphs(answer['body'])
-			for paragraph_index, paragraph in enumerate(paragraphs):
+	if items is not None:
+		for question in items:
+			answers = question.get('answers')
+			if answers is not None:
+				for answer in answers:
+					paragraphs = get_paragraphs(answer['body'])
+					if paragraphs is not None:
+						for paragraph_index, paragraph in enumerate(paragraphs):
 
-				#get conditional sentences (our technique and also includes just sentences with "if")
-				cond_sentences = get_cond_sentences(paragraph, q_id=question['question_id'], answ_id=answer['answer_id'], parag_index=paragraph_index)
-				all_interesting_sentences.extend(cond_sentences)
+							#get conditional sentences (our technique and also includes just sentences with "if")
+							cond_sentences = get_cond_sentences(paragraph, q_id=question['question_id'], answ_id=answer['answer_id'], parag_index=paragraph_index)
+							all_interesting_sentences.extend(cond_sentences)
 
-				#get baseline 1 sentences based on Martin's patterns
-				word_pattern_sentences = get_word_pattern_sentences(patterns,paragraph, q_id=question['question_id'], answ_id=answer['answer_id'], parag_index=paragraph_index)
-				all_interesting_sentences.extend(word_pattern_sentences)
+							#get baseline 1 sentences based on Martin's patterns
+							word_pattern_sentences = get_word_pattern_sentences(patterns,paragraph, q_id=question['question_id'], answ_id=answer['answer_id'], parag_index=paragraph_index)
+							all_interesting_sentences.extend(word_pattern_sentences)
 
 	return all_interesting_sentences
 
