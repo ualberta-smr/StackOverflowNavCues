@@ -188,3 +188,18 @@ def get_word_pattern_sentences(patterns, paragraph, q_id, answ_id, parag_index):
 			word_pattern_sentences.append(so_sentence)
 
 	return word_pattern_sentences
+
+
+## Baseline 2: LexRank
+# TODO
+def get_stemmed_para_sentences(paragraph, q_id, answ_id, parag_index):
+	word_pattern_sentences = list()
+	annotations = corenlp.annotate(paragraph, corenlp_properties)
+	for sent_index, sentence in enumerate(annotations['sentences']):
+		sentence_text = get_sentence_text(sentence)
+		if check_word_pattern(replace_regex_code_elem(sentence_text), patterns):
+			so_sentence = SOSentence(sentence=sentence_text, question_id=q_id, answer_id=answ_id, sentence_pos=sent_index, paragraph_index=parag_index)
+			word_pattern_sentences.append(so_sentence)
+
+	return word_pattern_sentences
+
