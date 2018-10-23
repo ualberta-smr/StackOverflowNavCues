@@ -125,10 +125,10 @@ def get_non_func(string):
 	
 	return res
 
-def get_regex_code_elem(sentence):
+def get_regex_code_elem(sentence_text):
 	result = []
 	for pattern in REGEX_LIST:
-		for word in sentence.split():
+		for word in sentence_text.split():
 			if re.match(pattern, word):
 				result.append(word)
 
@@ -155,15 +155,23 @@ def get_nouns(sentence, condition):
 
 
 ## Baseline 1: Word Patterns
-def check_word_pattern(sentence, patterns):
+
+def replace_regex_code_elem(sentence_text):
+	new_sentence_text = sentence_text
+	for pattern in REGEX_LIST:
+		new_sentence_text = re.sub(pattern, "CW", new_sentence_text)
+
+	return new_sentence_text
+
+def check_word_pattern(sentence_text, patterns):
     found_match = False
 
     for pattern in patterns:
         all_found = True
         for item in pattern:
-            if item == "CW":
-                continue
-            if not item in sentence:
+            # if item == "CW":
+            #     continue
+            if not item in sentence_text:
                 all_found = False
                 break
 
@@ -175,7 +183,7 @@ def get_word_pattern_sentences(patterns, paragraph, q_id, answ_id, parag_index):
 	annotations = corenlp.annotate(paragraph, corenlp_properties)
 	for sent_index, sentence in enumerate(annotations['sentences']):
 		sentence_text = get_sentence_text(sentence)
-		if check_word_pattern(sentence_text, patterns):
+		if check_word_pattern(replace_regex_code_elem(sentence_text), patterns):
 			so_sentence = SOSentence(sentence=sentence_text, question_id=q_id, answer_id=answ_id, sentence_pos=sent_index, paragraph_index=parag_index)
 			word_pattern_sentences.append(so_sentence)
 
