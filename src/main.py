@@ -44,7 +44,7 @@ def read_patterns_file():
 def main():
 	load_tags()
 	SITE = StackAPI('stackoverflow')
-	questions = SITE.fetch('questions', fromdate=datetime(2011,11,11), todate=datetime(2011,11,12), min=10, sort='votes', tagged='json', filter='!-*jbN-o8P3E5')
+	questions = SITE.fetch('questions', fromdate=datetime(2018,1,1), todate=datetime(2018,10,22), min=10, sort='votes', tagged='json', filter='!-*jbN-o8P3E5')
 	init_corenlp()
 	interesting_sentences = find_interesting_sentences(questions)
 
