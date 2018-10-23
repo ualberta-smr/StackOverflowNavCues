@@ -9,8 +9,15 @@ from tags import load_tags
 def find_interesting_sentences(questions):
 	patterns = read_patterns_file()
 	all_interesting_sentences = list()
-	for question in questions['items']:
-		for answer in question['answers']:
+	for question in questions.get('items'):
+
+		if question == None:
+			continue
+			
+		for answer in question.get('answers'):
+			if answer == None:
+				continue
+
 			paragraphs = get_paragraphs(answer['body'])
 			for paragraph_index, paragraph in enumerate(paragraphs):
 
