@@ -15,7 +15,8 @@ def find_interesting_sentences(questions):
 	if items is not None:
 		for question in items:
 			answers = question.get('answers')
-			if answers is not None:
+			#we want to consider threads that have at least 2 answers
+			if answers is not None and len(answers) >= 2:
 				for answer in answers:
 					paragraphs = get_paragraphs(answer['body'])
 					if paragraphs is not None:
@@ -44,7 +45,7 @@ def read_patterns_file():
 def main():
 	load_tags()
 	SITE = StackAPI('stackoverflow')
-	questions = SITE.fetch('questions', fromdate=datetime(2018,1,1), todate=datetime(2018,10,22), min=10, sort='votes', tagged='json', filter='!-*jbN-o8P3E5')
+	questions = SITE.fetch('questions', fromdate=datetime(2018,1,1), todate=datetime(2018,10,22), min=0, sort='votes', tagged='json', filter='!-*jbN-o8P3E5')
 	init_corenlp()
 	interesting_sentences = find_interesting_sentences(questions)
 
