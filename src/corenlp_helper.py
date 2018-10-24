@@ -76,26 +76,28 @@ def get_word(item):
 def get_cond_sentences(paragraph, q_id, answ_id, parag_index):
 	cond_sentences = list()
 	annotations = corenlp.annotate(paragraph, corenlp_properties)
-	for sent_index, sentence in enumerate(annotations['sentences']):
-		sentence_text = get_sentence_text(sentence)
-		if " if" in sentence_text.lower():
-			#initialize conditional sentence with basic info
-			cond_sentence = ConditionalSentence(sentence=sentence_text, question_id=q_id, answer_id=answ_id, sentence_pos=sent_index, paragraph_index=parag_index)
+	sentences = annotations.get('sentences')
+	if sentences is not None:
+		for sent_index, sentence in enumerate(sentences):
+			sentence_text = get_sentence_text(sentence)
+			if " if" in sentence_text.lower():
+				#initialize conditional sentence with basic info
+				cond_sentence = ConditionalSentence(sentence=sentence_text, question_id=q_id, answer_id=answ_id, sentence_pos=sent_index, paragraph_index=parag_index)
 
-			#get information about condition, nfrs etc
-			condition = get_condition_from_sentence(sentence)
-			cond_sentence.set_condition(condition)
-			cond_sentence.set_nfreqs(get_non_func(condition))
-			nouns_in_cond = list(set(get_nouns(sentence, condition) + get_regex_code_elem(sentence_text)))
-			cond_sentence.set_nouns(nouns_in_cond)
-			tags_in_cond = get_tags(nouns_in_cond)
+				#get information about condition, nfrs etc
+				condition = get_condition_from_sentence(sentence)
+				cond_sentence.set_condition(condition)
+				cond_sentence.set_nfreqs(get_non_func(condition))
+				nouns_in_cond = list(set(get_nouns(sentence, condition) + get_regex_code_elem(sentence_text)))
+				cond_sentence.set_nouns(nouns_in_cond)
+				tags_in_cond = get_tags(nouns_in_cond)
 
-			#Our criteria for a "useful" conditional sentence is that it contains one of the SO tags in its condition
-			if (len(tags_in_cond) != 0 ):
-				cond_sentence.set_conditional()
-				cond_sentence.set_tags(tags_in_cond)
+				#Our criteria for a "useful" conditional sentence is that it contains one of the SO tags in its condition
+				if (len(tags_in_cond) != 0 ):
+					cond_sentence.set_conditional()
+					cond_sentence.set_tags(tags_in_cond)
 
-			cond_sentences.append(cond_sentence)
+				cond_sentences.append(cond_sentence)
 
 	return cond_sentences
 
