@@ -76,9 +76,8 @@ def get_word(item):
 def get_cond_sentences(paragraph, q_id, answ_id, parag_index):
 	cond_sentences = list()
 	annotations = corenlp.annotate(paragraph, corenlp_properties)
-	sentences = annotations.get('sentences')
-	if sentences is not None:
-		for sent_index, sentence in enumerate(sentences):
+	try:
+		for sent_index, sentence in enumerate(annotations['sentences']):
 			sentence_text = get_sentence_text(sentence)
 			if " if" in sentence_text.lower():
 				#initialize conditional sentence with basic info
@@ -98,6 +97,8 @@ def get_cond_sentences(paragraph, q_id, answ_id, parag_index):
 					cond_sentence.set_tags(tags_in_cond)
 
 				cond_sentences.append(cond_sentence)
+	except:
+		print("Paragraph failed: " + paragraph, file=sys.stderr)
 
 	return cond_sentences
 
