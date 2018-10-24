@@ -98,7 +98,7 @@ def get_cond_sentences(paragraph, q_id, answ_id, parag_index):
 
 				cond_sentences.append(cond_sentence)
 	except:
-		print("Failed to enumerate sentences in para:" + q_id + "," + answ_id + "," + parag_index + ": " + paragraph, file=sys.stderr)
+		print("Failed to enumerate sentences in para:" + str(q_id) + "," + str(answ_id) + "," + str(parag_index) + ": " + paragraph, file=sys.stderr)
 
 	return cond_sentences
 
