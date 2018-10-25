@@ -12,7 +12,7 @@ def read_question_ids():
     with open("question_ids.txt", "r") as file: 
         for line in file.readlines():
             items = line.split(",")
-            question_ids.append([item.strip() for item in items])
+            question_ids.extend([item.strip() for item in items])
 
     return question_ids
 
@@ -35,8 +35,8 @@ def extract_paratxt_from_thread(question):
 def main():
 	load_tags()
 	SITE = StackAPI('stackoverflow')
+	init_corenlp()
 	question_ids = read_question_ids()
-
 	#get all threads for the ids we are interested in
 	questions = SITE.fetch('/questions', ids=question_ids, filter='!-*jbN-o8P3E5')
 	
