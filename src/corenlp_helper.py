@@ -198,7 +198,21 @@ def get_word_pattern_sentences(patterns, paragraph, q_id, answ_id, parag_index):
 
 ## Baseline 2: LexRank
 # TODO
-def get_stemmed_para_sentences(paragraph, q_id, answ_id, parag_index):
+
+def get_all_paragraph_sentences(paragraph):
+	annotations = corenlp.annotate(paragraph, corenlp_properties)
+	all_sentences = list()
+
+	try:
+		for sentence in annotations['sentences']:
+			sentence_text = get_sentence_text(sentence)
+			all_sentences.append(sentence_text)
+	except:
+		print("Failed to process paragraph:" + paragraph, file=sys.stderr)
+	
+	return all_sentences
+
+def get_all_thread_sentences(paragraph, q_id, answ_id, parag_index):
 	word_pattern_sentences = list()
 	annotations = corenlp.annotate(paragraph, corenlp_properties)
 	for sent_index, sentence in enumerate(annotations['sentences']):

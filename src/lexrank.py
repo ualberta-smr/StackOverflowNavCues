@@ -80,5 +80,3 @@ def main():
 	lxr = LexRank(documents, stopwords=STOPWORDS['en'])
 	print(lxr)
 
-if __name__ == "__main__":
-	main()
