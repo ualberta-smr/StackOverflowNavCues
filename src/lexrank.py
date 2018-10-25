@@ -5,7 +5,8 @@ from corenlp_helper import *
 from ConditionalSentence import ConditionalSentence
 from tags import load_tags
 from path import Path
-
+from nltk.stem import PorterStemmer
+from nltk.tokenize import sent_tokenize, word_tokenize
 
 def read_question_ids():
     question_ids = list()
@@ -18,7 +19,7 @@ def read_question_ids():
 
 def extract_paratxt_from_thread(question):
 	answers = question.get('answers')
-
+	ps = PorsterStemmer()
 	with open('./lexrank/' + str(question['question_id']) + '.txt', 'w') as file:    
 		for answer in answers:
 			paragraphs = get_paragraphs(answer['body'])
@@ -26,7 +27,10 @@ def extract_paratxt_from_thread(question):
 				if paragraphs is not None:
 					for paragraph in paragraphs:
 						for sentence in get_all_paragraph_sentences(paragraph):
-							file.write(sentence)
+							words = word_tokenize(sentence)
+							for word in words:
+								file.write(ps.stem(word + " ")
+							#file.write(sentence)
 						file.write("\n\n")
 
 		file.close()
