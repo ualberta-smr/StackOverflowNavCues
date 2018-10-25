@@ -191,7 +191,8 @@ def get_word_pattern_sentences(patterns, paragraph, q_id, answ_id, parag_index):
 				so_sentence = SOSentence(sentence=sentence_text, question_id=q_id, answer_id=answ_id, sentence_pos=sent_index, paragraph_index=parag_index)
 				word_pattern_sentences.append(so_sentence)
 	except:
-		print("Failed to enumerate sentences in para:" + q_id + "," + answ_id + "," + parag_index + ": " + paragraph, file=sys.stderr)
+
+		print("Failed to enumerate sentences in para:" + str(q_id) + "," + str(answ_id) + "," + str(parag_index) + ": " + paragraph, file=sys.stderr)
 	return word_pattern_sentences
 
 
