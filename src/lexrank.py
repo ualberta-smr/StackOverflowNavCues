@@ -8,7 +8,7 @@ from path import Path
 
 
 def read_question_ids():
-    question_ids = []
+    question_ids = list()
     with open("question_ids.txt", "r") as file: 
         for line in file.readlines():
             items = line.split(",")
@@ -17,7 +17,6 @@ def read_question_ids():
     return question_ids
 
 def extract_paratxt_from_thread(question):
-	thread_sentences = list()
 	answers = question.get('answers')
 
 	with open('./lexrank/' + str(question['question_id']) + '.txt', 'w') as file:    
