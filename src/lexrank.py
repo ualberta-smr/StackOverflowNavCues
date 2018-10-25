@@ -74,8 +74,8 @@ def main():
 	documents = []
 
 	for file_path in documents_dir.files('*.txt'):
-    	with file_path.open(mode='rt', encoding='utf-8') as fp:
-        	documents.append(fp.readlines())
+		with file_path.open(mode='rt', encoding='utf-8') as fp:
+			documents.append(fp.readlines())
 
 	lxr = LexRank(documents, stopwords=STOPWORDS['en'])
 	print(lxr)
