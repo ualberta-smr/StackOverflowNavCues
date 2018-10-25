@@ -36,5 +36,5 @@ Right now, there is also output from the baseline technique that relies on match
 
 ## Notes
 
-*  The current baseline pattern-based approach ignores the order of the patterns and the CW term. 
+*  The current baseline pattern-based approach ignores the order of the patterns
 
