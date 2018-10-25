@@ -16,8 +16,7 @@ def find_interesting_sentences(questions):
 		for question in items:
 			answers = question.get('answers')
 			all_answer_sentences = list()
-			num_cond_sentences = 0
-			num_b1_sentences = 0
+
 			#we want to consider threads that have at least 2 answers
 			if answers is not None and len(answers) >= 2:
 				for answer in answers:
@@ -45,57 +44,6 @@ def read_patterns_file():
             patterns.append([item.strip() for item in items])
 
     return patterns
-
-def read_question_ids():
-    question_ids = []
-    with open("question_ids.txt", "r") as file: 
-        for line in file.readlines():
-            items = line.split(",")
-            question_ids.append([item.strip() for item in items])
-
-    return question_ids
-
-def extract_doc_from_thread(question, path="./tmp"):
-	output_file = open(path + str(question['question_id']) + ".txt", "w")
-
-	answers = question.get('answers')
-
-	for answer in answers:
-		paragraphs = get_paragraphs(answer['body'])
-		if paragraphs is not None:
-			for paragraph in paragraphs:
-				print(paragraph, file=output_file)
-
-	output_file.close()
-
-def extract_paratxt_from_thread(question):
-	thread_sentences = list()
-	answers = question.get('answers')
-
-	for answer in answers:
-		paragraphs = get_paragraphs(answer['body'])
-		if paragraphs is not None:
-			if paragraphs is not None:
-				for paragraph in paragraphs:
-					thread_sentences.extend(get_all_paragraph_sentences(paragraph))
-
-	output_file.close()
-
-def get_lexrank_summaries():
-	SITE = StackAPI('stackoverflow')
-	question_ids = read_question_ids()
-
-	#get all threads for the ids we are interested in
-	questions = SITE.fetch('/questions/{ids}', ids=question_ids, filter='!-*jbN-o8P3E5')
-	
-				#get lexrank summary
-
-			#to be fair, we will do the summary size based on the maximum number of sentences identified by the other
-			#techniques
-			summary_size = max(len(cond_sentences), len(word_pattern_sentences))
-			#get lexrank summary
-
-	print(lxr, )
 
 
 def main():
