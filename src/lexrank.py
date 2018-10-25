@@ -4,7 +4,6 @@ from so_helper import get_paragraphs
 from corenlp_helper import *
 from ConditionalSentence import ConditionalSentence
 from tags import load_tags
-from lexrank import STOPWORDS, LexRank
 from path import Path
 
 
@@ -28,8 +27,8 @@ def extract_paratxt_from_thread(question):
 				if paragraphs is not None:
 					for paragraph in paragraphs:
 						for sentence in get_all_paragraph_sentences(paragraph):
-	        				file.write(sentence)
-	        			file.write("\n\n")
+							file.write(sentence)
+						file.write("\n\n")
 
 		file.close()
 
