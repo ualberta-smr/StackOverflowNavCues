@@ -19,7 +19,7 @@ def read_question_ids():
 
 def extract_paratxt_from_thread(question):
 	answers = question.get('answers')
-	ps = PorsterStemmer()
+	ps = PorterStemmer()
 	with open('./lexrank/' + str(question['question_id']) + '.txt', 'w') as file:
 		for answer in answers:
 			paragraphs = get_paragraphs(answer['body'])
@@ -29,7 +29,7 @@ def extract_paratxt_from_thread(question):
 						for sentence in get_all_paragraph_sentences(paragraph):
 							words = word_tokenize(sentence)
 							for word in words:
-								file.write(ps.stem(word + " "))
+								file.write(ps.stem(word) + " ")
 							#file.write(sentence)
 						file.write("\n\n")
 
