@@ -38,7 +38,7 @@ def main():
 	question_ids = read_question_ids()
 
 	#get all threads for the ids we are interested in
-	questions = SITE.fetch('/questions/{ids}', ids=question_ids, filter='!-*jbN-o8P3E5')
+	questions = SITE.fetch('/questions', ids=question_ids, filter='!-*jbN-o8P3E5')
 	
 	items = questions.get('items')
 
