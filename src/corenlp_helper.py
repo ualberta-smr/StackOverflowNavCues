@@ -183,6 +183,7 @@ def check_word_pattern(sentence_text, patterns):
 
 def get_word_pattern_sentences(patterns, paragraph, q_id, answ_id, parag_index):
 	word_pattern_sentences = list()
+	corenlp_properties={'annotators': 'pos,parse,lemma', 'outputFormat': 'json'}
 	annotations = corenlp.annotate(paragraph, corenlp_properties)
 	try:
 		for sent_index, sentence in enumerate(annotations['sentences']):
