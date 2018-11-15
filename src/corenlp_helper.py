@@ -28,6 +28,12 @@ def get_sentence_text(sentence):
 
 	return res
 
+def get_sentence_text_lemmatized(sentence):
+	res = ""
+	for word in sentence['tokens']:
+		res += word['lemma'] + " "
+
+	return res
 
 def get_index(snippet):
 	count = 0
@@ -187,7 +193,7 @@ def get_word_pattern_sentences(patterns, paragraph, q_id, answ_id, parag_index):
 	annotations = corenlp.annotate(paragraph, corenlp_properties)
 	try:
 		for sent_index, sentence in enumerate(annotations['sentences']):
-			sentence_text = get_sentence_text(sentence)
+			sentence_text = get_sentence_text_lemmatized(sentence)
 			if check_word_pattern(replace_regex_code_elem(sentence_text), patterns):
 				so_sentence = SOSentence(sentence=sentence_text, question_id=q_id, answer_id=answ_id, sentence_pos=sent_index, paragraph_index=parag_index)
 				word_pattern_sentences.append(so_sentence)
