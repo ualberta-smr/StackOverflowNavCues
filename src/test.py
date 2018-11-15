@@ -25,12 +25,15 @@ def get_sentence_text(sentence):
 
 def main():
 	init_corenlp()
-	annotations = corenlp.annotate("She has worked at Miller Corp. for 5 years. There will be a big announcement by Apple Inc today at 5:00pm. He works for apple inc in cupertino.", corenlp_properties)
-
-	for sentence in annotations['sentences']:
+	
+	try:
+		annotations = corenlp.annotate("She has worked at Miller Corp. for 5 years. There will be a big announcement by Apple Inc today at 5:00pm. He works for apple inc in cupertino.", corenlp_properties)
+		print(annotations)
+		for sentence in annotations['sentences']:
 			print("========")
 			print(sentence)
 			sentence_text = get_sentence_text(sentence)
-
+	except Exception as e: print(e)
+		
 if __name__ == "__main__":
 	main()

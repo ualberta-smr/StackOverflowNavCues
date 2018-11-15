@@ -1,4 +1,4 @@
-# make all patterns case-sensitive
+#make all patterns case-sensitive
 ENV.defaultStringMatchFlags = 0
 ENV.defaultStringPatternFlags = 0
 
