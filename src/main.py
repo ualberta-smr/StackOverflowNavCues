@@ -27,12 +27,10 @@ def find_interesting_sentences(questions):
 							#get conditional sentences (our technique and also includes just sentences with "if")
 							cond_sentences = get_cond_sentences(paragraph, q_id=question['question_id'], answ_id=answer['answer_id'], parag_index=paragraph_index)
 							all_interesting_sentences.extend(cond_sentences)
-							num_cond_sentences += len(cond_sentences)
 
 							#get baseline 1 sentences based on Martin's patterns
 							word_pattern_sentences = get_word_pattern_sentences(patterns,paragraph, q_id=question['question_id'], answ_id=answer['answer_id'], parag_index=paragraph_index)
 							all_interesting_sentences.extend(word_pattern_sentences)
-							num_b1_sentences += len(word_pattern_sentences)
 
 	return all_interesting_sentences
 
