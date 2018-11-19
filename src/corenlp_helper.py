@@ -207,12 +207,13 @@ def get_word_pattern_sentences(patterns, paragraph, q_id, answ_id, parag_index):
 # TODO
 
 def get_all_paragraph_sentences(paragraph):
+	corenlp_properties={'annotators': 'pos,parse,lemma', 'outputFormat': 'json'}
 	annotations = corenlp.annotate(paragraph, corenlp_properties)
 	all_sentences = list()
 
 	try:
 		for sentence in annotations['sentences']:
-			sentence_text = get_sentence_text(sentence)
+			sentence_text = get_sentence_text_lemmatized(sentence)
 			all_sentences.append(sentence_text)
 	except:
 		print("Failed to process paragraph:" + paragraph, file=sys.stderr)
