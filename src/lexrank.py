@@ -5,8 +5,6 @@ from corenlp_helper import *
 from ConditionalSentence import ConditionalSentence
 from tags import load_tags
 from path import Path
-from nltk.stem import PorterStemmer
-from nltk.tokenize import sent_tokenize, word_tokenize
 
 def read_question_ids():
     question_ids = list()
