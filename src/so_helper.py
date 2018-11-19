@@ -11,11 +11,11 @@ def get_paragraphs(post_content):
 
 	for paragraph in soup:
 		#replace all link text with LINK
-		#for a in paragraph.findAll('a'):
-  		#	a.string = "LINK_REP"
+		for a in paragraph.findAll('a'):
+  			a.string = "LINK"
 
 
-		#replace all link text with LINK
+		#replace all code tags with CW
 		#for a in paragraph.findAll('code'):
   		#	a.string = "CW"
 
