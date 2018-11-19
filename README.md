@@ -16,6 +16,8 @@ This repository holds the code and documents related to extracting conditional i
 
 2. Run `python3 src/main.py > output`. 
 
+3. To extract processed paragraphs (no html tags, links removed, and lemmatized words in the sentences) to be used with the lexrank approach, run `python3 src/lexrank.py`. This script reads question ids from the `question_ids.txt` file and then outputs the paragraph text of each thread from there in a `lexrank` directory.
+
 # Output format
 
 The output file will contain a `|`-separated output that matches the following header order `IsConditional|Question ID| Answer ID|Paragraph index|Sentence Position|Sentence| Condition|Tags|NFReqs|Nouns`. You can change the delimter used in `main.py`. Also, note that we currently print all sentences having `if` and mark the ones that match our criteria (i.e., have nouns matching SO tags in their condition) as True in the first column. This allows us to use all those that are False (i.e., just have the word `if` in them) as a naive baseline. 
