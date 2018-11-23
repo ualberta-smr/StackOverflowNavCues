@@ -102,7 +102,7 @@ must, subclass, implementor, override
 CW, must, be, not
 override, subclass, must
 should, not, empty
-must, CW, implemente, method
+must, CW, implement, method
 not, synchronize, concurrent, CW
 not, CW, thread-safe, object
 ignore, CW, must
