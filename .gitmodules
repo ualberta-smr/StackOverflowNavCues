@@ -1,3 +1,0 @@
-[submodule "porter-stemmer"]
-	path = src/porter-stemmer
-	url = https://github.com/ualberta-smr/porter-stemmer
