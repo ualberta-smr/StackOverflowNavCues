@@ -1,15 +1,17 @@
 import pdb
 import xml.etree.ElementTree as etree
 from pyquery import PyQuery
+from nltk.stem.porter import *
 
 TAGS_LIST = dict()
 
 def load_tags():
     global TAGS_LIST
+    stemmer = PorterStemmer()
     for event, elem in etree.iterparse('Tags.xml', events=('start', 'end')):
         if event == "start":
             if elem.tag == "row":
-                TAGS_LIST[elem.attrib["TagName"].lower()] = elem.attrib["Count"]
+                TAGS_LIST[stemmer.stem(elem.attrib["TagName"]).lower()] = elem.attrib["Count"]
 
 
 QUALITY_WORDS = {

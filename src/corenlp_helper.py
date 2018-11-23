@@ -5,11 +5,14 @@ import re
 from regex import REGEX_LIST
 from tags import load_tags, TAGS_LIST, QUALITY_WORDS, NOUN_IDENTIFIERS
 import sys
+from nltk.stem.porter import *
 
 #General CoreNLP Setup
 corenlp_properties={'annotators': 'pos,parse', 'outputFormat': 'json'}
 
 corenlp = None
+
+stemmer = PorterStemmer()
 
 def set_core_nlp_properties(properties):
 	global corenlp_properties
@@ -146,7 +149,7 @@ def get_regex_code_elem(sentence_text):
 def get_tags(word_list):
 	res = []
 	for word in word_list:
-		if word.lower() in TAGS_LIST:
+		if stemmer.stem(word).lower() in TAGS_LIST:
 			res.append(word.lower())
 
 	return res
