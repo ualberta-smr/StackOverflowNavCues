@@ -212,7 +212,7 @@ conditions, should, mandatory
 CW, lead, warning, will
 must, refuse, CW
 number, exceed, must
-following, CW, contraint
+following, CW, constraint
 must, CW, close
 CW, adjust, have
 must, implement, interface, CW
