@@ -17,10 +17,8 @@ def get_paragraphs(post_content):
 
 		#replace all code tags with CW
 		for a in paragraph.findAll('code'):
-  			a.string = "token"
+  			a.string = "CW"
 
 		paragraphs.append(paragraph.get_text())
 
-	#print("===========", file=sys.stderr)
-	#print(paragraphs, file=sys.stderr)
 	return paragraphs
