@@ -1,0 +1,28 @@
+you can use CW and CW 
+
+the standard try/catch be the correct way to handle a json.parse error in node.js , as mention in the node link doc from the joyent website , which say : 
+
+... the only commonly-used case where you would use try/catch be json.parse and other user-input validation function . 
+
+which be also in agreement with the link to nodejitsu which Aleksandr supply in he comment . 
+
+the best way to catch invalid JSON parsing error be to put the call to CW to a cw block . 
+
+you really do not have any other option - the built-in implementation throw a exception on invalid JSON datum and the only way to prevent that exception from halt you application be to catch it . even use a 3rd party library will not avoid that - they must do a cw on a CW call somewhere . 
+
+the only alternative be to implement you own json parsing algorithm that could be more forgive on invalid datum structure , but that feel like digging a 1 cubic metre hole with a small nuke . 
+
+the v8 JavaScript engine use by node.js link function which contain a cw block . 
+
+Update : link . for older release , see below . 
+
+a simple workaround be to put the safe-parsing logic into a separate function so that the main function can still be optimise : 
+
+if the JSON parsing be do sporadically , this might not have a noticeable effect on performance , but if use improperly in usage-heavy function it could lead to dramatic increase in response time . 
+
+it should be note that every.single.statement of JavaScript code in Node.js be execute only one-at-a-time , no matter if it be call from the main function or from a callback or from a different module or whatever . as such , every single statement will block the process . this be not necessarily a bad thing - a well design application will spend most of its time wait for a external resource -lrb- database response , http communication , filesystem operation etc. -rrb- . it be therefore of great importance that frequently execute JavaScript code can be optimise by the v8 engine so it take as little time as possible in this block state - see the note about performance . 
+
+well this work for I . in Catch I convert the datum to stringify before parse it to JSON . 
+
+this be about how to not break script during exception 
+

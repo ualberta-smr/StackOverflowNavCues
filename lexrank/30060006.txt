@@ -1,0 +1,30 @@
+if you take a look at CW , you will see that it create a new CW , but do not expose it as a bean . there be a getter , but the only way I have fish it out in the past be when I create the CW myself , e.g. 
+
+if you be work with spring boot , there be a link in the manual dedicate to work with the CW if you create a default CW CW , you should be able to autowire that same cw instance in you controller . 
+
+if you be use spring boot with Jackson on you classpath and default implementation for JSON parsing in you rest controller , then this should work : 
+
+as be say by other , you can not cw it in directly into you controller . 
+
+@Emerson Farrugia 's suggestion to create a new instance use 
+
+also do not work for I because the obtain instance be not follow the CW configuration property , which I need it to . 
+
+the solution I find be to obtain the ObjectMapper from Spring 's cw which be injectable . 
+
+so I autowire it : 
+
+and then get the ObjectMapper from it like this : 
+
+this instance behave exactly as spring mvc 's own message conversion - it probably be the same instance anyway . 
+
+at you cw class , add : 
+
+anywhere you wish to use CW : 
+
+peace ! 
+
+when you try to @autowire the mappingjackson2httpmessageconverter it give you : cw . 
+
+this be not a big issue , you can just change you variable name to one of the above to get that instance : cw 
+

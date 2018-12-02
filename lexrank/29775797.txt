@@ -1,0 +1,86 @@
+after spend some time , reverse engineering jsfiddle , try to generate payload - there be a effect . 
+
+please take eye -lrb- care -rrb- on line cw where response be not a response - it be promise . 
+
+jsFiddle : LINK & & Firefox > 39 & & Chrome > 42 
+
+with es2017 link , this be how to cw a json payload : 
+
+
+
+ca not use es2017 ? see @vp_art 's link 
+
+the question however be ask for a issue cause by a long since fix chrome bug . original answer follow . 
+
+chrome devtool do not even show the json as part of the request 
+
+this be the real issue here , and it be a link , fix in Chrome 46 . 
+
+that code work fine - it be post the JSON correctly , it just can not be see . 
+
+I would expect to see the object I have send back 
+
+that be not work because that be not the link . 
+
+the link be : 
+
+for endpoint accept JSON payload , the original code be correct 
+
+from search engine , I end up on this topic for non-json post datum with fetch , so think I would add this . 
+
+for non-json you do not have to use form datum . you can simply set the CW header to CW and use a string : 
+
+a alternative way to build that cw string , rather then typing it out as I do above , be to use library . for instance the cw function from link or link package . so use this it would look like : 
+
+I think you issue be CW can process CW request only . 
+
+but correct way to make json request be pass correct CW as a body : 
+
+
+
+I have create a thin wrapper around fetch -lrb- -rrb- with many improvement if you be use a purely json rest api : 
+
+to use it you have the variable cw and 4 method : 
+
+and within a cw function : 
+
+example with jquery : 
+
+this be related to CW . as you might have notice from other discussion and answer to this question some people be able to solve it by set CW . unfortunately in my case it do not work , my post request be still empty on the server side . 
+
+however , if you try with jquery 's CW and it be work , the reason be probably because of jquery use CW instead of CW . 
+
+have the same issue - no cw be send from a client to a server . 
+
+add cw header solve it for I : 
+
+it might be useful to somebody : 
+
+I be have the issue that formdata be not be send for my request 
+
+in my case it be a combination of follow header that be also cause the issue and the wrong Content-Type . 
+
+so I be send these two header with the request and it be not send the formdata when I remove the header that work . 
+
+also as other answer suggest that the content-type header need to be correct . 
+
+for my request the correct content-type header be : 
+
+`` content-type '' : `` application/x-www-form - urlencode ; charset = utf-8 '' 
+
+so bottom line if you formdata be not be attach to the request then it could potentially be you header . try bring you header to a minimum and then try add they one by one to see if you problem be rsolve . 
+
+I think that , we do not need parse the json object into a string , if the remote server accept json into they request , just run : 
+
+such as the curl request 
+
+in case to the remote serve not accept a json file as the body , just send a dataForm : 
+
+such as the curl request 
+
+the top answer do not work for php7 , because it have wrong encoding , but I could figure the right encode out with the other answer . this code also send authentication cookie , which you probably want when deal with e.g. php forum : 
+
+if you json payload contain array and nested object , I would use CW and jQuery 's cw method . 
+
+to you server , this will look like a standard HTML CW be cwed . 
+
