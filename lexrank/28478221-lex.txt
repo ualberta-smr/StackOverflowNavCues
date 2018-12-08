@@ -1,5 +1,5 @@
-lexrank.summarize("in you case the shorthand literal syntax would be: or shorter if you do not want the key: value syntax for literal: BTW if Cities do not contain anything other than the -lsb- -rsb- City, just use a slice of City. this will lead to a somewhat shorter syntax, and remove a unnecessary -lrb- possibly -rrb- layer: full example with everything write out explicitly:", 1, function (err, toplines, text) { console.log(toplines); });
+lexrank.summarize("in you case the shorthand literal syntax would be:. or shorter if you do not want the key: value syntax for literal:. BTW if Cities do not contain anything other than the -lsb- -rsb- City, just use a slice of City. this will lead to a somewhat shorter syntax, and remove a unnecessary -lrb- possibly -rrb- layer:. full example with everything write out explicitly:.", 1, function (err, toplines, text) { console.log(toplines); });
 
-[ { weight: 0.751107580507778,
-    text: 'in you case the shorthand literal syntax would be: or shorter if you do not want the key: value syntax for literal: BTW if Cities do not contain anything other than the -lsb- -rsb- City, just use a slice of City.',
-    index: 0 } ]
+[ { weight: 0.5671440535012587,
+    text: 'or shorter if you do not want the key: value syntax for literal:.',
+    index: 1 } ]
