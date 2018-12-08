@@ -1,0 +1,10 @@
+well , what you obtain when you CW be a cw and it happen to be a cw ; when you cw it , it will return the string representation of that CW , which be why you obtain that result . 
+
+what you want be to : 
+
+which will return the actual content of the JSON String itself -lrb- with everything unescaped and so on -rrb- . 
+
+note that this will return null if the CW be not a cw . 
+
+simple generic ternary to use the non-quoted text , otherwise keep the node intact . 
+
