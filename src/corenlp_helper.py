@@ -82,6 +82,7 @@ def get_word(item):
 	return res
 
 ## Conditional Sentences
+## @Christoph: this is where you would want to play with things
 def get_cond_sentences(paragraph, q_id, answ_id, parag_index):
 	cond_sentences = list()
 	annotations = corenlp.annotate(paragraph, corenlp_properties)
