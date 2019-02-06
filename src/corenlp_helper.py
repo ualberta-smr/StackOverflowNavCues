@@ -7,6 +7,20 @@ from tags import load_tags, TAGS_LIST, QUALITY_WORDS, NOUN_IDENTIFIERS
 import sys
 from nltk.stem.porter import *
 
+MODAL_VERBS = {
+    "shall", 
+    "should",
+    "will",
+    "must", 
+    "would", 
+    "can", 
+    "might",
+    "could",
+    "may",
+}
+
+NOUN_IDENTIFIERS = {'NN', 'NNS', 'NNP', 'NNPS'}
+
 #General CoreNLP Setup
 corenlp_properties={'annotators': 'pos,parse', 'outputFormat': 'json'}
 
@@ -105,6 +119,12 @@ def get_word(item):
 	return res
 
 ## Conditional Sentences
+
+def is_relevant_condition(sentence):
+	for token in sentence["tokens"]:
+		if token["originalText"].lower() == "if" and token["pos"] in NOUN_IDENTIFIERS:
+			res.append(token["originalText"])
+
 ## @Christoph: this is where you would want to play with things
 def get_cond_sentences(paragraph, q_id, answ_id, parag_index):
 	cond_sentences = list()
@@ -120,6 +140,7 @@ def get_cond_sentences(paragraph, q_id, answ_id, parag_index):
 				condition = get_condition_from_sentence(sentence)
 				cond_sentence.set_condition(condition)
 				cond_sentence.set_nfreqs(get_non_func(condition))
+				is_relevant_condition(sentence)
 				nouns_in_cond = list(set(get_nouns(sentence, condition) + get_regex_code_elem(sentence_text)))
 				cond_sentence.set_nouns(nouns_in_cond)
 				tags_in_cond = get_tags(nouns_in_cond)
