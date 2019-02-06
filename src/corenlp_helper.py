@@ -41,6 +41,7 @@ def get_sentence_text_lemmatized(sentence):
 def get_index(snippet):
 	count = 0
 	for item in snippet:
+		print ("Looping on item: " + item)
 		if item == " ":
 			count += 1
 		else:
@@ -51,7 +52,25 @@ def get_tree_from_parse_items(items):
 	index = None
 	res = []
 	for item in items:
-		if "in if" in item.lower():
+		print ("Looping on " + item)
+
+		#this check signifies that we are in an if clause
+		# An example of a parse tree would look like this
+		# (ROOT
+		# (S
+		#   (SBAR (IN If)
+		#     (S
+		#       (ADVP (RB instead))
+		#       (NP (DT the) (NN client))
+		#       (VP (VBZ uses)
+		#         (NP (DT a) (NN PUT) (NN request))
+		#         (S
+		#           (VP (TO to)
+		#             (VP (VB correct)
+		#               (NP (DT the) (NN email)))))
+		#         (, ,)
+
+		if "in if" in item.lower(): 
 			index = get_index(item)
 		else:
 			if index:
