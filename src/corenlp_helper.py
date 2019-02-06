@@ -3,7 +3,7 @@ from SOSentence import SOSentence
 from pycorenlp import StanfordCoreNLP as pycorenlp_StanfordCoreNLP
 import re
 from regex import REGEX_LIST
-from tags import load_tags, TAGS_LIST, QUALITY_WORDS, NOUN_IDENTIFIERS
+from tags import load_tags, TAGS_LIST, QUALITY_WORDS
 import sys
 from nltk.stem.porter import *
 
@@ -55,7 +55,6 @@ def get_sentence_text_lemmatized(sentence):
 def get_index(tree):
 	index = 0
 	for item in tree:
-		print ("Looping on item: " + item)
 		#there are these extra spaces in the tree. We basically want to get the index of the
 		#first subtree of the if so we want to ignore these spaces and know what the index of
 		#that subtree is
@@ -69,8 +68,6 @@ def get_conditional_tree(parse_items):
 	index = None
 	res = []
 	for item in parse_items:
-		print ("Looping on " + item)
-
 		#this check signifies that we are in an if clause
 		# An example of a parse tree would look like this
 		# (ROOT
@@ -140,7 +137,6 @@ def get_cond_sentences(paragraph, q_id, answ_id, parag_index):
 				condition = get_condition_from_sentence(sentence)
 				cond_sentence.set_condition(condition)
 				cond_sentence.set_nfreqs(get_non_func(condition))
-				is_relevant_condition(sentence)
 				nouns_in_cond = list(set(get_nouns(sentence, condition) + get_regex_code_elem(sentence_text)))
 				cond_sentence.set_nouns(nouns_in_cond)
 				tags_in_cond = get_tags(nouns_in_cond)
