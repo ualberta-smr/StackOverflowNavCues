@@ -52,7 +52,8 @@ def read_question_ids():
 def main():
 	load_tags()
 	SITE = StackAPI('stackoverflow')
-	questions = read_question_ids();
+	question_ids = read_question_ids();
+	questions = SITE.fetch('/questions', ids=question_ids, filter='!-*jbN-o8P3E5')
 	init_corenlp()
 	interesting_sentences = find_interesting_sentences(questions)
 
