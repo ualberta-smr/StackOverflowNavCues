@@ -38,20 +38,23 @@ def get_sentence_text_lemmatized(sentence):
 
 	return res
 
-def get_index(snippet):
-	count = 0
-	for item in snippet:
+def get_index(tree):
+	index = 0
+	for item in tree:
 		print ("Looping on item: " + item)
-		if item == " ":
-			count += 1
+		#there are these extra spaces in the tree. We basically want to get the index of the
+		#first subtree of the if so we want to ignore these spaces and know what the index of
+		#that subtree is
+		if item == " ": 
+			index += 1
 		else:
-			return count
+			return index
 
 
-def get_tree_from_parse_items(items):
+def get_conditional_tree(parse_items):
 	index = None
 	res = []
-	for item in items:
+	for item in parse_items:
 		print ("Looping on " + item)
 
 		#this check signifies that we are in an if clause
@@ -73,6 +76,7 @@ def get_tree_from_parse_items(items):
 		if "in if" in item.lower(): 
 			index = get_index(item)
 		else:
+			#if we have already seen an if condition, then we will have an index
 			if index:
 				if "(, ,)" in item:
 					return res
@@ -136,17 +140,17 @@ def get_condition_from_sentence(sentence):
 	parse_res = sentence['parse']
 	print (parse_res)
 	split = parse_res.split("\n")
-	condition = get_tree_from_parse_items(split)
+	conditional_tree = get_conditional_tree(split)
 
-	final = ""
-	for item in condition:
+	condition = ""
+	for item in conditional_tree:
 			if item:
-				final += item + " "
+				condition += item + " "
 
-	if (len(final) == 0):
+	if (len(condition) == 0):
 		return None
 	else:
-		return final
+		return condition
 
 def get_non_func(string):
 	res = []
