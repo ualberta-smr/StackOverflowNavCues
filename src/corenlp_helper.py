@@ -115,6 +115,7 @@ def get_cond_sentences(paragraph, q_id, answ_id, parag_index):
 
 def get_condition_from_sentence(sentence):
 	parse_res = sentence['parse']
+	print (parse_res)
 	split = parse_res.split("\n")
 	condition = get_tree_from_parse_items(split)
 

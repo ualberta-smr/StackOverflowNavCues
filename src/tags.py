@@ -10,7 +10,7 @@ def load_tags():
     stemmer = PorterStemmer()
     for event, elem in etree.iterparse('Tags.xml', events=('start', 'end')):
         if event == "start":
-            if elem.tag == "row" and elem.attrib > 2:
+            if elem.tag == "row" and int(elem.attrib["Count"]) > 2:
                 TAGS_LIST[stemmer.stem(elem.attrib["TagName"]).lower()] = elem.attrib["Count"]
 
 
