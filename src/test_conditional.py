@@ -41,7 +41,7 @@ def read_patterns_file():
 
 def read_question_ids():
     question_ids = list()
-    with open("test/question_ids.txt", "r") as file: 
+    with open("tests/question_ids.txt", "r") as file: 
         for line in file.readlines():
             items = line.split(",")
             question_ids.extend([item.strip() for item in items])
