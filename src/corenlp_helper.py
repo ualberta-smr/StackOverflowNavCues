@@ -206,6 +206,7 @@ def get_nouns(sentence, condition):
 	words = set(re.sub("[^\w]", " ",  str(condition)).split())
 
 	for token in sentence["tokens"]:
+		print ("token: " + token)
 		if token["originalText"].lower() in words and token["pos"] in NOUN_IDENTIFIERS:
 			res.append(token["originalText"])
 
