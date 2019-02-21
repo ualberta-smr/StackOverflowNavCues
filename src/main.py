@@ -25,7 +25,7 @@ def find_interesting_sentences(questions):
 						for paragraph_index, paragraph in enumerate(paragraphs):
 
 							#get conditional sentences (our technique and also includes just sentences with "if")
-							cond_sentences = get_cond_sentences(paragraph, q_id=question['question_id'], answ_id=answer['answer_id'], parag_index=paragraph_index)
+							cond_sentences = get_cond_sentences_from_para(paragraph, q_id=question['question_id'], answ_id=answer['answer_id'], parag_index=paragraph_index)
 							all_interesting_sentences.extend(cond_sentences)
 
 							#get baseline 1 sentences based on Martin's patterns

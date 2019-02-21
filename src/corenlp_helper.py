@@ -153,7 +153,7 @@ def get_cond_sentence(sentence):
 	return None
 
 ## @Christoph: this is where you would want to play with things
-def get_cond_sentences(paragraph, q_id, answ_id, parag_index):
+def get_cond_sentences_from_para(paragraph, q_id, answ_id, parag_index):
 	cond_sentences = list()
 	annotations = corenlp.annotate(paragraph, corenlp_properties)
 	try:
