@@ -2,7 +2,7 @@ from SOSentence import SOSentence
 
 class ConditionalSentence(SOSentence):
 
-	def __init__(self, sentence, question_id, answer_id, paragraph_index=None, sentence_pos=None, condition=None, tags=None, nfreqs=None, nouns=None, conditional=False):
+	def __init__(self, sentence, question_id=None, answer_id=None, paragraph_index=None, sentence_pos=None, condition=None, tags=None, nfreqs=None, nouns=None, conditional=False):
 		SOSentence.__init__(self, sentence, question_id, answer_id,paragraph_index, sentence_pos)
 		self.condition = condition
 		self.tags = tags
@@ -26,6 +26,18 @@ class ConditionalSentence(SOSentence):
 	def set_conditional(self):
 		self.conditional = True
 
+	def set_question_id(self, question_id):
+		self.question_id = question_id
+
+	def set_answer_id(self, answer_id):
+		self.answer_id = answer_id
+
+	def set_paragraph_index(self, paragraph_index):
+		self.paragraph_index = paragraph_index
+
+	def set_sentence_pos(self, sentence_pos):
+		self.sentence_pos = sentence_pos
+
 	def get_condition(self):
 		return self.condition
 
@@ -38,7 +50,14 @@ class ConditionalSentence(SOSentence):
 	def get_nouns(self):
 		return self.nouns
 
+	def get_sentence(self):
+		return self.sentence
+
+	def is_conditional(self):
+		return self.conditional
+
 	def print(self, delimeter):
+		print("type of sentence in class: " + str(type(self.sentence)))
 		print(self.conditional, self.question_id, self.answer_id, self.paragraph_index, self.sentence_pos, self.sentence.replace("-LRB-", "(").replace("-RRB-", ")"), self.condition, self.tags, self.nfreqs, self.nouns, sep=delimeter)
 
 
