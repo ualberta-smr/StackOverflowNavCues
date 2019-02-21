@@ -119,6 +119,14 @@ def get_word(item):
 
 ## Conditional Sentences
 
+def is_interrogative_sentence(sentence):
+	#simply check if it ends with a question mark
+	tokens = sentence["tokens"]
+	if (tokens[len(tokens) - 1]['word'] == "?"):
+		return True
+
+	return False
+
 def verb_has_dep_noun(enhancedDependencies, verb_token_index, tokens):
 	for dependency in enhancedDependencies:
 		if dependency['governor'] == verb_token_index:
@@ -175,6 +183,9 @@ def get_cond_sentence(sentence):
 			#check all our criteria for a conditional sentence being insightful
 			if (is_relevant_condition(sentence)):# and condition_contains_so_tag(nouns_in_cond)):
 				cond_sentence.set_conditional()
+
+			if (is_interrogative_sentence(sentence)):
+				cond_sentence.set_interrogative()
 
 			return cond_sentence
 

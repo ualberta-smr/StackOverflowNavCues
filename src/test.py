@@ -61,19 +61,19 @@ class TestConditionalSentences(unittest.TestCase):
 
 		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
 			self.assertTrue(cond_sentence.is_conditional())
+ 
 
-# def main():
-	
-	
-# 	paragraph = "You should use Windows if you want."
+	def test_interrogative_sentence(self):
+		paragraph = "Now, if we issue the exact same PATCH request as above, what happens?"
 
-	
-# 	for cond_sentence in get_cond_sentences(paragraph, None, None, None):
-# 		if cond_sentence is not None:
-# 			cond_sentence.print('|')
-# 		else:
-# 			print("it's none")
-		
+		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
+			self.assertTrue(cond_sentence.is_interrogative())
+
+	def test_not_interrogative_sentence(self):
+		paragraph = "I even used Postman to check if I had the correct routes or endpoint ."
+
+		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
+			self.assertFalse(cond_sentence.is_interrogative())
 
 if __name__ == "__main__":
 	unittest.main()
