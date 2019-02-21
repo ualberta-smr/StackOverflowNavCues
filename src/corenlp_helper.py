@@ -122,32 +122,53 @@ def is_relevant_condition(sentence):
 		if token["originalText"].lower() == "if" and token["pos"] in NOUN_IDENTIFIERS:
 			res.append(token["originalText"])
 
+def get_cond_sentence(sentence):
+	try:
+		sentence_text = get_sentence_text(sentence)
+
+		if " if" in sentence_text.lower():
+			#initialize conditional sentence with basic info
+			cond_sentence = ConditionalSentence(sentence=sentence_text)
+
+			#get information about condition, nfrs etc
+			condition = get_condition_from_sentence(sentence)
+			cond_sentence.set_condition(condition)
+			cond_sentence.set_nfreqs(get_non_func(condition))
+			nouns_in_cond = list(set(get_nouns(sentence, condition) + get_regex_code_elem(sentence_text)))
+			cond_sentence.set_nouns(nouns_in_cond)
+			tags_in_cond = get_tags(nouns_in_cond)
+
+			#Our criteria for a "useful" conditional sentence is that it contains one of the SO tags in its condition
+			if (len(tags_in_cond) != 0 ):
+				cond_sentence.set_conditional()
+				cond_sentence.set_tags(tags_in_cond)
+
+			return cond_sentence
+
+	except Exception as e:
+		print(e)
+		traceback.print_exc()
+		print("Failed to process sentence: " + sentence_text)
+
+	return None
+
 ## @Christoph: this is where you would want to play with things
 def get_cond_sentences(paragraph, q_id, answ_id, parag_index):
 	cond_sentences = list()
 	annotations = corenlp.annotate(paragraph, corenlp_properties)
 	try:
 		for sent_index, sentence in enumerate(annotations['sentences']):
-			sentence_text = get_sentence_text(sentence)
-			if " if" in sentence_text.lower():
-				#initialize conditional sentence with basic info
-				cond_sentence = ConditionalSentence(sentence=sentence_text, question_id=q_id, answer_id=answ_id, sentence_pos=sent_index, paragraph_index=parag_index)
-
-				#get information about condition, nfrs etc
-				condition = get_condition_from_sentence(sentence)
-				cond_sentence.set_condition(condition)
-				cond_sentence.set_nfreqs(get_non_func(condition))
-				nouns_in_cond = list(set(get_nouns(sentence, condition) + get_regex_code_elem(sentence_text)))
-				cond_sentence.set_nouns(nouns_in_cond)
-				tags_in_cond = get_tags(nouns_in_cond)
-
-				#Our criteria for a "useful" conditional sentence is that it contains one of the SO tags in its condition
-				if (len(tags_in_cond) != 0 ):
-					cond_sentence.set_conditional()
-					cond_sentence.set_tags(tags_in_cond)
+			cond_sentence = get_cond_sentence(sentence)
+			if (cond_sentence is not None):
+				cond_sentence.set_question_id(q_id)
+				cond_sentence.set_answer_id(answ_id)
+				cond_sentence.set_sentence_pos(sent_index)
+				cond_sentence.set_paragraph_index(parag_index)
 
 				cond_sentences.append(cond_sentence)
-	except:
+	except Exception as e: 
+		print(e)
+		traceback.print_exc()
 		print("Failed to enumerate sentences in para:" + str(q_id) + "," + str(answ_id) + "," + str(parag_index) + ": " + paragraph, file=sys.stderr)
 
 	return cond_sentences
@@ -202,7 +223,7 @@ def get_nouns(sentence, condition):
 	words = set(re.sub("[^\w]", " ",  str(condition)).split())
 
 	for token in sentence["tokens"]:
-		print ("token: " + token)
+		print ("token: " + str(token))
 		if token["originalText"].lower() in words and token["pos"] in NOUN_IDENTIFIERS:
 			res.append(token["originalText"])
 
