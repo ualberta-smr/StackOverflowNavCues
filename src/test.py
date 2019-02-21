@@ -75,5 +75,17 @@ class TestConditionalSentences(unittest.TestCase):
 		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
 			self.assertFalse(cond_sentence.is_interrogative())
 
+	def test_first_person(self):
+		paragraph = "I even used Postman to check if I had the correct routes or endpoint."
+
+		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
+			self.assertTrue(cond_sentence.is_first_person())
+
+	def test_not_first_person(self):
+		paragraph = "I should mention that I didn't know that json is not managed in memory with temp tables (text/blob case)... I 'm not sure if it could lead to performance issues."
+
+		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
+			self.assertFalse(cond_sentence.is_first_person())
+
 if __name__ == "__main__":
 	unittest.main()

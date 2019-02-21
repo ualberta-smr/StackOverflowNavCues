@@ -119,6 +119,16 @@ def get_word(item):
 
 ## Conditional Sentences
 
+def is_first_person_condition(sentence):
+	tokens = sentence['tokens']
+
+	for token_index, token in enumerate(tokens):
+		if token['word'] == "if":
+			if (token_index <= len(tokens) - 2 and tokens[token_index + 1]['word'].lower() == "i"):
+				return True
+
+	return False
+
 def is_interrogative_sentence(sentence):
 	#simply check if it ends with a question mark
 	tokens = sentence["tokens"]
@@ -186,6 +196,9 @@ def get_cond_sentence(sentence):
 
 			if (is_interrogative_sentence(sentence)):
 				cond_sentence.set_interrogative()
+
+			if (is_first_person_condition(sentence)):
+				cond_sentence.set_first_person()
 
 			return cond_sentence
 

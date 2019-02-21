@@ -2,18 +2,22 @@ from SOSentence import SOSentence
 
 class ConditionalSentence(SOSentence):
 
-	def __init__(self, sentence, question_id=None, answer_id=None, paragraph_index=None, sentence_pos=None, condition=None, tags=None, nfreqs=None, nouns=None, conditional=False,interrogative=False):
+	def __init__(self, sentence, question_id=None, answer_id=None, paragraph_index=None, sentence_pos=None, condition=None, tags=None, nfreqs=None, nouns=None, conditional=False):
 		SOSentence.__init__(self, sentence, question_id, answer_id,paragraph_index, sentence_pos)
 		self.condition = condition
 		self.tags = tags
 		self.nfreqs = nfreqs
 		self.nouns = nouns
 		self.conditional = conditional
-		self.interrogative = interrogative
+		self.interrogative = False
+		self.first_person = False
 
 
 	def set_interrogative(self):
 		self.interrogative = True
+
+	def set_first_person(self):
+		self.first_person = True
 
 	def set_condition(self, condition):
 		self.condition = condition
@@ -62,6 +66,9 @@ class ConditionalSentence(SOSentence):
 
 	def is_interrogative(self):
 		return self.interrogative
+
+	def is_first_person(self):
+		return self.first_person
 
 
 	def print(self, delimeter):
