@@ -14,7 +14,7 @@ class TestConditionalSentences(unittest.TestCase):
 		#if related to verb, but verb has no dependencies to a noun (any noun... NN*)
 		paragraph = "You should use Windows if you want."
 
-		for cond_sentence in get_cond_sentences(paragraph, None, None, None):
+		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
 			self.assertFalse(cond_sentence.is_conditional())
 
 	def test_verb_noun_dep(self):
@@ -23,7 +23,7 @@ class TestConditionalSentences(unittest.TestCase):
 		#if related to verb, but verb has a dependency to a noun
 		paragraph = "You should use Windows if you want features."
 
-		for cond_sentence in get_cond_sentences(paragraph, None, None, None):
+		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
 			self.assertTrue(cond_sentence.is_conditional())
 
 	def test_if_no_dep(self):
@@ -32,7 +32,7 @@ class TestConditionalSentences(unittest.TestCase):
 		#the if not related to verb or noun
 		paragraph = "You should use Windows if necessary."
 
-		for cond_sentence in get_cond_sentences(paragraph, None, None, None):
+		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
 			self.assertFalse(cond_sentence.is_conditional())
 
 	def test_if_verb_dep_it(self):
@@ -41,7 +41,7 @@ class TestConditionalSentences(unittest.TestCase):
 		#if is related to a verb but that verb's subject is "it" (not noun) -- same as 1
 		paragraph = "You should use Windows even if it fails."
 
-		for cond_sentence in get_cond_sentences(paragraph, None, None, None):
+		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
 			self.assertFalse(cond_sentence.is_conditional())
 
 	def test_verb_phrase_dep(self):
@@ -50,7 +50,7 @@ class TestConditionalSentences(unittest.TestCase):
 		#same as test_verb_noun_dep but there's a phrase invovled
 		paragraph = "You should use Windows even if the response fails."
 
-		for cond_sentence in get_cond_sentences(paragraph, None, None, None):
+		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
 			self.assertTrue(cond_sentence.is_conditional())
 
 	def test_if_dep_noun(self):
@@ -59,7 +59,7 @@ class TestConditionalSentences(unittest.TestCase):
 		#the if has a direct dependency on a noun
 		paragraph = "You should use Windows even if the intended effect is bluescreen."
 
-		for cond_sentence in get_cond_sentences(paragraph, None, None, None):
+		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
 			self.assertTrue(cond_sentence.is_conditional())
 
 # def main():
