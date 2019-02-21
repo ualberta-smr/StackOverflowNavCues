@@ -120,43 +120,30 @@ def get_word(item):
 ## Conditional Sentences
 
 def verb_has_dep_noun(enhancedDependencies, verb_token_index, tokens):
-
-	print ("checking verb token index " + str(verb_token_index))
 	for dependency in enhancedDependencies:
 		if dependency['governor'] == verb_token_index:
 			dependent_index = int(dependency['dependent'])
-			print ("checking pos of " + str(tokens[dependent_index - 1]['word']))
 			dependent_pos = tokens[dependent_index - 1]['pos']
 			if (dependent_pos in NOUN_IDENTIFIERS):
 				return True
-		# elif dependency['dependent'] == verb_token_index:
-		# 	governor_index = int(dependency['governor'])
-		# 	print ("checking pos of " + str(tokens[governor_index - 1]['word']))
-		# 	gorvernor_pos = tokens[governor_index - 1]['pos']
-		# 	if (gorvernor_pos in NOUN_IDENTIFIERS):
-		# 		return True
 
 	return False
 
 def is_relevant_condition(sentence):
-	# for token in sentence["tokens"]:
-	# 	if token["originalText"].lower() == "if" and token["pos"] in NOUN_IDENTIFIERS:
-	# 		res.append(token["originalText"])
 
 	tokens = sentence["tokens"]
-	# print(str(tokens) + "\n")
-	# print(str(sentence["enhancedDependencies"]) + "\n")
 	enhanced_dependencies = sentence['enhancedDependencies']
-	relevant_condition = False
+	is_relevant_condition = False
 	for dependency in enhanced_dependencies:
 		if dependency['dependentGloss'] == "if":
 			governor_token_index = int(dependency['governor'])
 			governor_pos = tokens[governor_token_index - 1]['pos']
-			print("checking verb: " + str(tokens[governor_token_index-1]['word']))
 			if governor_pos in VERB_IDENTIFIERS:
-				relevant_condition = verb_has_dep_noun(enhanced_dependencies, governor_token_index, tokens)
+				is_relevant_condition = verb_has_dep_noun(enhanced_dependencies, governor_token_index, tokens)
+			elif governor_pos in NOUN_IDENTIFIERS:
+				is_relevant_condition = True
 
-	return relevant_condition
+	return is_relevant_condition
 
 
 def condition_contains_so_tag(nouns_in_cond):
