@@ -38,8 +38,8 @@ class ConditionalSentence(SOSentence):
 	def set_nouns(self, nouns):
 		self.nouns = nouns
 
-	def set_insightful(self):
-		self.insightful = True
+	def set_insightful(self, value):
+		self.insightful = value
 
 	def set_question_id(self, question_id):
 		self.question_id = question_id
@@ -86,6 +86,7 @@ class ConditionalSentence(SOSentence):
 	def print(self, delimeter):
 		print(self.insightful, self.question_id, self.answer_id, self.paragraph_index, self.sentence_pos, self.sentence.replace("-LRB-", "(").replace("-RRB-", ")"), self.condition, self.tags, self.nfreqs, self.nouns, self.interrogative, self.first_person, self.unsure_phrase, self.grammar_dependencies, sep=delimeter)
 
-
-
+	def __eq__(self, other):
+		#used for calcualting true positives or true negatives
+		return self.question_id = other.question_id and self.answer_id = other.answer_id and self.paragraph_index = other.paragraph_index and self.sentence_pos = other.sentence_pos and self.insightful = self.insightful
 
