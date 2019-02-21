@@ -26,41 +26,41 @@ class TestConditionalSentences(unittest.TestCase):
 		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
 			self.assertTrue(cond_sentence.is_conditional())
 
-	def test_if_no_dep(self):
+	# def test_if_no_dep(self):
 
-		#should NOT be tagged as a conditional insight
-		#the if not related to verb or noun
-		paragraph = "You should use Windows if necessary."
+	# 	#should NOT be tagged as a conditional insight
+	# 	#the if not related to verb or noun
+	# 	paragraph = "You should use Windows if necessary."
 
-		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
-			self.assertFalse(cond_sentence.is_conditional())
+	# 	for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
+	# 		self.assertFalse(cond_sentence.is_conditional())
 
-	def test_if_verb_dep_it(self):
+	# def test_if_verb_dep_it(self):
 
-		#should NOT be tagged as a conditional insight
-		#if is related to a verb but that verb's subject is "it" (not noun) -- same as 1
-		paragraph = "You should use Windows even if it fails."
+	# 	#should NOT be tagged as a conditional insight
+	# 	#if is related to a verb but that verb's subject is "it" (not noun) -- same as 1
+	# 	paragraph = "You should use Windows even if it fails."
 
-		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
-			self.assertFalse(cond_sentence.is_conditional())
+	# 	for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
+	# 		self.assertFalse(cond_sentence.is_conditional())
 
-	def test_verb_phrase_dep(self):
+	# def test_verb_phrase_dep(self):
 
-		#should be tagged as a conditional insight
-		#same as test_verb_noun_dep but there's a phrase invovled
-		paragraph = "You should use Windows even if the response fails."
+	# 	#should be tagged as a conditional insight
+	# 	#same as test_verb_noun_dep but there's a phrase invovled
+	# 	paragraph = "You should use Windows even if the response fails."
 
-		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
-			self.assertTrue(cond_sentence.is_conditional())
+	# 	for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
+	# 		self.assertTrue(cond_sentence.is_conditional())
 
-	def test_if_dep_noun(self):
+	# def test_if_dep_noun(self):
 
-		#should be tagged as a conditional insight
-		#the if has a direct dependency on a noun
-		paragraph = "You should use Windows even if the intended effect is bluescreen."
+	# 	#should be tagged as a conditional insight
+	# 	#the if has a direct dependency on a noun
+	# 	paragraph = "You should use Windows even if the intended effect is bluescreen."
 
-		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
-			self.assertTrue(cond_sentence.is_conditional())
+	# 	for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
+	# 		self.assertTrue(cond_sentence.is_conditional())
 
 # def main():
 	

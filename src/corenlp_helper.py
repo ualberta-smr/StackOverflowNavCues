@@ -21,6 +21,8 @@ MODAL_VERBS = {
 
 NOUN_IDENTIFIERS = {'NN', 'NNS', 'NNP', 'NNPS'}
 
+VERB_IDENTIFIERS = {'VBP'}
+
 #General CoreNLP Setup
 corenlp_properties={'annotators': 'pos,parse', 'outputFormat': 'json'}
 
@@ -117,10 +119,35 @@ def get_word(item):
 
 ## Conditional Sentences
 
+def verb_has_dep_noun(enhancedDependencies, governor_token_index, tokens):
+
+	for dependency in enhancedDependencies:
+		if dependency['governor'] == governor_token_index:
+			dependent_index = int(dependency['dependent'])
+			dependent_pos = tokens[dependent_index - 1]['pos']
+			if (dependent_pos in NOUN_IDENTIFIERS):
+				return True
+
+	return False
+
 def is_relevant_condition(sentence):
-	for token in sentence["tokens"]:
-		if token["originalText"].lower() == "if" and token["pos"] in NOUN_IDENTIFIERS:
-			res.append(token["originalText"])
+	# for token in sentence["tokens"]:
+	# 	if token["originalText"].lower() == "if" and token["pos"] in NOUN_IDENTIFIERS:
+	# 		res.append(token["originalText"])
+
+	tokens = sentence["tokens"]
+	# print(str(tokens) + "\n")
+	# print(str(sentence["enhancedDependencies"]) + "\n")
+	enhanced_dependencies = sentence['enhancedDependencies']
+	for dependency in enhanced_dependencies:
+		if dependency['dependentGloss'] == "if":
+			governor_token_index = int(dependency['governor'])
+			governor_pos = tokens[governor_token_index - 1]['pos']
+			if governor_pos in VERB_IDENTIFIERS:
+				return verb_has_dep_noun(enhanced_dependencies, governor_token_index, tokens)
+
+	return False
+
 
 def condition_contains_so_tag(nouns_in_cond):
 	#One criteria for a "useful" conditional sentence is that it contains one of the SO tags in its condition
@@ -149,7 +176,7 @@ def get_cond_sentence(sentence):
 			cond_sentence.set_nouns(nouns_in_cond)
 			
 			#check all our criteria for a conditional sentence being insightful
-			if (condition_contains_so_tag(nouns_in_cond)):
+			if (is_relevant_condition(sentence)):# and condition_contains_so_tag(nouns_in_cond)):
 				cond_sentence.set_conditional()
 
 			return cond_sentence
@@ -185,7 +212,7 @@ def get_cond_sentences_from_para(paragraph, q_id, answ_id, parag_index):
 
 def get_condition_from_sentence(sentence):
 	parse_res = sentence['parse']
-	print (parse_res)
+	#print (parse_res)
 	split = parse_res.split("\n")
 	conditional_tree = get_conditional_tree(split)
 
@@ -232,7 +259,7 @@ def get_nouns(sentence, condition):
 	words = set(re.sub("[^\w]", " ",  str(condition)).split())
 
 	for token in sentence["tokens"]:
-		print ("token: " + str(token))
+		#print ("token: " + str(token))
 		if token["originalText"].lower() in words and token["pos"] in NOUN_IDENTIFIERS:
 			res.append(token["originalText"])
 
