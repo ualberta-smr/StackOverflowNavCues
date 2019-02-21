@@ -21,7 +21,7 @@ MODAL_VERBS = {
 
 NOUN_IDENTIFIERS = {'NN', 'NNS', 'NNP', 'NNPS'}
 
-VERB_IDENTIFIERS = {'VBP'}
+VERB_IDENTIFIERS = {'VBP', 'VBZ'}
 
 #General CoreNLP Setup
 corenlp_properties={'annotators': 'pos,parse', 'outputFormat': 'json'}
@@ -119,14 +119,22 @@ def get_word(item):
 
 ## Conditional Sentences
 
-def verb_has_dep_noun(enhancedDependencies, governor_token_index, tokens):
+def verb_has_dep_noun(enhancedDependencies, verb_token_index, tokens):
 
+	print ("checking verb token index " + str(verb_token_index))
 	for dependency in enhancedDependencies:
-		if dependency['governor'] == governor_token_index:
+		if dependency['governor'] == verb_token_index:
 			dependent_index = int(dependency['dependent'])
+			print ("checking pos of " + str(tokens[dependent_index - 1]['word']))
 			dependent_pos = tokens[dependent_index - 1]['pos']
 			if (dependent_pos in NOUN_IDENTIFIERS):
 				return True
+		# elif dependency['dependent'] == verb_token_index:
+		# 	governor_index = int(dependency['governor'])
+		# 	print ("checking pos of " + str(tokens[governor_index - 1]['word']))
+		# 	gorvernor_pos = tokens[governor_index - 1]['pos']
+		# 	if (gorvernor_pos in NOUN_IDENTIFIERS):
+		# 		return True
 
 	return False
 
@@ -143,6 +151,7 @@ def is_relevant_condition(sentence):
 		if dependency['dependentGloss'] == "if":
 			governor_token_index = int(dependency['governor'])
 			governor_pos = tokens[governor_token_index - 1]['pos']
+			print("checking verb: " + str(tokens[governor_token_index-1]['word']))
 			if governor_pos in VERB_IDENTIFIERS:
 				return verb_has_dep_noun(enhanced_dependencies, governor_token_index, tokens)
 
