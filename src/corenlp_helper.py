@@ -122,6 +122,17 @@ def is_relevant_condition(sentence):
 		if token["originalText"].lower() == "if" and token["pos"] in NOUN_IDENTIFIERS:
 			res.append(token["originalText"])
 
+def condition_contains_so_tag(nouns_in_cond):
+	#One criteria for a "useful" conditional sentence is that it contains one of the SO tags in its condition
+	tags_in_cond = get_tags(nouns_in_cond)
+	if (len(tags_in_cond) != 0):
+		cond_sentence.set_tags(tags_in_cond)
+		return True
+	else:
+		return False
+		
+
+
 def get_cond_sentence(sentence):
 	try:
 		sentence_text = get_sentence_text(sentence)
@@ -136,12 +147,10 @@ def get_cond_sentence(sentence):
 			cond_sentence.set_nfreqs(get_non_func(condition))
 			nouns_in_cond = list(set(get_nouns(sentence, condition) + get_regex_code_elem(sentence_text)))
 			cond_sentence.set_nouns(nouns_in_cond)
-			tags_in_cond = get_tags(nouns_in_cond)
-
-			#Our criteria for a "useful" conditional sentence is that it contains one of the SO tags in its condition
-			if (len(tags_in_cond) != 0 ):
+			
+			#check all our criteria for a conditional sentence being insightful
+			if (condition_contains_so_tag(nouns_in_cond)):
 				cond_sentence.set_conditional()
-				cond_sentence.set_tags(tags_in_cond)
 
 			return cond_sentence
 
