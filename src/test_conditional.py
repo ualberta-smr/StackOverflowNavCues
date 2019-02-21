@@ -62,7 +62,7 @@ def get_intersection(list1, list2):
 
 def create_benchmark():
 	benchmark = list()
-	entries = csv.DictReader(open("benchmark.csv"))
+	entries = csv.DictReader(open("tests/benchmark_json_questions.csv"))
 	for entry in entries:
 		cond_sentence = ConditionalSentence(sentence=None, question_id = entry['QuestionID'], answer_id = entry['AnswerID'], paragraph_index=entry['ParagraphIndex'], sentence_pos=entry['SentenceIndex'], insightful=str_to_bool(entry['Insightful']))
 		benchmark.append(cond_sentence)
