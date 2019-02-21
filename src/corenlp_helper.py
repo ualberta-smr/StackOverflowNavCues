@@ -147,15 +147,16 @@ def is_relevant_condition(sentence):
 	# print(str(tokens) + "\n")
 	# print(str(sentence["enhancedDependencies"]) + "\n")
 	enhanced_dependencies = sentence['enhancedDependencies']
+	relevant_condition = False
 	for dependency in enhanced_dependencies:
 		if dependency['dependentGloss'] == "if":
 			governor_token_index = int(dependency['governor'])
 			governor_pos = tokens[governor_token_index - 1]['pos']
 			print("checking verb: " + str(tokens[governor_token_index-1]['word']))
 			if governor_pos in VERB_IDENTIFIERS:
-				return verb_has_dep_noun(enhanced_dependencies, governor_token_index, tokens)
+				relevant_condition = verb_has_dep_noun(enhanced_dependencies, governor_token_index, tokens)
 
-	return False
+	return relevant_condition
 
 
 def condition_contains_so_tag(nouns_in_cond):
