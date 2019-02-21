@@ -167,7 +167,7 @@ def has_relevant_grammar_dependencies(sentence):
 	return is_relevant_condition
 
 
-def condition_contains_so_tag(nouns_in_cond):
+def condition_contains_so_tag(cond_sentence, nouns_in_cond):
 	#One criteria for a "useful" conditional sentence is that it contains one of the SO tags in its condition
 	tags_in_cond = get_tags(nouns_in_cond)
 	if (len(tags_in_cond) != 0):
@@ -197,14 +197,23 @@ def build_cond_sentence(sentence):
 			if (has_relevant_grammar_dependencies(sentence)):
 				cond_sentence.set_grammar_dependencies(True)
 
-				if (condition_contains_so_tag(nouns_in_cond)):
-					cond_sentnece.set_insightful(True)
+				if (condition_contains_so_tag(cond_sentence,nouns_in_cond)):
+					cond_sentence.set_insightful(True)
 
 			if (is_interrogative_sentence(sentence)):
 				cond_sentence.set_interrogative(True)
+				 #filter out sentences that are interrogative, even if they fulfilled prev criteria
+				cond_sentence.set_insightful(False)
 
 			if (is_first_person_condition(sentence)):
 				cond_sentence.set_first_person(True)
+				#filter out sentences that have first person in their condition, even if they fulfilled prev criteria
+				cond_sentence.set_insightful(False)
+
+			if (contains_unsure_phrases(sentence)):
+				cond_sentence.set_unsure_phrases(True)
+				#filter out sentences that have unsure phrases, even if they fulfilled prev criteria
+				cond_sentence.set_insightful(False)
 
 			return cond_sentence
 
