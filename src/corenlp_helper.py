@@ -150,7 +150,7 @@ def verb_has_dep_noun(enhancedDependencies, verb_token_index, tokens):
 
 	return False
 
-def is_relevant_condition(sentence):
+def has_relevant_grammar_dependencies(sentence):
 
 	tokens = sentence["tokens"]
 	enhanced_dependencies = sentence['enhancedDependencies']
@@ -178,7 +178,7 @@ def condition_contains_so_tag(nouns_in_cond):
 		
 
 
-def get_cond_sentence(sentence):
+def build_cond_sentence(sentence):
 	try:
 		sentence_text = get_sentence_text(sentence)
 
@@ -194,14 +194,17 @@ def get_cond_sentence(sentence):
 			cond_sentence.set_nouns(nouns_in_cond)
 			
 			#check all our criteria for a conditional sentence being insightful
-			if (is_relevant_condition(sentence)):# and condition_contains_so_tag(nouns_in_cond)):
-				cond_sentence.set_conditional()
+			if (has_relevant_grammar_dependencies(sentence)):
+				cond_sentence.set_grammar_dependencies(True)
+
+				if (condition_contains_so_tag(nouns_in_cond)):
+					cond_sentnece.set_insightful(True)
 
 			if (is_interrogative_sentence(sentence)):
-				cond_sentence.set_interrogative()
+				cond_sentence.set_interrogative(True)
 
 			if (is_first_person_condition(sentence)):
-				cond_sentence.set_first_person()
+				cond_sentence.set_first_person(True)
 
 			return cond_sentence
 
@@ -218,7 +221,7 @@ def get_cond_sentences_from_para(paragraph, q_id, answ_id, parag_index):
 	annotations = corenlp.annotate(paragraph, corenlp_properties)
 	try:
 		for sent_index, sentence in enumerate(annotations['sentences']):
-			cond_sentence = get_cond_sentence(sentence)
+			cond_sentence = build_cond_sentence(sentence)
 			if (cond_sentence is not None):
 				cond_sentence.set_question_id(q_id)
 				cond_sentence.set_answer_id(answ_id)

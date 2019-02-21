@@ -15,7 +15,7 @@ class TestConditionalSentences(unittest.TestCase):
 		paragraph = "You should use Windows if you want."
 
 		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
-			self.assertFalse(cond_sentence.is_conditional())
+			self.assertFalse(cond_sentence.has_grammar_dependencies())
 
 	def test_verb_noun_dep(self):
 
@@ -24,7 +24,7 @@ class TestConditionalSentences(unittest.TestCase):
 		paragraph = "You should use Windows if you want features."
 
 		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
-			self.assertTrue(cond_sentence.is_conditional())
+			self.assertTrue(cond_sentence.has_grammar_dependencies())
 
 	def test_if_no_dep(self):
 
@@ -33,7 +33,7 @@ class TestConditionalSentences(unittest.TestCase):
 		paragraph = "You should use Windows if necessary."
 
 		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
-			self.assertFalse(cond_sentence.is_conditional())
+			self.assertFalse(cond_sentence.has_grammar_dependencies())
 
 	def test_if_verb_dep_it(self):
 
@@ -42,7 +42,7 @@ class TestConditionalSentences(unittest.TestCase):
 		paragraph = "You should use Windows even if it fails."
 
 		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
-			self.assertFalse(cond_sentence.is_conditional())
+			self.assertFalse(cond_sentence.has_grammar_dependencies())
 
 	def test_verb_phrase_dep(self):
 
@@ -51,7 +51,7 @@ class TestConditionalSentences(unittest.TestCase):
 		paragraph = "You should use Windows even if the response fails."
 
 		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
-			self.assertTrue(cond_sentence.is_conditional())
+			self.assertTrue(cond_sentence.has_grammar_dependencies())
 
 	def test_if_dep_noun(self):
 
@@ -60,7 +60,7 @@ class TestConditionalSentences(unittest.TestCase):
 		paragraph = "You should use Windows even if the intended effect is bluescreen."
 
 		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
-			self.assertTrue(cond_sentence.is_conditional())
+			self.assertTrue(cond_sentence.has_grammar_dependencies())
 
 	def test_interrogative_sentence(self):
 		paragraph = "Now, if we issue the exact same PATCH request as above, what happens?"
