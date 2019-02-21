@@ -11,7 +11,10 @@ class ConditionalSentence(SOSentence):
 		self.conditional = conditional
 		self.interrogative = False
 		self.first_person = False
+		self.unsure_phrase = False
 
+	def set_unsure_phrase(self):
+		self.unsure_phrase = True
 
 	def set_interrogative(self):
 		self.interrogative = True
@@ -70,6 +73,8 @@ class ConditionalSentence(SOSentence):
 	def is_first_person(self):
 		return self.first_person
 
+	def is_unsure_phrase(self):
+		return self.is_unsure_phrase
 
 	def print(self, delimeter):
 		print("type of sentence in class: " + str(type(self.sentence)))

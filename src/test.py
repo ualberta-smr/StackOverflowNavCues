@@ -61,7 +61,6 @@ class TestConditionalSentences(unittest.TestCase):
 
 		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
 			self.assertTrue(cond_sentence.is_conditional())
- 
 
 	def test_interrogative_sentence(self):
 		paragraph = "Now, if we issue the exact same PATCH request as above, what happens?"
@@ -86,6 +85,12 @@ class TestConditionalSentences(unittest.TestCase):
 
 		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
 			self.assertFalse(cond_sentence.is_first_person())
+
+	def test_unsure_phrase(self):
+		paragraph = "I should mention that I didn't know that json is not managed in memory with temp tables (text/blob case)... I 'm not sure if it could lead to performance issues."
+
+		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
+			self.assertTrue(cond_sentence.is_unsure_phrase())
 
 if __name__ == "__main__":
 	unittest.main()

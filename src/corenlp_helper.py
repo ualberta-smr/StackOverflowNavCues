@@ -137,6 +137,9 @@ def is_interrogative_sentence(sentence):
 
 	return False
 
+def contains_unsure_phrases(sentence_text):
+	return "not sure" in sentence_text or "don't know" in sentence_text or "don ' t know" in sentence_text or "don 't know" in sentence_text
+
 def verb_has_dep_noun(enhancedDependencies, verb_token_index, tokens):
 	for dependency in enhancedDependencies:
 		if dependency['governor'] == verb_token_index:
