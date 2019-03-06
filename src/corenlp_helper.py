@@ -24,7 +24,7 @@ NOUN_IDENTIFIERS = {'NN', 'NNS', 'NNP', 'NNPS'}
 VERB_IDENTIFIERS = {'VBP', 'VBZ'}
 
 #General CoreNLP Setup
-corenlp_properties={'annotators': 'pos,parse', 'outputFormat': 'json'}
+corenlp_properties={'annotators': 'pos,parse', 'outputFormat': 'json', 'timeout': 30000}
 
 corenlp = None
 
@@ -150,7 +150,7 @@ def verb_has_dep_noun(enhancedDependencies, verb_token_index, tokens):
 
 	return False
 
-def has_relevant_grammar_dependencies(sentence):
+def check_relevant_grammar_dependencies(sentence, cond_sentence):
 
 	tokens = sentence["tokens"]
 	enhanced_dependencies = sentence['enhancedDependencies']
@@ -160,11 +160,9 @@ def has_relevant_grammar_dependencies(sentence):
 			governor_token_index = int(dependency['governor'])
 			governor_pos = tokens[governor_token_index - 1]['pos']
 			if governor_pos in VERB_IDENTIFIERS:
-				is_relevant_condition = verb_has_dep_noun(enhanced_dependencies, governor_token_index, tokens)
+				cond_sentence.set_valid_vb_dep(verb_has_dep_noun(enhanced_dependencies, governor_token_index, tokens))
 			elif governor_pos in NOUN_IDENTIFIERS:
-				is_relevant_condition = True
-
-	return is_relevant_condition
+				cond_sentence.set_valid_noun_dep(True)
 
 
 def condition_contains_so_tag(cond_sentence, nouns_in_cond):
@@ -192,13 +190,15 @@ def build_cond_sentence(sentence):
 			cond_sentence.set_nfreqs(get_non_func(condition))
 			nouns_in_cond = list(set(get_nouns(sentence, condition) + get_regex_code_elem(sentence_text)))
 			cond_sentence.set_nouns(nouns_in_cond)
-			
-			#check all our criteria for a conditional sentence being insightful
-			if (has_relevant_grammar_dependencies(sentence)):
-				cond_sentence.set_grammar_dependencies(True)
 
-				if (condition_contains_so_tag(cond_sentence,nouns_in_cond)):
-					cond_sentence.set_insightful(True)
+			#check all our criteria for a conditional sentence being insightful
+			check_relevant_grammar_dependencies(sentence, cond_sentence)
+
+			#cond_sentence.set_grammar_dependencies(True)
+
+			if (condition_contains_so_tag(cond_sentence,nouns_in_cond)):
+				cond_sentence.set_insightful(True)
+				cond_sentence.set_so_tag(True)
 
 			if (is_interrogative_sentence(sentence)):
 				cond_sentence.set_interrogative(True)
@@ -228,20 +228,27 @@ def build_cond_sentence(sentence):
 def get_cond_sentences_from_para(paragraph, q_id, answ_id, parag_index):
 	cond_sentences = list()
 	annotations = corenlp.annotate(paragraph, corenlp_properties)
+
 	try:
 		for sent_index, sentence in enumerate(annotations['sentences']):
-			cond_sentence = build_cond_sentence(sentence)
-			if (cond_sentence is not None):
-				cond_sentence.set_question_id(q_id)
-				cond_sentence.set_answer_id(answ_id)
-				cond_sentence.set_sentence_pos(sent_index)
-				cond_sentence.set_paragraph_index(parag_index)
+			try:
+				cond_sentence = build_cond_sentence(sentence)
+				if (cond_sentence is not None):
+					cond_sentence.set_question_id(q_id)
+					cond_sentence.set_answer_id(answ_id)
+					cond_sentence.set_sentence_pos(sent_index)
+					cond_sentence.set_paragraph_index(parag_index)
 
-				cond_sentences.append(cond_sentence)
+					cond_sentences.append(cond_sentence)
+			except Exception as e: 
+				print(e)
+				traceback.print_exc()
+				print("Failed to enumerate sentence " + sent_index + "(" + sentence + ") in para:" + str(q_id) + "," + str(answ_id) + "," + str(parag_index) + ": " + paragraph, file=sys.stderr)
 	except Exception as e: 
-		print(e)
-		traceback.print_exc()
-		print("Failed to enumerate sentences in para:" + str(q_id) + "," + str(answ_id) + "," + str(parag_index) + ": " + paragraph, file=sys.stderr)
+			print(e)
+			traceback.print_exc()
+			print("Failed to enumerate paragraph " + str(q_id) + "," + str(answ_id) + "," + str(parag_index) + ": " + paragraph, file=sys.stderr)
+
 
 	return cond_sentences
 

@@ -2,7 +2,7 @@ from SOSentence import SOSentence
 
 class ConditionalSentence(SOSentence):
 
-	def __init__(self, sentence, question_id=None, answer_id=None, paragraph_index=None, sentence_pos=None, condition=None, tags=None, nfreqs=None, nouns=None, insightful=False):
+	def __init__(self, sentence, question_id=None, answer_id=None, paragraph_index=None, sentence_pos=None, condition=None, tags=None, nfreqs=None, nouns=None, so_tag=False, insightful=False):
 		SOSentence.__init__(self, sentence, question_id, answer_id,paragraph_index, sentence_pos)
 		self.condition = condition
 		self.tags = tags
@@ -13,6 +13,18 @@ class ConditionalSentence(SOSentence):
 		self.first_person = False
 		self.unsure_phrase = False
 		self.grammar_dependencies = False
+		self.valid_noun_dep = False
+		self.valid_vb_dep = False
+		self.so_tag = False
+
+	def set_valid_vb_dep(self, value):
+		self.valid_vb_dep = value
+
+	def set_valid_noun_dep(self, value):
+		self.valid_noun_dep = value
+
+	def set_so_tag(self,value):
+		self.so_tag = value
 
 	def set_grammar_dependencies(self, value):
 		self.grammar_dependencies = value
@@ -80,13 +92,28 @@ class ConditionalSentence(SOSentence):
 	def is_unsure_phrase(self):
 		return self.is_unsure_phrase
 
+	def has_valid_vb_dep(self):
+		return self.valid_vb_dep
+
+	def has_valid_noun_dep(self):
+		return self.valid_noun_dep
+
+	def has_so_tag(self):
+		return self.so_tag
+
 	def has_grammar_dependencies(self):
 		return self.grammar_dependencies
 
-	def print(self, delimeter):
-		print(self.insightful, self.question_id, self.answer_id, self.paragraph_index, self.sentence_pos, self.sentence.replace("-LRB-", "(").replace("-RRB-", ")"), self.condition, self.tags, self.nfreqs, self.nouns, self.interrogative, self.first_person, self.unsure_phrase, self.grammar_dependencies, sep=delimeter)
+	def print(self, delimeter, file=None):
+		if file is not None:
+			print(self.insightful, self.question_id, self.answer_id, self.paragraph_index, self.sentence_pos, self.sentence.replace("-LRB-", "(").replace("-RRB-", ")"), self.condition, self.tags, self.nfreqs, self.nouns, self.interrogative, self.first_person, self.unsure_phrase, self.grammar_dependencies, sep=delimeter)
+		else:
+			file.write(self.insightful, self.question_id, self.answer_id, self.paragraph_index, self.sentence_pos, self.sentence.replace("-LRB-", "(").replace("-RRB-", ")"), self.condition, self.tags, self.nfreqs, self.nouns, self.interrogative, self.first_person, self.unsure_phrase, self.grammar_dependencies, sep=delimeter)
+
+	def __hash__(self):
+		return hash(self.question_id) + hash(self.answer_id) + hash(self.paragraph_index) + hash(self.sentence_pos)	
 
 	def __eq__(self, other):
 		#used for calcualting true positives or true negatives
-		return self.question_id = other.question_id and self.answer_id = other.answer_id and self.paragraph_index = other.paragraph_index and self.sentence_pos = other.sentence_pos and self.insightful = self.insightful
+		return self.question_id == other.question_id and self.answer_id == other.answer_id and self.paragraph_index == other.paragraph_index and self.sentence_pos == other.sentence_pos #and self.insightful == other.insightful
 
