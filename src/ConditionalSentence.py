@@ -1,4 +1,5 @@
 from SOSentence import SOSentence
+import csv
 
 class ConditionalSentence(SOSentence):
 
@@ -104,14 +105,14 @@ class ConditionalSentence(SOSentence):
 	def has_grammar_dependencies(self):
 		return self.grammar_dependencies
 
-	def print(self, delimeter, file=None):
-		if file is not None:
+	def print(self, delimeter, csv_writer=None):
+		if csv_writer is None:
 			print(self.insightful, self.question_id, self.answer_id, self.paragraph_index, self.sentence_pos, self.sentence.replace("-LRB-", "(").replace("-RRB-", ")"), self.condition, self.tags, self.nfreqs, self.nouns, self.interrogative, self.first_person, self.unsure_phrase, self.grammar_dependencies, sep=delimeter)
 		else:
-			file.write(self.insightful, self.question_id, self.answer_id, self.paragraph_index, self.sentence_pos, self.sentence.replace("-LRB-", "(").replace("-RRB-", ")"), self.condition, self.tags, self.nfreqs, self.nouns, self.interrogative, self.first_person, self.unsure_phrase, self.grammar_dependencies, sep=delimeter)
+			csv_writer.writerow([self.insightful, self.question_id, self.answer_id, self.paragraph_index, self.sentence_pos, self.sentence.replace("-LRB-", "(").replace("-RRB-", ")"), self.condition, self.tags, self.nfreqs, self.nouns, self.interrogative, self.first_person, self.unsure_phrase, self.grammar_dependencies])
 
 	def __hash__(self):
-		return hash(self.question_id) + hash(self.answer_id) + hash(self.paragraph_index) + hash(self.sentence_pos)	
+		return hash(self.question_id) + hash(self.answer_id) + hash(self.paragraph_index) + hash(self.sentence_pos)
 
 	def __eq__(self, other):
 		#used for calcualting true positives or true negatives
