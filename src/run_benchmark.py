@@ -43,7 +43,7 @@ def read_patterns_file():
 
 def read_question_ids():
 	question_ids = list()
-	with open("tests/json_question_ids.txt", "r") as file: 
+	with open("benchmark/data/json_question_ids.txt", "r") as file: 
 		for line in file.readlines():
 			question_ids.append(int(line.strip()))
 
@@ -64,7 +64,7 @@ def get_intersection(list1, list2):
 
 def load_benchmark():
 	benchmark = list()
-	entries = csv.DictReader(open("tests/benchmark_json_questions.csv"))
+	entries = csv.DictReader(open("benchmark/data/benchmark_json_questions.csv"))
 	for entry in entries:
 		cond_sentence = ConditionalSentence(sentence=None, question_id = int(entry['QuestionID']), answer_id = int(entry['AnswerID']), paragraph_index=int(entry['ParagraphIndex']), sentence_pos=int(entry['SentenceIndex']), insightful=str_to_bool(entry['Insightful']))
 		benchmark.append(cond_sentence)
@@ -78,12 +78,31 @@ def filter_by_value(list, value):
        if sentence.is_insightful == value: yield el
 
 def calculate_perf_metrics(heuristic, heuristic_sentences, benchmark):
-	print("Calculating for " + heuristic)
-	print("input size: " + str(len(heuristic_sentences)))
-	intersection = get_intersection(benchmark, heuristic_sentences)
-	print("intersection:: "+ str(len(intersection)))
-	print(heuristic +  ", recall=" + str(len(intersection)/len(benchmark)))
-	print(heuristic + ", precision=" + str(len(intersection)/len(heuristic_sentences)))
+	print("=========== Calculating for " + heuristic)
+
+	predicted_size = len(heuristic_sentences)
+	benchmark_size = len(benchmark)
+	print("predicted size: " + str(predicted_size))
+	recall = 0
+	precision = 1
+
+	if predicted_size != 0:
+		benchmark_yes = [sentence for sentence in benchmark if sentence.is_insightful() == True]
+		benchmark_yes_size = len(benchmark_yes)
+		# benchmark_no = [sentence for sentence in benchmark if sentence.is_insightful() == False]
+		# benchmark_no_size = len(benchmark_no)
+
+		#calculate recall and precision
+		intersection_yes = get_intersection(benchmark_yes, heuristic_sentences)
+		intersection_yes_size = len(intersection_yes)
+		recall = intersection_yes_size/benchmark_yes_size
+		precision = intersection_yes_size/predicted_size
+
+		print(heuristic + ", intersection size = " + str(intersection_yes_size))
+
+	print(heuristic +  ", recall=" + str(recall))
+	print(heuristic + ", precision=" + str(precision))
+
 
 def print_output(filename, output):
 
@@ -97,16 +116,14 @@ def main():
 	SITE = StackAPI('stackoverflow')
 	question_ids = read_question_ids();
 	benchmark = load_benchmark()
-	benchmark_yes = [sentence for sentence in benchmark if sentence.is_insightful() == True]
-	benchmark_no = [sentence for sentence in benchmark if sentence.is_insightful() == False]
 
 	print ("Benchmark size: " + str(len(benchmark)))
-	print ("Insightful count: " + str(len(benchmark_yes)))
-	print ("Not Insightful count: " + str(len(benchmark_no)))
+	# print ("Insightful count: " + str(len(benchmark_yes)))
+	# print ("Not Insightful count: " + str(len(benchmark_no)))
 	all_interesting_sentences = list()
 	init_corenlp()
 
-	total_true_positive = 0 
+	total_true_positive = 0
 	total_false_positive = 0
 	total_false_negative = 0
 
@@ -155,7 +172,7 @@ def main():
 				H1_H2_2.append(interesting_sentence)
 				is_h2_2 = True
 
-			if is_h2_1 and is_h2_2:
+			if is_h2_1 or is_h2_2:
 				H1_H2.append(interesting_sentence)
 
 				if not interesting_sentence.is_interrogative():
@@ -168,11 +185,28 @@ def main():
 							H1_H2_H3_H4_H5.append(interesting_sentence)
 
 
-	print_output("basic_H1.csv", basic_H1)
-	print_output("H1_H2_1.csv", H1_H2_1)
-	calculate_perf_metrics("basic_H1", basic_H1, benchmark_yes)
-	calculate_perf_metrics("H1_H2_1", H1_H2_1, benchmark_yes)
-	
+
+	print_output("benchmark/results/basic_H1.csv", basic_H1)
+	calculate_perf_metrics("basic_H1", basic_H1, benchmark)
+
+	print_output("benchmark/results/H1_H2_1.csv", H1_H2_1)
+	calculate_perf_metrics("H1_H2_1", H1_H2_1, benchmark)
+
+	print_output("benchmark/results/H1_H2_2.csv", H1_H2_1)
+	calculate_perf_metrics("H1_H2_2", H1_H2_2, benchmark)
+
+	print_output("benchmark/results/H1_H2.csv", H1_H2_1)
+	calculate_perf_metrics("H1_H2", H1_H2, benchmark)
+
+	print_output("benchmark/results/H1_H2_H3.csv", H1_H2_1)
+	calculate_perf_metrics("H1_H2_H3", H1_H2_H3, benchmark)
+
+	print_output("benchmark/results/H1_H2_H3_H4.csv", H1_H2_1)
+	calculate_perf_metrics("H1_H2_H3_H4", H1_H2_H3_H4, benchmark)
+
+	print_output("benchmark/results/H1_H2_H3_H4_H5.csv", H1_H2_1)
+	calculate_perf_metrics("H1_H2_H3_H4_H5", H1_H2_H3_H4_H5, benchmark)
+
 
 
 if __name__ == "__main__":
