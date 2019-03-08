@@ -43,7 +43,7 @@ def read_patterns_file():
 
 def read_question_ids():
 	question_ids = list()
-	with open("tests/reduced_ids.txt", "r") as file: 
+	with open("tests/json_question_ids.txt", "r") as file: 
 		for line in file.readlines():
 			question_ids.append(int(line.strip()))
 
@@ -59,14 +59,14 @@ def str_to_bool(string):
 
 #https://www.geeksforgeeks.org/python-intersection-two-lists/
 def get_intersection(list1, list2):
-    list3 = [value for value in list1 if value in list2] 
+    list3 = set(list1).intersection(set(list2))#[value for value in list1 if value in list2] 
     return list3
 
 def load_benchmark():
 	benchmark = list()
-	entries = csv.DictReader(open("tests/reduced_benchmark.csv"))
+	entries = csv.DictReader(open("tests/benchmark_json_questions.csv"))
 	for entry in entries:
-		cond_sentence = ConditionalSentence(sentence=None, question_id = entry['QuestionID'], answer_id = entry['AnswerID'], paragraph_index=entry['ParagraphIndex'], sentence_pos=entry['SentenceIndex'], insightful=str_to_bool(entry['Insightful']))
+		cond_sentence = ConditionalSentence(sentence=None, question_id = int(entry['QuestionID']), answer_id = int(entry['AnswerID']), paragraph_index=int(entry['ParagraphIndex']), sentence_pos=int(entry['SentenceIndex']), insightful=str_to_bool(entry['Insightful']))
 		benchmark.append(cond_sentence)
 
 	return benchmark
@@ -83,20 +83,26 @@ def calculate_perf_metrics(heuristic, heuristic_sentences, benchmark):
 	intersection = get_intersection(benchmark, heuristic_sentences)
 	print("intersection:: "+ str(len(intersection)))
 	print(heuristic +  ", recall=" + str(len(intersection)/len(benchmark)))
+	print(heuristic + ", precision=" + str(len(intersection)/len(heuristic_sentences)))
 
 def print_output(filename, output):
 
 	file = open(filename, "w")
+	output_writer = csv.writer(file, delimiter='|')
 	for sentence in output:
-		print ("printng sentence")
-		sentence.print('|', file)
+		sentence.print('|', output_writer)
 
 def main():
 	load_tags()
 	SITE = StackAPI('stackoverflow')
 	question_ids = read_question_ids();
 	benchmark = load_benchmark()
+	benchmark_yes = [sentence for sentence in benchmark if sentence.is_insightful() == True]
+	benchmark_no = [sentence for sentence in benchmark if sentence.is_insightful() == False]
+
 	print ("Benchmark size: " + str(len(benchmark)))
+	print ("Insightful count: " + str(len(benchmark_yes)))
+	print ("Not Insightful count: " + str(len(benchmark_no)))
 	all_interesting_sentences = list()
 	init_corenlp()
 
@@ -164,8 +170,8 @@ def main():
 
 	print_output("basic_H1.csv", basic_H1)
 	print_output("H1_H2_1.csv", H1_H2_1)
-	calculate_perf_metrics("basic_H1", basic_H1, benchmark)
-	calculate_perf_metrics("H1_H2_1", H1_H2_1, benchmark)
+	calculate_perf_metrics("basic_H1", basic_H1, benchmark_yes)
+	calculate_perf_metrics("H1_H2_1", H1_H2_1, benchmark_yes)
 	
 
 
