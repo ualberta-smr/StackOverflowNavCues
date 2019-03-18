@@ -17,6 +17,10 @@ class ConditionalSentence(SOSentence):
 		self.valid_noun_dep = False
 		self.valid_vb_dep = False
 		self.so_tag = False
+		self.true_positive = False
+
+	def set_true_positive(self, value):
+		self.true_positive = value
 
 	def set_valid_vb_dep(self, value):
 		self.valid_vb_dep = value
@@ -105,11 +109,18 @@ class ConditionalSentence(SOSentence):
 	def has_grammar_dependencies(self):
 		return self.grammar_dependencies
 
+	def is_true_positive(self):
+		return self.true_positive
+
 	def print(self, delimeter, csv_writer=None):
 		if csv_writer is None:
-			print(self.insightful, self.question_id, self.answer_id, self.paragraph_index, self.sentence_pos, self.sentence.replace("-LRB-", "(").replace("-RRB-", ")"), self.condition, self.tags, self.nfreqs, self.nouns, self.interrogative, self.first_person, self.unsure_phrase, self.grammar_dependencies, sep=delimeter)
+			print(self.question_id, self.answer_id, self.paragraph_index, self.sentence_pos, self.sentence.replace("-LRB-", "(").replace("-RRB-", ")"), self.true_positive, self.condition, self.tags, self.nfreqs, self.nouns, self.interrogative, self.first_person, self.unsure_phrase, self.grammar_dependencies, sep=delimeter)
+			#uncomment to get insightful column in real output
+			#print(self.insightful, self.question_id, self.answer_id, self.paragraph_index, self.sentence_pos, self.sentence.replace("-LRB-", "(").replace("-RRB-", ")"), self.true_positive, self.condition, self.tags, self.nfreqs, self.nouns, self.interrogative, self.first_person, self.unsure_phrase, self.grammar_dependencies, sep=delimeter)
 		else:
-			csv_writer.writerow([self.insightful, self.question_id, self.answer_id, self.paragraph_index, self.sentence_pos, self.sentence.replace("-LRB-", "(").replace("-RRB-", ")"), self.condition, self.tags, self.nfreqs, self.nouns, self.interrogative, self.first_person, self.unsure_phrase, self.grammar_dependencies])
+			csv_writer.writerow([self.question_id, self.answer_id, self.paragraph_index, self.sentence_pos, self.sentence.replace("-LRB-", "(").replace("-RRB-", ")"), self.true_positive, self.condition, self.tags, self.nfreqs, self.nouns, self.interrogative, self.first_person, self.unsure_phrase, self.grammar_dependencies])
+			#uncomment to get insightful column in real output
+			#csv_writer.writerow([self.insightful, self.question_id, self.answer_id, self.paragraph_index, self.sentence_pos, self.sentence.replace("-LRB-", "(").replace("-RRB-", ")"), self.true_positive, self.condition, self.tags, self.nfreqs, self.nouns, self.interrogative, self.first_person, self.unsure_phrase, self.grammar_dependencies])
 
 	def __hash__(self):
 		return hash(self.question_id) + hash(self.answer_id) + hash(self.paragraph_index) + hash(self.sentence_pos)

@@ -93,12 +93,17 @@ def calculate_perf_metrics(heuristic, heuristic_sentences, benchmark):
 		# benchmark_no_size = len(benchmark_no)
 
 		#calculate recall and precision
-		intersection_yes = get_intersection(benchmark_yes, heuristic_sentences)
+		intersection_yes = get_intersection(benchmark_yes, heuristic_sentences)	
 		intersection_yes_size = len(intersection_yes)
 		recall = intersection_yes_size/benchmark_yes_size
 		precision = intersection_yes_size/predicted_size
 
 		print(heuristic + ", intersection size = " + str(intersection_yes_size))
+
+		#set true positives to true... this is extremely inefficient
+		for sentence in heuristic_sentences:
+			if sentence in intersection_yes:
+				sentence.set_true_positive(True)
 
 	print(heuristic +  ", recall=" + str(recall))
 	print(heuristic + ", precision=" + str(precision))
@@ -107,7 +112,9 @@ def calculate_perf_metrics(heuristic, heuristic_sentences, benchmark):
 def print_output(filename, output):
 
 	file = open(filename, "w")
+	fieldnames = ["QuestionId", "AnswerID", "ParagraphIndex", "SentenceIndex", "Sentence", "TruePositive?", "Condition", "Tags In Condition", "NFReqs", "Nouns", "IsFirstPerson?", "IsUnsurePhrase?", "HasWantedGrammerDep?"]
 	output_writer = csv.writer(file, delimiter='|')
+	output_writer.writerow(fieldnames)
 	for sentence in output:
 		sentence.print('|', output_writer)
 
@@ -192,19 +199,19 @@ def main():
 	print_output("benchmark/results/H1_H2_1.csv", H1_H2_1)
 	calculate_perf_metrics("H1_H2_1", H1_H2_1, benchmark)
 
-	print_output("benchmark/results/H1_H2_2.csv", H1_H2_1)
+	print_output("benchmark/results/H1_H2_2.csv", H1_H2_2)
 	calculate_perf_metrics("H1_H2_2", H1_H2_2, benchmark)
 
-	print_output("benchmark/results/H1_H2.csv", H1_H2_1)
+	print_output("benchmark/results/H1_H2.csv", H1_H2)
 	calculate_perf_metrics("H1_H2", H1_H2, benchmark)
 
-	print_output("benchmark/results/H1_H2_H3.csv", H1_H2_1)
+	print_output("benchmark/results/H1_H2_H3.csv", H1_H2_H3)
 	calculate_perf_metrics("H1_H2_H3", H1_H2_H3, benchmark)
 
-	print_output("benchmark/results/H1_H2_H3_H4.csv", H1_H2_1)
+	print_output("benchmark/results/H1_H2_H3_H4.csv", H1_H2_H3_H4)
 	calculate_perf_metrics("H1_H2_H3_H4", H1_H2_H3_H4, benchmark)
 
-	print_output("benchmark/results/H1_H2_H3_H4_H5.csv", H1_H2_1)
+	print_output("benchmark/results/H1_H2_H3_H4_H5.csv", H1_H2_H3_H4_H5)
 	calculate_perf_metrics("H1_H2_H3_H4_H5", H1_H2_H3_H4_H5, benchmark)
 
 
