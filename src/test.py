@@ -100,7 +100,7 @@ class TestConditionalSentences(unittest.TestCase):
 			self.assertTrue(cond_sentence.is_unsure_phrase())
 
 	def test_if_in_paren(self):
-		paragraph = "(I did not choose this option because the `lambda' limits are lower than the Firehose limits, you can configure Firehose to write a file each 128Mb or 15 minutes, but if you associate this lambda function to Firehose, the lambda function will be executed every 3 mins or 5 MB, in my case I had the problem of generate a lot of little parquet files, as for each time that the lambda function is launched I generate at least 10 files)."
+		paragraph = "(I did not choose this option because the `lambda' limits are lower than the Firehose limits, you can configure Firehose to write a file each 128Mb or 15 minutes, but if you associate this lambda function to Firehose, the lambda function will be executed every 3 mins or 5 MB, in my case I had the problem of generate a lot of little parquet files, as for each time that the lambda function is launched I generate at least 10 files). One quick workaround (if you have the luxury of code generation you can automate this): dummy text. There is a already an LINK for this in the postgres driver Github repository (even if the problem seems the be the serverside processing). You can use it for debugging your app on a local machine (if everything works in production)."
 
 		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
 			self.assertTrue(cond_sentence.is_if_in_paren())
