@@ -88,7 +88,7 @@ class TestConditionalSentences(unittest.TestCase):
 			self.assertFalse(cond_sentence.is_first_person())
 
 	def test_unsure_phrase(self):
-		paragraph = "I should mention that I didn't know that json is not managed in memory with temp tables (text/blob case)... I 'm not sure if it could lead to performance issues."
+		paragraph = "I should mention that I didn't know that json is not managed in memory with temp tables (text/blob case)... I 'm not sure if it could lead to performance issues. I don't know if it's the best solution, but what I'm trying now is to just pass values as strings unformatted except for a decimal point, like so:"
 
 		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
 			self.assertTrue(cond_sentence.is_unsure_phrase())

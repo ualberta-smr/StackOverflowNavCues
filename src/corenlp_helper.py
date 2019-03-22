@@ -173,7 +173,7 @@ def contains_unwanted_if_you(sentence, sentence_text):
 
 def contains_unsure_phrases(sentence_text):
 	sentence_text_lower = sentence_text.lower()
-	return "not sure" in sentence_text_lower or "don't know" in sentence_text_lower or "don ' t know" in sentence_text_lower or "don 't know" in sentence_text_lower
+	return "not sure" in sentence_text_lower or "don't know" in sentence_text_lower or "do n't know" in sentence_text_lower or "don 't know" in sentence_text_lower
 
 def verb_has_dep_noun(enhancedDependencies, verb_token_index, tokens):
 	for dependency in enhancedDependencies:
