@@ -30,17 +30,17 @@ H1_H2_H3_H4, intersection size = 26
 H1_H2_H3_H4, recall=0.3333333333333333
 H1_H2_H3_H4, precision=0.23423423423423423
 =========== Calculating for H1_H2_H3_H4_H5
-predicted size: 109
+predicted size: 108
 H1_H2_H3_H4_H5, intersection size = 26
 H1_H2_H3_H4_H5, recall=0.3333333333333333
-H1_H2_H3_H4_H5, precision=0.23853211009174313
+H1_H2_H3_H4_H5, precision=0.24074074074074073
 =========== Calculating for H1_H2_H3_H4_H5_H6
-predicted size: 107
+predicted size: 104
 H1_H2_H3_H4_H5_H6, intersection size = 26
 H1_H2_H3_H4_H5_H6, recall=0.3333333333333333
-H1_H2_H3_H4_H5_H6, precision=0.24299065420560748
+H1_H2_H3_H4_H5_H6, precision=0.25
 =========== Calculating for H1_H2_H3_H4_H5_H6_H7
-predicted size: 83
+predicted size: 80
 H1_H2_H3_H4_H5_H6_H7, intersection size = 21
 H1_H2_H3_H4_H5_H6_H7, recall=0.2692307692307692
-H1_H2_H3_H4_H5_H6_H7, precision=0.25301204819277107
+H1_H2_H3_H4_H5_H6_H7, precision=0.2625
