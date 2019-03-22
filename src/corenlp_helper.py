@@ -42,8 +42,14 @@ def init_corenlp():
 #General helper functions to process corenlp annotation results
 def get_sentence_text(sentence):
 	res = ""
-	for word in sentence['tokens']:
-		res += word['word'] + " "
+	punctuation = [".", ",", ":", "'"]
+	sentence_len = len(sentence['tokens'])
+	for index, token in enumerate(sentence['tokens']):
+		curr_word = token['word']
+		next_word = sentence['tokens'][index + 1]['word'] if index + 1 < sentence_len else None
+		res += token['word'] 
+		if next_word is not None and (next_word not in punctuation and not next_word.startswith("'")):
+			res += " "
 
 	return res
 
@@ -137,8 +143,36 @@ def is_interrogative_sentence(sentence):
 
 	return False
 
+#we want to ignore conditions that are in parentheses (if x..)
+def is_if_in_paren(sentence_text):
+	#check if the if sentence is in parentheses
+	return sentence_text.strip().startswith("-LRB-")
+
+#ignore sentences which contain "if you" (except exceptions in the next point)
+# keep sentences where "if you" is followed by: are, have, want, or need (i.e., if you are, if you have, if you want, if you need)
+# keep sentence where the "if" is not followed by "you".
+def contains_unwanted_if_you(sentence, sentence_text):
+	sentence_text_lower = sentence_text.lower()
+	approved_verbs = ['have', 'are', 'want', 'need']
+	if "if you" in sentence_text_lower:
+		tokens = sentence["tokens"]
+		enhanced_dependencies = sentence['enhancedDependencies']
+		
+		for dependency in enhanced_dependencies:
+			#risk of this not working correctly if the you we are interested in is not the first you
+			if dependency['dependentGloss'] == "you":
+				governor = dependency['governorGloss']
+				governor_token_index = int(dependency['governor'])
+				governor_pos = tokens[governor_token_index - 1]['pos']
+				if governor_pos in VERB_IDENTIFIERS and governor not in approved_verbs:
+					return True
+	
+	return False
+
+
 def contains_unsure_phrases(sentence_text):
-	return "not sure" in sentence_text or "don't know" in sentence_text or "don ' t know" in sentence_text or "don 't know" in sentence_text
+	sentence_text_lower = sentence_text.lower()
+	return "not sure" in sentence_text_lower or "don't know" in sentence_text_lower or "don ' t know" in sentence_text_lower or "don 't know" in sentence_text_lower
 
 def verb_has_dep_noun(enhancedDependencies, verb_token_index, tokens):
 	for dependency in enhancedDependencies:
@@ -210,10 +244,17 @@ def build_cond_sentence(sentence):
 				#filter out sentences that have first person in their condition, even if they fulfilled prev criteria
 				cond_sentence.set_insightful(False)
 
-			if (contains_unsure_phrases(sentence)):
+			if (contains_unsure_phrases(sentence_text)):
+				print("settimg unsure true")
 				cond_sentence.set_unsure_phrase(True)
 				#filter out sentences that have unsure phrases, even if they fulfilled prev criteria
 				cond_sentence.set_insightful(False)
+
+			if (is_if_in_paren(sentence_text)):
+				cond_sentence.set_if_in_paren(True)
+
+			if (contains_unwanted_if_you(sentence, sentence_text)):
+				cond_sentence.set_unwanted_if_you(True)
 
 			return cond_sentence
 

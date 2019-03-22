@@ -93,5 +93,29 @@ class TestConditionalSentences(unittest.TestCase):
 		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
 			self.assertTrue(cond_sentence.is_unsure_phrase())
 
+	def test_unsure_phrase2(self):
+		paragraph = "Not sure if anyone still runs into this issue but I was able to address this in a dotnetcore console project (netcoreapp2 .0) via x. I'm not sure if this applies to some Java frameworks, too."
+
+		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
+			self.assertTrue(cond_sentence.is_unsure_phrase())
+
+	def test_if_in_paren(self):
+		paragraph = "(I did not choose this option because the `lambda' limits are lower than the Firehose limits, you can configure Firehose to write a file each 128Mb or 15 minutes, but if you associate this lambda function to Firehose, the lambda function will be executed every 3 mins or 5 MB, in my case I had the problem of generate a lot of little parquet files, as for each time that the lambda function is launched I generate at least 10 files)."
+
+		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
+			self.assertTrue(cond_sentence.is_if_in_paren())
+
+	def test_wanted_if_you(self):
+		paragraph = "Well, if you just need a single extra property, one simple approach is to parse your JSON to a CW, use CW to populate your class from the CW , and then use CW to pull in the extra property. Then you'll get the error because it 's not a string, it 's an object, and if you already have it in this form then there's no need to use CW. You can fix this problem if you are the owner of both domains. Alternatively if you want them to be represented as a set, and the elements are strings, you could put them in objects like CW."
+
+		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
+			self.assertFalse(cond_sentence.has_unwanted_if_you())
+
+	def test_unwanted_if_you(self):
+		paragraph = "However, if you try with jQuery's CW and it's working, the reason is probably because of jQuery using CW instead of CW."
+
+		for cond_sentence in get_cond_sentences_from_para(paragraph, None, None, None):
+			self.assertTrue(cond_sentence.has_unwanted_if_you())
+
 if __name__ == "__main__":
 	unittest.main()

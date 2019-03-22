@@ -18,6 +18,14 @@ class ConditionalSentence(SOSentence):
 		self.valid_vb_dep = False
 		self.so_tag = False
 		self.true_positive = False
+		self.if_in_paren = False
+		self.unwanted_if_you = False
+
+	def set_unwanted_if_you(self, value):
+		self.unwanted_if_you = value
+
+	def set_if_in_paren(self, value):
+		self.if_in_paren = value
 
 	def set_true_positive(self, value):
 		self.true_positive = value
@@ -95,7 +103,7 @@ class ConditionalSentence(SOSentence):
 		return self.first_person
 
 	def is_unsure_phrase(self):
-		return self.is_unsure_phrase
+		return self.unsure_phrase
 
 	def has_valid_vb_dep(self):
 		return self.valid_vb_dep
@@ -111,6 +119,12 @@ class ConditionalSentence(SOSentence):
 
 	def is_true_positive(self):
 		return self.true_positive
+
+	def is_if_in_paren(self):
+		return self.if_in_paren
+
+	def has_unwanted_if_you(self):
+		return self.unwanted_if_you
 
 	def print(self, delimeter, csv_writer=None):
 		if csv_writer is None:

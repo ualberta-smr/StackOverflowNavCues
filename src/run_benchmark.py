@@ -188,6 +188,7 @@ def main():
 					if not interesting_sentence.is_first_person():
 						H1_H2_H3_H4.append(interesting_sentence)
 
+						print("going to check sentence unsure: " + str(interesting_sentence.is_unsure_phrase()))
 						if not interesting_sentence.is_unsure_phrase():
 							H1_H2_H3_H4_H5.append(interesting_sentence)
 

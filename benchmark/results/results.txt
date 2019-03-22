@@ -1,35 +1,158 @@
 Benchmark size: 113
+settimg unsure true
+settimg unsure true
+settimg unsure true
+settimg unsure true
+settimg unsure true
+settimg unsure true
+settimg unsure true
+settimg unsure true
+settimg unsure true
+settimg unsure true
+settimg unsure true
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: True
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: True
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
+going to check sentence unsure: False
 =========== Calculating for basic_H1
-predicted size: 281
+predicted size: 279
 basic_H1, intersection size = 52
 basic_H1, recall=0.6666666666666666
-basic_H1, precision=0.18505338078291814
+basic_H1, precision=0.1863799283154122
 =========== Calculating for H1_H2_1
-predicted size: 93
+predicted size: 92
 H1_H2_1, intersection size = 20
 H1_H2_1, recall=0.2564102564102564
-H1_H2_1, precision=0.21505376344086022
+H1_H2_1, precision=0.21739130434782608
 =========== Calculating for H1_H2_2
 predicted size: 31
 H1_H2_2, intersection size = 6
 H1_H2_2, recall=0.07692307692307693
 H1_H2_2, precision=0.1935483870967742
 =========== Calculating for H1_H2
-predicted size: 124
+predicted size: 123
 H1_H2, intersection size = 26
 H1_H2, recall=0.3333333333333333
-H1_H2, precision=0.20967741935483872
+H1_H2, precision=0.21138211382113822
 =========== Calculating for H1_H2_H3
-predicted size: 117
+predicted size: 116
 H1_H2_H3, intersection size = 26
 H1_H2_H3, recall=0.3333333333333333
-H1_H2_H3, precision=0.2222222222222222
+H1_H2_H3, precision=0.22413793103448276
 =========== Calculating for H1_H2_H3_H4
-predicted size: 112
+predicted size: 111
 H1_H2_H3_H4, intersection size = 26
 H1_H2_H3_H4, recall=0.3333333333333333
-H1_H2_H3_H4, precision=0.23214285714285715
+H1_H2_H3_H4, precision=0.23423423423423423
 =========== Calculating for H1_H2_H3_H4_H5
-predicted size: 0
-H1_H2_H3_H4_H5, recall=0
-H1_H2_H3_H4_H5, precision=1
+predicted size: 109
+H1_H2_H3_H4_H5, intersection size = 26
+H1_H2_H3_H4_H5, recall=0.3333333333333333
+H1_H2_H3_H4_H5, precision=0.23853211009174313
