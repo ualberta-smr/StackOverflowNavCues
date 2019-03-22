@@ -146,7 +146,8 @@ def is_interrogative_sentence(sentence):
 #we want to ignore conditions that are in parentheses (if x..)
 def is_if_in_paren(sentence_text):
 	#check if the if sentence is in parentheses
-	return sentence_text.strip().startswith("-LRB-")
+	sentence_text_stripped = sentence_text.strip().lower()
+	return "-lrb- if" in sentence_text_stripped or sentence_text_stripped.startswith("-lrb-") or sentence_text_stripped.startswith("(") or "(if" in sentence_text.strip() or "( if" in sentence_text.strip()
 
 #ignore sentences which contain "if you" (except exceptions in the next point)
 # keep sentences where "if you" is followed by: are, have, want, or need (i.e., if you are, if you have, if you want, if you need)
@@ -249,7 +250,7 @@ def build_cond_sentence(sentence):
 				#filter out sentences that have unsure phrases, even if they fulfilled prev criteria
 				cond_sentence.set_insightful(False)
 
-			if (is_if_in_paren(sentence_text)):
+			if (is_if_in_paren(str(sentence_text))):
 				cond_sentence.set_if_in_paren(True)
 
 			if (contains_unwanted_if_you(sentence, sentence_text)):
