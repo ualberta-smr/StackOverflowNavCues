@@ -154,7 +154,8 @@ def main():
 	#########Herustic 3: Conditional sentences that are actually question phrases are not "useful"
 	#########Heursitc 4: If there is a first person reference "I" after the "if", this sentence is not "useful"
 	#########Heurstic 5: Sentences containing uncertainty with phrases like "I don't know" or "I'm not sure" are not useful
-
+	#########Heuristic 6: ignore if sentences in parentheses
+	#########Heuristic 7: ignore sentences with "if you" unless it's if you have, if you want, if you are, if you need
 	basic_H1 = list()
 	H1_H2_1 = list()
 	H1_H2_2 = list()
@@ -162,6 +163,8 @@ def main():
 	H1_H2_H3 = list()
 	H1_H2_H3_H4  = list()
 	H1_H2_H3_H4_H5 = list()
+	H1_H2_H3_H4_H5_H6 = list()
+	H1_H2_H3_H4_H5_H6_H7 = list()
 
 
 	for interesting_sentence in all_interesting_sentences:
@@ -188,9 +191,14 @@ def main():
 					if not interesting_sentence.is_first_person():
 						H1_H2_H3_H4.append(interesting_sentence)
 
-						print("going to check sentence unsure: " + str(interesting_sentence.is_unsure_phrase()))
 						if not interesting_sentence.is_unsure_phrase():
 							H1_H2_H3_H4_H5.append(interesting_sentence)
+
+							if not interesting_sentence.is_if_in_paren():
+								H1_H2_H3_H4_H5_H6.append(interesting_sentence)
+
+								if not interesting_sentence.has_unwanted_if_you():
+									H1_H2_H3_H4_H5_H6_H7.append(interesting_sentence)
 
 
 
@@ -214,6 +222,12 @@ def main():
 
 	print_output("benchmark/results/H1_H2_H3_H4_H5.csv", H1_H2_H3_H4_H5)
 	calculate_perf_metrics("H1_H2_H3_H4_H5", H1_H2_H3_H4_H5, benchmark)
+
+	print_output("benchmark/results/H1_H2_H3_H4_H5_H6.csv", H1_H2_H3_H4_H5_H6)
+	calculate_perf_metrics("H1_H2_H3_H4_H5_H6", H1_H2_H3_H4_H5_H6, benchmark)
+
+	print_output("benchmark/results/H1_H2_H3_H4_H5_H6_H7.csv", H1_H2_H3_H4_H5_H6_H7)
+	calculate_perf_metrics("H1_H2_H3_H4_H5_H6_H7", H1_H2_H3_H4_H5_H6_H7, benchmark)
 
 
 

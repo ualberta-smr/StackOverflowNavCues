@@ -245,7 +245,6 @@ def build_cond_sentence(sentence):
 				cond_sentence.set_insightful(False)
 
 			if (contains_unsure_phrases(sentence_text)):
-				print("settimg unsure true")
 				cond_sentence.set_unsure_phrase(True)
 				#filter out sentences that have unsure phrases, even if they fulfilled prev criteria
 				cond_sentence.set_insightful(False)
