@@ -227,17 +227,11 @@ def build_cond_sentence(sentence):
 
 			#set the value for all the factors/features we check for
 			check_relevant_grammar_dependencies(sentence, cond_sentence)
-
 			cond_sentence.set_so_tag(condition_contains_so_tag(cond_sentence,nouns_in_cond))
-
 			cond_sentence.set_interrogative(is_interrogative_sentence(sentence))
-
 			cond_sentence.set_first_person(is_first_person_condition(sentence))
-
 			cond_sentence.set_unsure_phrase(contains_unsure_phrases(sentence_text))
-
 			cond_sentence.set_if_in_paren(is_if_in_paren(str(sentence_text)))
-
 			cond_sentence.set_unwanted_if_you(contains_unwanted_if_you(sentence, sentence_text))
 
 
@@ -252,8 +246,30 @@ def build_cond_sentence(sentence):
 			#########Heurstic 5: Sentences containing uncertainty with phrases like "I don't know" or "I'm not sure" are not useful
 			#########Heuristic 6: ignore if sentences in parentheses
 			#########Heuristic 7: ignore sentences with "if you" unless it's if you have, if you want, if you are, if you need
-			#if (cond_sentence.has_valid_vb_dep() or cond_sentence.has_valid_noun_dep()):
 
+			#first, check basic heuristics: heuristic 1 + heuristic 2
+			if (cond_sentence.has_so_tag() and (cond_sentence.has_valid_vb_dep() or cond_sentence.has_valid_noun_dep()):
+				cond_sentence.set_insightful(True)
+
+				#then start filtering out "bad" sentences
+				if cond_sentence.is_interrogative_sentence():
+					cond_sentence.set_insightful(False)
+					return cond_sentence #no need to check for more
+
+				if cond_sentence.is_first_person():
+					cond_sentence.set_insightful(False)
+					return cond_sentence #no need to check for more
+
+				if cond_sentence.is_unsure_phrase():
+					cond_sentence.set_insightful(False)
+					return cond_sentence #no need to check for more
+
+				if cond_sentence.is_if_in_paren():
+					cond_sentence.set_insightful(False)
+					return cond_sentence #no need to check for more
+
+				if cond_sentence.has_unwanted_if_you():
+					cond_sentence.set_insightful(False)
 
 
 			return cond_sentence
