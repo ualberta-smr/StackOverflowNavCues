@@ -6,6 +6,7 @@ from regex import REGEX_LIST
 from tags import load_tags, TAGS_LIST, QUALITY_WORDS
 import sys
 from nltk.stem.porter import *
+import traceback
 
 MODAL_VERBS = {
     "shall", 
@@ -412,7 +413,6 @@ def get_word_pattern_sentences(patterns, paragraph, q_id, answ_id, parag_index):
 
 
 ## Baseline 2: LexRank
-# TODO
 
 def get_all_paragraph_sentences(paragraph):
 	corenlp_properties={'annotators': 'pos,parse,lemma', 'outputFormat': 'json'}
@@ -428,6 +428,7 @@ def get_all_paragraph_sentences(paragraph):
 
 	return all_sentences
 
+## not used
 def get_all_thread_sentences(paragraph, q_id, answ_id, parag_index):
 	word_pattern_sentences = list()
 	annotations = corenlp.annotate(paragraph, corenlp_properties)
