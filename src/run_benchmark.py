@@ -27,7 +27,7 @@ def find_interesting_sentences(questions):
 						for paragraph_index, paragraph in enumerate(paragraphs):
 
 							#get conditional sentences (our technique and also includes just sentences with "if")
-							cond_sentences = get_cond_sentences_from_para(paragraph, q_id=question['question_id'], answ_id=answer['answer_id'], parag_index=paragraph_index)
+							cond_sentences, count1, count2 = get_cond_sentences_from_para(paragraph, q_id=question['question_id'], answ_id=answer['answer_id'], parag_index=paragraph_index)
 							all_interesting_sentences.extend(cond_sentences)
 
 	return all_interesting_sentences
@@ -112,7 +112,7 @@ def calculate_perf_metrics(heuristic, heuristic_sentences, benchmark):
 def print_output(filename, output):
 
 	file = open(filename, "w")
-	fieldnames = ["QuestionId", "AnswerID", "ParagraphIndex", "SentenceIndex", "Sentence", "TruePositive?", "Condition", "Tags In Condition", "NFReqs", "Nouns", "IsFirstPerson?", "IsUnsurePhrase?", "HasWantedGrammerDep?"]
+	fieldnames = ["IsInsightFulIf?","QuestionId", "AnswerID", "ParagraphIndex", "SentenceIndex", "Sentence", "TruePositive?", "Condition", "Tags In Condition", "NFReqs", "Nouns", "IsFirstPerson?", "IsUnsurePhrase?", "HasWantedGrammerDep?"]
 	output_writer = csv.writer(file, delimiter='|')
 	output_writer.writerow(fieldnames)
 	for sentence in output:

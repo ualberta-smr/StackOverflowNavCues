@@ -132,9 +132,9 @@ class ConditionalSentence(SOSentence):
 			#uncomment to get insightful column in real output
 			#print(self.insightful, self.question_id, self.answer_id, self.paragraph_index, self.sentence_pos, self.sentence.replace("-LRB-", "(").replace("-RRB-", ")"), self.true_positive, self.condition, self.tags, self.nfreqs, self.nouns, self.interrogative, self.first_person, self.unsure_phrase, self.grammar_dependencies, sep=delimeter)
 		else:
-			csv_writer.writerow([self.question_id, self.answer_id, self.paragraph_index, self.sentence_pos, self.sentence.replace("-LRB-", "(").replace("-RRB-", ")"), self.true_positive, self.condition, self.tags, self.nfreqs, self.nouns, self.interrogative, self.first_person, self.unsure_phrase, self.grammar_dependencies])
+			#csv_writer.writerow([self.question_id, self.answer_id, self.paragraph_index, self.sentence_pos, self.sentence.replace("-LRB-", "(").replace("-RRB-", ")"), self.true_positive, self.condition, self.tags, self.nfreqs, self.nouns, self.interrogative, self.first_person, self.unsure_phrase, self.grammar_dependencies])
 			#uncomment to get insightful column in real output
-			#csv_writer.writerow([self.insightful, self.question_id, self.answer_id, self.paragraph_index, self.sentence_pos, self.sentence.replace("-LRB-", "(").replace("-RRB-", ")"), self.true_positive, self.condition, self.tags, self.nfreqs, self.nouns, self.interrogative, self.first_person, self.unsure_phrase, self.grammar_dependencies])
+			csv_writer.writerow([self.insightful, self.question_id, self.answer_id, self.paragraph_index, self.sentence_pos, self.sentence.replace("-LRB-", "(").replace("-RRB-", ")"), self.true_positive, self.condition, self.tags, self.nfreqs, self.nouns, self.interrogative, self.first_person, self.unsure_phrase, self.grammar_dependencies])
 
 	def __hash__(self):
 		return hash(self.question_id) + hash(self.answer_id) + hash(self.paragraph_index) + hash(self.sentence_pos)

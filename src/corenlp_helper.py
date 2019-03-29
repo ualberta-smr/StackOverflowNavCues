@@ -248,11 +248,11 @@ def build_cond_sentence(sentence):
 			#########Heuristic 7: ignore sentences with "if you" unless it's if you have, if you want, if you are, if you need
 
 			#first, check basic heuristics: heuristic 1 + heuristic 2
-			if (cond_sentence.has_so_tag() and (cond_sentence.has_valid_vb_dep() or cond_sentence.has_valid_noun_dep()):
+			if cond_sentence.has_so_tag() and (cond_sentence.has_valid_vb_dep() or cond_sentence.has_valid_noun_dep()):
 				cond_sentence.set_insightful(True)
 
 				#then start filtering out "bad" sentences
-				if cond_sentence.is_interrogative_sentence():
+				if cond_sentence.is_interrogative():
 					cond_sentence.set_insightful(False)
 					return cond_sentence #no need to check for more
 
@@ -285,9 +285,12 @@ def build_cond_sentence(sentence):
 def get_cond_sentences_from_para(paragraph, q_id, answ_id, parag_index):
 	cond_sentences = list()
 	annotations = corenlp.annotate(paragraph, corenlp_properties)
+	processed_sentences = 0
+	failed_sentences = 0
 
 	try:
 		for sent_index, sentence in enumerate(annotations['sentences']):
+			processed_sentences += 1
 			try:
 				cond_sentence = build_cond_sentence(sentence)
 				if (cond_sentence is not None):
@@ -300,14 +303,16 @@ def get_cond_sentences_from_para(paragraph, q_id, answ_id, parag_index):
 			except Exception as e: 
 				print(e)
 				traceback.print_exc()
+				failed_sentences += 1
 				print("Failed to enumerate sentence " + sent_index + "(" + sentence + ") in para:" + str(q_id) + "," + str(answ_id) + "," + str(parag_index) + ": " + paragraph, file=sys.stderr)
 	except Exception as e: 
 			print(e)
 			traceback.print_exc()
 			print("Failed to enumerate paragraph " + str(q_id) + "," + str(answ_id) + "," + str(parag_index) + ": " + paragraph, file=sys.stderr)
+			return None, 0, 0
 
 
-	return cond_sentences
+	return cond_sentences, processed_sentences, failed_sentences
 
 
 def get_condition_from_sentence(sentence):
