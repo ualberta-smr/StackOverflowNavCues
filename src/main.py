@@ -93,8 +93,13 @@ def read_patterns_file():
 def main():
 	load_tags()
 	SITE = StackAPI('stackoverflow')
-	#Get questions from last 3 years: Ran on March 29, 2019
-	questions = SITE.fetch('questions', fromdate=datetime(2016,3,29), todate=datetime(2019,3,29), min=0, sort='votes', tagged='json', filter='!-*jbN-o8P3E5')
+	#based on the equivalent query on StackExchange DataExplorer directly (https://data.stackexchange.com/stackoverflow/query/edit/1019759), we should have 32887 results
+	#therefore, setting the limits of the API accordingly
+	SITE.page_size = 100
+	SITE.max_pages = 40
+	#Get questions from last 1 year: Ran on March 29, 2019
+	#filter created from here: https://api.stackexchange.com/docs/questions
+	questions = SITE.fetch('questions', fromdate=datetime(2018,3,29), todate=datetime(2019,3,29), min=0, sort='votes', tagged='json', filter='!-*jbN-o8P3E5')
 	init_corenlp()
 	interesting_sentences = find_interesting_sentences(questions)
 
