@@ -22,12 +22,11 @@ def extract_paratxt_from_thread(question):
 		for answer in answers:
 			paragraphs = get_paragraphs(answer['body'])
 			if paragraphs is not None:
-				if paragraphs is not None:
-					for paragraph in paragraphs:
-						for sentence in get_all_paragraph_sentences(paragraph):
-							file.write(sentence)
-							#file.write(sentence)
-						file.write("\n\n")
+				for paragraph in paragraphs:
+					for sentence in get_all_paragraph_sentences(paragraph):
+						file.write(sentence)
+						#file.write(sentence)
+					file.write("\n\n")
 
 		file.close()
 
