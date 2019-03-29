@@ -189,7 +189,6 @@ def check_relevant_grammar_dependencies(sentence, cond_sentence):
 
 	tokens = sentence["tokens"]
 	enhanced_dependencies = sentence['enhancedDependencies']
-	is_relevant_condition = False
 	for dependency in enhanced_dependencies:
 		if dependency['dependentGloss'] == "if":
 			governor_token_index = int(dependency['governor'])
@@ -226,35 +225,36 @@ def build_cond_sentence(sentence):
 			nouns_in_cond = list(set(get_nouns(sentence, condition) + get_regex_code_elem(sentence_text)))
 			cond_sentence.set_nouns(nouns_in_cond)
 
-			#check all our criteria for a conditional sentence being insightful
+			#set the value for all the factors/features we check for
 			check_relevant_grammar_dependencies(sentence, cond_sentence)
 
-			#cond_sentence.set_grammar_dependencies(True)
+			cond_sentence.set_so_tag(condition_contains_so_tag(cond_sentence,nouns_in_cond))
 
-			if (condition_contains_so_tag(cond_sentence,nouns_in_cond)):
-				cond_sentence.set_insightful(True)
-				cond_sentence.set_so_tag(True)
+			cond_sentence.set_interrogative(is_interrogative_sentence(sentence))
 
-			if (is_interrogative_sentence(sentence)):
-				cond_sentence.set_interrogative(True)
-				 #filter out sentences that are interrogative, even if they fulfilled prev criteria
-				cond_sentence.set_insightful(False)
+			cond_sentence.set_first_person(is_first_person_condition(sentence))
 
-			if (is_first_person_condition(sentence)):
-				cond_sentence.set_first_person(True)
-				#filter out sentences that have first person in their condition, even if they fulfilled prev criteria
-				cond_sentence.set_insightful(False)
+			cond_sentence.set_unsure_phrase(contains_unsure_phrases(sentence_text))
 
-			if (contains_unsure_phrases(sentence_text)):
-				cond_sentence.set_unsure_phrase(True)
-				#filter out sentences that have unsure phrases, even if they fulfilled prev criteria
-				cond_sentence.set_insightful(False)
+			cond_sentence.set_if_in_paren(is_if_in_paren(str(sentence_text)))
 
-			if (is_if_in_paren(str(sentence_text))):
-				cond_sentence.set_if_in_paren(True)
+			cond_sentence.set_unwanted_if_you(contains_unwanted_if_you(sentence, sentence_text))
 
-			if (contains_unwanted_if_you(sentence, sentence_text)):
-				cond_sentence.set_unwanted_if_you(True)
+
+			#check combination of heuristics to set as insightful
+			##### Heuristics:
+			#########Heuristic 1: If any noun in the conditional phrase is a SO tag, then this is a "useful" sentence
+			#########Heuristic 2: Grammatical Relationships
+			#############Heuristic 2.1: The "if" must be related to a verb and that verb must have a dependency on a noun
+			#############Heuristic 2.2: OR the "if" must be related to a noun
+			#########Herustic 3: Conditional sentences that are actually question phrases are not "useful"
+			#########Heursitc 4: If there is a first person reference "I" after the "if", this sentence is not "useful"
+			#########Heurstic 5: Sentences containing uncertainty with phrases like "I don't know" or "I'm not sure" are not useful
+			#########Heuristic 6: ignore if sentences in parentheses
+			#########Heuristic 7: ignore sentences with "if you" unless it's if you have, if you want, if you are, if you need
+			#if (cond_sentence.has_valid_vb_dep() or cond_sentence.has_valid_noun_dep()):
+
+
 
 			return cond_sentence
 
@@ -404,7 +404,7 @@ def get_all_paragraph_sentences(paragraph):
 			all_sentences.append(sentence_text)
 	except:
 		print("Failed to process paragraph:" + paragraph, file=sys.stderr)
-	
+
 	return all_sentences
 
 def get_all_thread_sentences(paragraph, q_id, answ_id, parag_index):
