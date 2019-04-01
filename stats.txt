@@ -1,11 +1,11 @@
-Num. Threads processed: 4000
-Total considered threads: 1997
-Total processed answers (based on considered threads): 5273
-Avg. num of answers in considered threads: 2.6404606910365547
-Total processed paragraphs: 15617
-Total failed paragraphs: 3
-Total processed sentences: 19858
+Num. Threads processed: 29420
+Total considered threads: 7920
+Total processed answers (based on considered threads): 19427
+Avg. num of answers in considered threads: 2.4529040404040403
+Total processed paragraphs: 53494
+Total failed paragraphs: 11
+Total processed sentences: 69331
 Total failed sentences: 0
-Total if sentences: 1075
-Total insightful if sentences: 258
-Total wordpattern sentences: 346
+Total if sentences: 3441
+Total insightful if sentences: 761
+Total wordpattern sentences: 1200
