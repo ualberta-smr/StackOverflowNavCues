@@ -228,6 +228,9 @@ def build_cond_sentence(sentence):
 
 			#set the value for all the factors/features we check for
 			check_relevant_grammar_dependencies(sentence, cond_sentence)
+
+			if (cond_sentence.has_valid_vb_dep() or cond_sentence.has_valid_noun_dep())
+				cond_sentence.set_grammar_dependencies(True)
 			cond_sentence.set_so_tag(condition_contains_so_tag(cond_sentence,nouns_in_cond))
 			cond_sentence.set_interrogative(is_interrogative_sentence(sentence))
 			cond_sentence.set_first_person(is_first_person_condition(sentence))
@@ -249,7 +252,7 @@ def build_cond_sentence(sentence):
 			#########Heuristic 7: ignore sentences with "if you" unless it's if you have, if you want, if you are, if you need
 
 			#first, check basic heuristics: heuristic 1 + heuristic 2
-			if cond_sentence.has_so_tag() and (cond_sentence.has_valid_vb_dep() or cond_sentence.has_valid_noun_dep()):
+			if cond_sentence.has_so_tag() and cond_sentence.has_grammar_dependencies()):
 				cond_sentence.set_insightful(True)
 
 				#then start filtering out "bad" sentences
