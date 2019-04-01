@@ -15,6 +15,7 @@ def find_interesting_sentences(questions):
 
 	items = questions.get('items')
 
+	file.write("Len questions: " + str(len(questions)) + "\n")
 	file.write("Num. Threads processed: " + str(len(items)) + "\n")
 
 	answer_count = 0
@@ -93,7 +94,9 @@ def read_patterns_file():
 def main():
 	load_tags()
 	SITE = StackAPI('stackoverflow', key='***REMOVED***')
-	#based on the equivalent query on StackExchange DataExplorer directly (https://data.stackexchange.com/stackoverflow/query/edit/1019759), we should have 32887 results
+	#based on the equivalent query on StackExchange DataExplorer directly (https://data.stackexchange.com/stackoverflow/query/edit/1019759), 
+	# we should have 33343 threads returned by query below for last 1 year (8508 having at least 2 answers)
+	# and 111,026 for last 3 years
 	#therefore, setting the limits of the API accordingly
 	SITE.page_size = 100
 	SITE.max_pages = 400
