@@ -92,7 +92,7 @@ def read_patterns_file():
 
 def main():
 	load_tags()
-	SITE = StackAPI('stackoverflow')
+	SITE = StackAPI('stackoverflow', key='CWwV4ERW0DDkc6tgjdAjGg((')
 	#based on the equivalent query on StackExchange DataExplorer directly (https://data.stackexchange.com/stackoverflow/query/edit/1019759), we should have 32887 results
 	#therefore, setting the limits of the API accordingly
 	SITE.page_size = 100
