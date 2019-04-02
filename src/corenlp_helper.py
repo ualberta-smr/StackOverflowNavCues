@@ -252,7 +252,7 @@ def build_cond_sentence(sentence):
 			#########Heuristic 7: ignore sentences with "if you" unless it's if you have, if you want, if you are, if you need
 
 			#first, check basic heuristics: heuristic 1 + heuristic 2
-			if cond_sentence.has_so_tag() and cond_sentence.has_grammar_dependencies()):
+			if (cond_sentence.has_so_tag() and cond_sentence.has_grammar_dependencies()):
 				cond_sentence.set_insightful(True)
 
 				#then start filtering out "bad" sentences
