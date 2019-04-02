@@ -1,0 +1,56 @@
+in you ts definition file , e.g. typings.d.ts ` , you can add this line : 
+
+then add this in you typescript -lrb- . t -rrb- file : - 
+
+the import form and the module declaration need to agree about the shape of the module , about what it export . 
+
+when you write 
+
+you be state that all module that have a specifier end in CW have a single export name CW which be of type cw . 
+
+there be several way you can consume such a module include 
+
+and 
+
+and 
+
+and 
+
+the first form be the best and the syntactic sugar it leverage be the very reason JavaScript have CW export . 
+
+however I mention the other form to give you a hint about what be go wrong . pay special attention to the last one . CW give you a object represent the module itself and not its export binding . 
+
+so why the error ? because you write 
+
+and yet there be no export name CW declare by you cw . 
+
+all of this assume that you module loader be provide the json as the CW export as suggest by you original declaration . 
+
+with typescript 2.9 . + you can simply import JSON file with typesafety and intellisense like this : 
+
+make sure to add these setting in the CW section of you cw -lrb- link -rrb- : 
+
+side note : 
+
+it be easy to use typescript version 2.9 + . so you can easily import JSON file as link . 
+
+but if you need to use older version : 
+
+you can access JSON file in more typescript way . first , make sure you new CW location be the same as with the CW property in you cw file . 
+
+if you do not have a include property in you cw file . then you folder structure should be like that : 
+
+but if you have a cw property in you cw : 
+
+then you cw should be in the CW directory as describe in CW property 
+
+as in many of the response , you can define a global declaration for all you json file . 
+
+but I prefer a more type version of this . for instance , let 's say you have configuration file cw like that : 
+
+then we can declare a specific type for it : 
+
+it be easy to import in you typescript file : 
+
+but in compilation phase , you should copy JSON file to you dist folder manually . I just add a script property to my cw configuration : 
+

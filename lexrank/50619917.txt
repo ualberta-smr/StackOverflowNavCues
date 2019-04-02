@@ -1,0 +1,12 @@
+fetch be async , which mean it return a promise . 
+
+the constant cw here be a cw . which await to get resolve , to get you code to work you either have to use CW like this : 
+
+and you will also have to add the CW keyword to you top function that wrap you code , but if this be a website you will need to use babel for this to work in all browser . 
+
+another take be use the callback technique but you will have to do some rewrite , but here be a start : 
+
+cw return a CW , so if you want to use slice method , you should use it inside the last CW , but it would be better if you fetch you datum in CW , save you datum in react state , and after that use in cw method ; 
+
+for example , you code should look like : 
+

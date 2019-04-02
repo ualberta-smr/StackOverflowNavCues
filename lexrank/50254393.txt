@@ -1,0 +1,46 @@
+you can build you viewmodel so that it contain the datum you would like to serialize and then pass it to angularjs in you view as follow : 
+
+and then in you angular controller have a function to receive the datum as follow : 
+
+the above assume you be try to pass datum from mvc to angularj on page load . if you be try to hit a controller and get datum back to angularj upon some event such as a button click , then you can write a angularjs function similar to the following -lrb- this will be a asynchronous request -rrb- : 
+
+and you controller action would look something like : 
+
+imagine that you divide you front end in three layer -lrb- mvc or mvvm -rrb- whatever you want . 
+
+when you need info from server , the best practice be to separate the logic that make the request and the logic that manipulate the datum . 
+
+more info about how to make the request you can find it read about REST APIS in LINK . 
+
+normally one of the layer require the use of service and you can have you controller and you service -lrb- the place where you get the raw datum from the server and you make the request . for that you need to use the link service from angularj . 
+
+$ http : the $ http service be a core angularjs service that facilitate communication with the remote http server via the browser 's xmlhttprequest object or via jsonp . 
+
+so basically it show you how to make get , post and put request . one example from the documentation be : 
+
+pay attention to the url because there be the place where you let you request knwow which method be go to be hit on the server to take the action . if you request be succesful , then you can use the parameter call response . from there , you can do whatever you want . if you decide to make that request part from you controller , you can assign it directly to a variable on you scope . pay attention if you need to serialize the datum . something like 
+
+the first documentation link from above show this example which do exactly what I tell you . 
+
+after all the mention above , pay attention to what you want to display . be you go to display the element of a object array ? the use on you HTML the CW directive . be you go to display just a variable -lrb- no array nor object -rrb- then you use need to use a angular expression cw 
+
+in summary : 
+
+I hope the explanation make sense and check the documentation if you need more info . 
+
+other answer say to use . success in the angular function , . success and . error be deprecate , instead . then should be use . 
+
+work result : 
+
+MVC : 
+
+the function need to be of type jsonresult , and the return value of json use jsonrequestbehavior.allowget . 
+
+AngularJS : 
+
+this be in my ajs controller , use . then instead of . success . if you use console.log the result return from the mvc controller and view it in the browser inspect you will see the object with lot of other info and the value you want be in the . datum section of the object . 
+
+so to access the value you need to do result.data . in my case this give I and array . I assign this to a scope . then in my view I can access the value by do -lcb- -lcb- filelist -lsb- 1 -rsb- -rcb- -rcb- etc. . this can also be use in ng-repeat e.g : 
+
+each value in the array in the repeat can be access use $ index which be the number of the repeat start at 0 . 
+

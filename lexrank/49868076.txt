@@ -1,0 +1,24 @@
+long-story-short : nope . there be no way to store cw by value in container or cw . 
+
+qt forbid the copy of qobject and all inherit class . the mandatory the CW macro will disable any copy constructor also in newly define class . 
+
+the copy constructor that you be define in the CW class be miss the base class constructor call . if CW have a copy constructor it would be something like this : 
+
+probably , the compiler be give you a warning , but allow you to have such a constructor , even if it will result in undefined behavior or slice a instance of CW every time it be pass by value . 
+
+furthermore , the link state the following : 
+
+the value store in the various container can be of any assignable datum type . to qualify , a type must provide a default constructor , a copy constructor , and a assignment operator . this cover most datum type you be likely to want to store in a container , include basic type such as int and double , pointer type , and Qt datum type such as qstring , qdate , and QTime , but it do not cover qobject or any qobject subclass -lrb- QWidget , QDialog , QTimer , etc. -rrb- . 
+
+so you can not store CW and derive class inside a qt container unless you store they as pointer , as copy of qobject be disable by design . 
+
+furthermore , if you want to exploit polymorphic behavior you must use pointer , even if there be no explicit need to cast to derive class in you code , as far as I can see . if you really need to resort to cast in some place , you could consider make you ToJson a template function . 
+
+there be a solution , but use caution as it be only reasonable/applicable in the follow scenario : 
+
+if you code use the class as a CW for any reason other than to get meta information , you be almost certainly use it incorrectly if you be try to store it by value -lrb- as explain by G. Giordano in they answer -rrb- . 
+
+misuse consideration aside , in order to json-ify a cw that store a cw subclass by value , you can use the cw method and pass it the user type id and cw . 
+
+example : 
+
