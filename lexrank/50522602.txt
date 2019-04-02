@@ -1,0 +1,14 @@
+with use GsonBuilder setfeildnamepolicy 
+
+Default argument would not work in datum class in the case when object be instantiate with retrofit due to parse library use underneath , which probably create object without call constructor . for example CW use CWto create object . 
+
+what you can do - be to add backing property for field that have default value : 
+
+the root of the problem be the fact that GSON create object not via constructor call , but via unsafe staff . thus it lead to broken thing like null-safety or property initialization . 
+
+the only way I know how to workaround you case look like this : 
+
+here we create one back property cw which will be initialize to null by gson . next we add custom getter and setter for public property which check each it be invoke if cw be null . and if so it return you default value . otherwise , it return the value store in CW 
+
+yes , it look ugly . otherwise you should consider use another json library like Jackson which as I know support Kotlin well . 
+

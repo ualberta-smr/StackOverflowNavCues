@@ -1,0 +1,32 @@
+you need to delete the element in datum and append CW : 
+
+explanation : 
+
+the cw operator here do not update you cw element . so you can make use of CW and CW to delete old one and add new one . 
+
+when you use CW it mean you be make the CW refer to CW but not update the actual cw 
+
+output : 
+
+assignment -lrb- cw -rrb- do not change a variable in place . 
+
+here be 2 option to solve this : 
+
+cw 
+
+CW this work only if the key in you cw variable overlap with the key in the item . 
+
+if you have something assign to x , e.g. cw , then if you write CW , that do not influence CW * -lrb- or any other datum , for that matter -rrb- in any way . it just mean that variable CW now refer to a different object -lrb- cw rather than cw -rrb- . 
+
+on the other hand cw do influence datum -lrb- in general case -rrb- . it modify datum in CW . it still do not modify datum which be previously in CW * - that old datum be just no longer reference by CW . 
+
+this have very similar semantics as cw . 
+
+after CW , variable CW no longer reference a item from CW , it reference a different variable : CW . if you cw you will see that . 
+
+the line that be execute after that be CW , which again change what CW reference , thus effectively cancel the previous line . 
+
+what you actually want be to modify CW , so you should do so , e.g. 
+
+-lrb- * -rrb- although the original datum be not modify by this , it may be `` delete '' i.e. it be memory may be free if it be no longer reference by any variable , because it be no longer need . 
+

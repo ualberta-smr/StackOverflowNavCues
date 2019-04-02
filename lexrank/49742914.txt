@@ -1,0 +1,20 @@
+you be nearly there , you just need to add one more condition case as above . if time be the same , you then get the opportunity to sort by a secondary dimension -lrb- or visa versa -rrb- 
+
+check the result of cw on the property CW , if it be either cw or cw then return that result . otherwise -lrb- result be CW -rrb- , return the comparaison of CW : 
+
+which can be even shorter use a logical CW : 
+
+if CW return a truthy value -lrb- i.e. cw or cw -rrb- , then that truthy value will be return and the rest of CW will be ignore . if it return a falsy value -lrb- i.e. cw -rrb- then the value of the other operand of CW will be return -lrb- which be sort by cw -rrb- 
+
+this can be solve with a single sort function line : 
+
+fiddle link 
+
+this work because CW will only consider the second component if the CW be zero . 
+
+I also want to point out that CW be not only make the checking of the statement concise , it also allow you to chain further check in you sorting requirement . for example , let 's say you also want to sort by a third option -lrb- say action -rrb- . you can by simply add another CW , and check further . 
+
+this alternative compare the username first -lrb- faster than a precipitated localecompare execution -rrb- , if they be equal then a common comparison between integer be execute . 
+
+
+

@@ -1,0 +1,16 @@
+you should cast you datum to the CW type because you have array in response . 
+
+you be try to cast to CW , but you have a array of cw because you response enclose in CW bracket . 
+
+example : 
+
+or if you want to get just only one cw object from response you can write : 
+
+or if you object can be a array or not a array -lrb- but it sound a little bit strange -rrb- you could try to cast to several possible type . 
+
+the response type be array of json object so you have to cast it to CW . since you be use Swift 4 , you can use CW type which map the model to the response . 
+
+you can define you Model struct like 
+
+you can read more about decodable protocol link 
+

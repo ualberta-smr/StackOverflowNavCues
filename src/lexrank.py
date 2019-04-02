@@ -4,11 +4,11 @@ from so_helper import get_paragraphs
 from corenlp_helper import *
 from ConditionalSentence import ConditionalSentence
 from tags import load_tags
-from path import Path
+from pathlib import Path
 
 def read_question_ids():
     question_ids = list()
-    with open("question_ids.txt", "r") as file: 
+    with open("lexrank/question_ids.txt", "r") as file: 
         for line in file.readlines():
             items = line.split(",")
             question_ids.extend([item.strip() for item in items])

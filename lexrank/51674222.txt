@@ -1,0 +1,24 @@
+Keys with a lead cw underscore be not really ` hide ' , they be just more string to JSON . the Construct CW class be just a dictionary with order , the CW key be not anything special to that class . 
+
+you have two option : 
+
+and perhaps a third , but a casual scan of the construct project page do not tell I if it be available : have construct output json or at least a json-compatible dictionary , perhaps by use adapter . 
+
+the default hook can not prevent the CW key from be add to the output , but would let you at least avoid the error : 
+
+filter can be do recursively ; the link can help keep such code clean : 
+
+I have the above implementation a additional CW argument too , to explicitly skip key that have a CW character at the start . this would help skip all additional ` hide ' attribute the Construct library be use . 
+
+since CW be a cw subclass , the above code will automatically handle instance such as CW . 
+
+link do not do what you might think it do - it instruct the link to skip key that be not of a basic type , not the value of the key - i.e. if you have a CW CW it would skip the CW key , whereas without CW set to cw it would raise a CW . 
+
+you can overload link -lrb- and its underbelly -rrb- and perform look-ahead filter there , but you will end up pretty much rewrite the cw module , slow it down in the process as you will not be able to benefit from the compile part . what I would suggest you be to pre-process you datum via iterative filter and skip keys/types you do not want in you final JSON . then the cw module should be able to process it without any additional instruction . something like : 
+
+then create you filter : 
+
+in this case skip just by type should suffice , but in case the CW key hold some other undesirable datum this guarantee it will not be in the final result . anyway , you can then just filter the datum prior to pass it to the CW : 
+
+of course , if you structure contain some other exotic datum or datum that be represent in JSON differently base on its type , this approach might mess it up as it turn all mapping into CW and all sequence into CW . however , for general usage this should be more than enough . 
+

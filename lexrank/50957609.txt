@@ -1,0 +1,36 @@
+for aggregate those value into a array , for example : 
+
+
+
+if you have any other object inside and you want to get access to they property too , you can create nested loop , like this : 
+
+
+
+this way you will be able to iterate through CW and CW object property too . 
+
+in you loop : 
+
+x be the string value of key of you object . in order to get the car1 property of you nested object you can change you loop as : 
+
+it be also a good practice to use link while use CW loop it might also iterate over property which be in you object 's prototype chain . 
+
+you cw property be not at the level that you be try to access it at . Loop through the object and check to see if car1 exist on the next level down . if it do , show the alert . also note , you should have a cw statement in you cw loop to make sure the property exist -lrb- or some other condition -rrb- 
+
+
+
+you should just change the for loop to 
+
+try it out 
+
+you have a small misgiving here . you be not loop over a array , you be loop over the property of a object with a link loop . 
+
+you should be careful with that . you probably want to make it ` safe ' -lrb- will not traverse the prototype or non enumerable property -rrb- by change to a more update method of traversal . namely safely get the value of the object , not the key and then loop over it with some of the newer looping function . 
+
+we will be use link to get a array of the value since we do not need the key , then link to filter out anything without a ` car1 ' property as report by link , and finally map over it to transform it with link . as a way to keep the alert in , we will then be alert on each of they use link 
+
+now we have a array of the car1 property of the value in the Object . the good news be this will work if give a array of object as well instead of a nested Object , but only because we do not care about the key that hold the object and only that a object actually have a ` car1 ' property 
+
+can be rewrite as 
+
+can be rewrite since in JavaScript function be first order and can be pass as argument to other function 
+
