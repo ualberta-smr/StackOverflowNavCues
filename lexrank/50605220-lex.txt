@@ -1,0 +1,5 @@
+lexrank.summarize("if you input field value be number, then you can use input type ` number '. the min and max attribute represent number range to input. Hope this be much simpler. update inorder to hide the arrow you could use the follow. you can use this regex if you have to use CW you can use a text input and allow only number to be type in, with the use of CW. from 48 to 57 be the keyboard number from 0-9. if it pass this validation then you check if it exceede the max value of you input. for the min value, the user can not enter something below CW because to do that he should be able to write CW, which do not pass the first condition -lrb- number only -rrb-", 1, function (err, toplines, text) { console.log(toplines); });
+
+[ { weight: 0.45824527207564486,
+    text: 'you can use this regex if you have to use CW you can use a text input and allow only number to be type in, with the use of CW.',
+    index: 4 } ]

@@ -1,0 +1,5 @@
+lexrank.summarize("without additional information ; it do not appear you have much exist code. if you be try to get start with save datum to a mysql database in c# ; Microsoft provide this tutorial. however there be not much people can do to answer this question without additional info. Tutorial: link people might be able to give better answer if you include the following: here the solution: now you can loop through item like below. and here how you can insert to db: for ADO.Net: link for EntityFramework: link if you json contain from 0... n number of person then CW be good solution for you this may reduce you database round trip if you have performance requirement the follow method contain sample of CW link be good article if you have to use CW as insert command.", 1, function (err, toplines, text) { console.log(toplines); });
+
+[ { weight: 0.46647930757671413,
+    text: 'and here how you can insert to db: for ADO.Net: link for EntityFramework: link if you json contain from 0...',
+    index: 4 } ]
