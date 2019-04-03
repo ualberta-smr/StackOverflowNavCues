@@ -1,0 +1,21 @@
+﻿Technique,QuestionID,AnswerID,SentenceText
+LexRank,49638703,49667023,This validation error message should be human-readable and it should be okay for the client to display it to the user.
+LexRank,49742914,49742993,If it returned a falsy value (i.e. 0) then the value of the other operand of || will be returned (which is sorting by timestamp)
+LexRank,49868076,49904853,"Misuse considerations aside, in order to JSON-ify a QVariant that stores a QObject subclass by value, you can use the QMetaType::create method and pass it the user type id and yourQVariant.constData()."
+LexRank,49996456,51494250,But if you have an include property in your tsconfig.json:
+LexRank,50014635,50014701,You can then access your user.json in the folder /api/user.json at localhost:8081/api/user.json
+LexRank,50088757,50088868,"You are trying to cast to [String: Any], but you have an array of [String: Any] because your response enclosed in [] brackets."
+LexRank,50221841,50222277,"Except that actually here, you don't even to do that, because if you're using map the way that I think you are (you didn't post your data so it's hard to tell), then you can just generate an HTML element for each item in the array"
+LexRank,50227069,50227170,"Use .reduce to convert the array into an object, as you're doing, but then you need to .find twice to see if the matching name and then if the matching value object exists."
+LexRank,50254393,50261031,Normally one of the layers requires the use of services and you can have your controllers and your services (the place where you get the raw data from the server and you make the request.
+LexRank,50460523,50460873,"After item = update, variable item no longer references an item from data, it references a different variable: update."
+LexRank,50485037,50485134,Overwrites the existing file if the file exists.
+LexRank,50522602,50523464,"Otherwise, it returns the value stored in _isPlaying"
+LexRank,50605220,50605288,"If your input field values are numbers, then you can use input type 'number' ."
+LexRank,50619917,50620194,"fetch returns a Promise, so if you want to use slice method, you should use it inside the last .then(), but it would be better if you fetch your data in componentDidMount, save your data in React state, and after that use in render method;"
+LexRank,50703187,50703313,"So, yes, in my opinion, require calls should be at the top, unless you know what you're doing, or you're loading a dynamic dependency."
+LexRank,50957609,50958104,"You're not looping over an Array, you are looping over the properties of an Object with a for...in loop."
+LexRank,51580523,51580716,"Solution :- You must use database , when you save data you do it in db , when you delete data , you delete it from db & when you fetch data then you fetch from db."
+LexRank,51628014,51628324,"regarding the download every launch , i recommend having expire or new data flag , you should store them in a file/coreData or any other alternative and , it's best to implement Codable , to read them as Data to objects and vice versa when saving"
+LexRank,51674222,51675877,"if your had a dict {object(): ""foobar""} it would skip the object() key, whereas without skipkeys set to True it would raise a TypeError."
+LexRank,51682923,51683003,and here how you can insert to db : for ADO.Net : https://msdn.microsoft.com/en-us/library/ms233812.aspx
