@@ -19,3 +19,4 @@ LexRank,51580523,51580716,"Solution :- You must use database , when you save dat
 LexRank,51628014,51628324,"regarding the download every launch , i recommend having expire or new data flag , you should store them in a file/coreData or any other alternative and , it's best to implement Codable , to read them as Data to objects and vice versa when saving"
 LexRank,51674222,51675877,"if your had a dict {object(): ""foobar""} it would skip the object() key, whereas without skipkeys set to True it would raise a TypeError."
 LexRank,51682923,51683003,and here how you can insert to db : for ADO.Net : https://msdn.microsoft.com/en-us/library/ms233812.aspx
+LexRank,51783807,51784010,"So not only will it check if the string is contained in the array, but if the string is also a substring."
