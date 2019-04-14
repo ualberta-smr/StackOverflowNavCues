@@ -1,0 +1,5 @@
+lexrank.summarize("you should not use CW as it will not work the way you might expect it, particularly if you be deal with string. it will recursively check if all part be contain. so not only will it check if the string be contain in the array, but if the string be also a substring. you will want to write out you condition check any and all tag against you criterion. one way would be to use CW, e.g. this produce:. if you want that wrap in a array, you could -lrb- for example -rrb- wrap the filter above in square bracket. another solution be to use the idiom: first -lrb- select -lrb- _ -rrb- -rrb-:. if the CW be omit, then the same item in the CW array might be emit more than once.", 1, function (err, toplines, text) { console.log(toplines); });
+
+[ { weight: 0.4254749489614401,
+    text: 'so not only will it check if the string be contain in the array, but if the string be also a substring.',
+    index: 2 } ]
