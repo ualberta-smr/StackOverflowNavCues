@@ -8,3 +8,9 @@
 8: condinsight + lexrank
 9: wordpattern + lexrank
 10: ifsentence + wordpatternbaseline + lexrank
+
+
+if sentence: 1, 4, 7, 10
+condinsight: 2, 5, 8
+word pattern: 3,4,5,9,10
+LexRank: >=6
