@@ -112,7 +112,7 @@ def calculate_perf_metrics(heuristic, heuristic_sentences, benchmark):
 def print_output(filename, output):
 
 	file = open(filename, "w")
-	fieldnames = ["IsInsightFulIf?","QuestionId", "AnswerID", "ParagraphIndex", "SentenceIndex", "Sentence", "TruePositive?", "Condition", "Tags In Condition", "NFReqs", "Nouns", "IsFirstPerson?", "IsUnsurePhrase?", "HasWantedGrammerDep?"]
+	fieldnames = ["IsInsightFulIf?","QuestionId", "AnswerID", "ParagraphIndex", "SentenceIndex", "Sentence", "TruePositive?", "Condition", "Tags In Condition", "NFReqs", "Nouns", "IsInterrogative?", "IsFirstPerson?", "IsUnsurePhrase?", "HasWantedGrammerDep?"]
 	output_writer = csv.writer(file, delimiter='|')
 	output_writer.writerow(fieldnames)
 	for sentence in output:
