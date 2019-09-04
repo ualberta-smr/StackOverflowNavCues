@@ -4,6 +4,7 @@ from so_helper import get_paragraphs
 from corenlp_helper import *
 from ConditionalSentence import ConditionalSentence
 from tags import load_tags
+from statistics import mean, median, mode
 
 
 def find_interesting_sentences(questions):
@@ -15,7 +16,6 @@ def find_interesting_sentences(questions):
 
 	items = questions.get('items')
 
-	file.write("Len questions: " + str(len(questions)) + "\n")
 	file.write("Num. Threads processed: " + str(len(items)) + "\n")
 
 	answer_count = 0
@@ -29,6 +29,7 @@ def find_interesting_sentences(questions):
 	total_if_sentences = 0
 	total_insightful_if_sentences = 0
 	word_pattern_count = 0
+	answer_counts = []
 
 	if items is not None:
 		for question in items:
@@ -38,11 +39,11 @@ def find_interesting_sentences(questions):
 
 			#we want to consider threads that have at least 2 answers
 			if answers is not None and len(answers) >= 2:
+				answer_counts.append(len(answers))
 
 				considered_threads += 1
 
 				for answer in answers:
-					answer_count += 1
 					paragraphs = get_paragraphs(answer['body'])
 					if paragraphs is not None:
 						for paragraph_index, paragraph in enumerate(paragraphs):
@@ -69,8 +70,12 @@ def find_interesting_sentences(questions):
 
 
 	file.write("Total considered threads: " + str(considered_threads) + "\n")
-	file.write("Total processed answers (based on considered threads): " + str(answer_count)  + "\n")
-	file.write("Avg. num of answers in considered threads: " + str(answer_count/considered_threads) + "\n")
+	file.write("Total processed answers (based on considered threads): " + sum(answer_counts)  + "\n")
+	file.write("Mean answers: " + str(mean(answer_counts)) + "\n")
+	file.write("Median answers: " + str(median(answer_counts)) + "\n")
+	file.write("Max answers: " + str(max(answer_counts)) + "\n")
+	file.write("Min answers: " + str(min(answer_counts)) + "\n")
+	file.write("Mode answers: " + str(mode(answer_counts)) + "\n")
 	file.write("Total processed paragraphs: " + str(total_paragraphs) + "\n")
 	file.write("Total failed paragraphs: " + str(total_failed_paragraphs) + "\n")
 	file.write("Total processed sentences: " + str(total_processed_sentences) + "\n")
