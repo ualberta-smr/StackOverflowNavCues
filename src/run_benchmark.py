@@ -28,7 +28,8 @@ def find_interesting_sentences(questions):
 
 							#get conditional sentences (our technique and also includes just sentences with "if")
 							cond_sentences, count1, count2 = get_cond_sentences_from_para(paragraph, q_id=question['question_id'], answ_id=answer['answer_id'], parag_index=paragraph_index)
-							all_interesting_sentences.extend(cond_sentences)
+							if cond_sentences is not None:
+								all_interesting_sentences.extend(cond_sentences)
 
 	return all_interesting_sentences
 
@@ -125,8 +126,7 @@ def main():
 	benchmark = load_benchmark()
 
 	print ("Benchmark size: " + str(len(benchmark)))
-	# print ("Insightful count: " + str(len(benchmark_yes)))
-	# print ("Not Insightful count: " + str(len(benchmark_no)))
+
 	all_interesting_sentences = list()
 	init_corenlp()
 
