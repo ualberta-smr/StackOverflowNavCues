@@ -10,6 +10,24 @@ class TestConditionalSentences(unittest.TestCase):
 		load_tags()
 		init_corenlp()
 
+	def test_tags_in_cond(self):
+
+		#should NOT be tagged as a conditional insight
+		paragraph = "You can add more value types in the toDictionary function if you need."
+
+		cond_sentences, processed_sentences, failed_sentences = get_cond_sentences_from_para(paragraph, None, None, None)
+		for cond_sentence in cond_sentences:
+			self.assertFalse(cond_sentence.has_so_tag())
+
+	def test_tags_in_cond2(self):
+
+		#should be tagged as a conditional insight
+		paragraph = "You can add more value types if you need toDictionary."
+
+		cond_sentences, processed_sentences, failed_sentences = get_cond_sentences_from_para(paragraph, None, None, None)
+		for cond_sentence in cond_sentences:
+			self.assertTrue(cond_sentence.has_so_tag())
+
 	def test_verb_no_dep(self):
 
 		#should NOT be tagged as a conditional insight
@@ -18,7 +36,6 @@ class TestConditionalSentences(unittest.TestCase):
 
 		cond_sentences, processed_sentences, failed_sentences = get_cond_sentences_from_para(paragraph, None, None, None)
 		for cond_sentence in cond_sentences:
-			cond_sentence.print("|")
 			self.assertFalse(cond_sentence.has_valid_vb_dep())
 
 	def test_verb_noun_dep(self):
