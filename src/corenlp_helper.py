@@ -223,7 +223,7 @@ def build_cond_sentence(sentence):
 			condition = get_condition_from_sentence(sentence)
 			cond_sentence.set_condition(condition)
 			cond_sentence.set_nfreqs(get_non_func(condition))
-			nouns_in_cond = list(set(get_nouns(sentence, condition) + get_regex_code_elem(sentence_text)))
+			nouns_in_cond = list(set(get_nouns(sentence, condition) + get_regex_code_elem(condition)))
 			cond_sentence.set_nouns(nouns_in_cond)
 
 			#set the value for all the factors/features we check for
@@ -285,7 +285,6 @@ def build_cond_sentence(sentence):
 
 	return None
 
-## @Christoph: this is where you would want to play with things
 def get_cond_sentences_from_para(paragraph, q_id, answ_id, parag_index):
 	cond_sentences = list()
 	annotations = corenlp.annotate(paragraph, corenlp_properties)
@@ -347,10 +346,12 @@ def get_non_func(string):
 
 def get_regex_code_elem(sentence_text):
 	result = []
-	for pattern in REGEX_LIST:
-		for word in sentence_text.split():
-			if re.match(pattern, word):
-				result.append(word)
+
+	if sentence_text is not None:
+		for pattern in REGEX_LIST:
+			for word in sentence_text.split():
+				if re.match(pattern, word):
+					result.append(word)
 
 	return result
 
