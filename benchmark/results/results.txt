@@ -1,46 +1,46 @@
-mark size: 113
+Benchmark size: 113
 =========== Calculating for basic_H1
-predicted size: 288
+predicted size: 291
 basic_H1, intersection size = 52
 basic_H1, recall=0.6666666666666666
-basic_H1, precision=0.18055555555555555
+basic_H1, precision=0.17869415807560138
 =========== Calculating for H1_H2_1
-predicted size: 95
+predicted size: 96
 H1_H2_1, intersection size = 20
 H1_H2_1, recall=0.2564102564102564
-H1_H2_1, precision=0.21052631578947367
+H1_H2_1, precision=0.20833333333333334
 =========== Calculating for H1_H2_2
-predicted size: 32
+predicted size: 33
 H1_H2_2, intersection size = 6
 H1_H2_2, recall=0.07692307692307693
-H1_H2_2, precision=0.1875
+H1_H2_2, precision=0.18181818181818182
 =========== Calculating for H1_H2
-predicted size: 127
+predicted size: 129
 H1_H2, intersection size = 26
 H1_H2, recall=0.3333333333333333
-H1_H2, precision=0.2047244094488189
+H1_H2, precision=0.20155038759689922
 =========== Calculating for H1_H2_H3
-predicted size: 120
+predicted size: 122
 H1_H2_H3, intersection size = 26
 H1_H2_H3, recall=0.3333333333333333
-H1_H2_H3, precision=0.21666666666666667
+H1_H2_H3, precision=0.21311475409836064
 =========== Calculating for H1_H2_H3_H4
-predicted size: 115
+predicted size: 116
 H1_H2_H3_H4, intersection size = 26
 H1_H2_H3_H4, recall=0.3333333333333333
-H1_H2_H3_H4, precision=0.22608695652173913
+H1_H2_H3_H4, precision=0.22413793103448276
 =========== Calculating for H1_H2_H3_H4_H5
-predicted size: 111
+predicted size: 112
 H1_H2_H3_H4_H5, intersection size = 26
 H1_H2_H3_H4_H5, recall=0.3333333333333333
-H1_H2_H3_H4_H5, precision=0.23423423423423423
+H1_H2_H3_H4_H5, precision=0.23214285714285715
 =========== Calculating for H1_H2_H3_H4_H5_H6
-predicted size: 107
+predicted size: 108
 H1_H2_H3_H4_H5_H6, intersection size = 26
 H1_H2_H3_H4_H5_H6, recall=0.3333333333333333
-H1_H2_H3_H4_H5_H6, precision=0.24299065420560748
+H1_H2_H3_H4_H5_H6, precision=0.24074074074074073
 =========== Calculating for H1_H2_H3_H4_H5_H6_H7
-predicted size: 82
+predicted size: 83
 H1_H2_H3_H4_H5_H6_H7, intersection size = 21
 H1_H2_H3_H4_H5_H6_H7, recall=0.2692307692307692
-H1_H2_H3_H4_H5_H6_H7, precision=0.25609756097560976
+H1_H2_H3_H4_H5_H6_H7, precision=0.25301204819277107
