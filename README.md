@@ -1,4 +1,4 @@
-## Extracting Navigation Cues from Stack Overflow
+## Extracting Essential Sentences from Stack Overflow Answers
 
 When navigating a given Stack Overflow thread, users may want to quickly spot certain sentences in an answer to decide if they want to read it or navigate it past it. We call these sentences *essential sentences*. This repository contains the code we used for extracting essential sentences using four approaches in our SANER 2020 paper "Essential Sentences for Navigating Stack Overflow Answers". If you are looking for the complete artifact page, which includes the survey results etc.,  please check [https://github.com/ualberta-smr/saner2020-artifactpage](https://github.com/ualberta-smr/saner2020-artifactpage).
 
