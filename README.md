@@ -48,3 +48,9 @@ To run the benchmark, run `python3 src/run_benchmark.py`. The combination of heu
 The sentences detected by each combination of heuristics will be saved in the `benchmark/results` folder.
 
 **IMPORTANT:** Take these numbers with a grain of salt, since the benchmark is not based on looking at *all* sentences in the threads. Instead, we manually analyzed conditional sentences (those with if conditions) and decided if they are useful conditions or not. Thus, there may be other sentences in the thread that are useful but are not conditional sentences. The relative performance of heuristics is what counts here.
+
+Contributors
+===
+
+* Sarah Nadi (main developer & maintainer)
+* Benyamin Noori (early contributor)
