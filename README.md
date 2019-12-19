@@ -53,4 +53,5 @@ Contributors
 ===
 
 * Sarah Nadi (main developer & maintainer)
+* Christoph Treude (responsible for lexrank results)
 * Benyamin Noori (early contributor)
