@@ -1,8 +1,0 @@
-in you case the shorthand literal syntax would be : 
-
-or shorter if you do not want the key : value syntax for literal : 
-
-BTW if Cities do not contain anything other than the -lsb- -rsb- City , just use a slice of City . this will lead to a somewhat shorter syntax , and remove a unnecessary -lrb- possibly -rrb- layer : 
-
-full example with everything write out explicitly : 
-
