@@ -113,7 +113,7 @@ def calculate_perf_metrics(heuristic, heuristic_sentences, benchmark):
 def print_output(filename, output):
 
 	file = open(filename, "w")
-	fieldnames = ["IsInsightFulIf?","QuestionId", "AnswerID", "ParagraphIndex", "SentenceIndex", "Sentence", "TruePositive?", "Condition", "Tags In Condition", "NFReqs", "Nouns", "IsInterrogative?", "IsFirstPerson?", "IsUnsurePhrase?", "HasWantedGrammerDep?"]
+	fieldnames = ["IsInsightFulIf?","QuestionId", "AnswerID", "ParagraphIndex", "SentenceIndex", "Sentence", "TruePositive?", "Condition", "Tags In Condition", "NFReqs", "Nouns", "IsInterrogative?", "IsFirstPerson?", "IsUnsurePhrase?", "HasValidVbDep?", "HasValidNounDep?", "HasWantedGrammerDep?"]
 	output_writer = csv.writer(file, delimiter='|')
 	output_writer.writerow(fieldnames)
 	for sentence in output:
@@ -165,6 +165,11 @@ def main():
 	H1_H2_H3_H4_H5 = list()
 	H1_H2_H3_H4_H5_H6 = list()
 	H1_H2_H3_H4_H5_H6_H7 = list()
+	H1_H3 = list()
+	H1_H3_H4 = list()
+	H1_H3_H4_H5 = list()
+	H1_H3_H4_H5_H6 = list()
+	H1_H3_H4_H5_H6_H7 = list()
 
 
 	for interesting_sentence in all_interesting_sentences:
@@ -185,19 +190,29 @@ def main():
 			if is_h2_1 or is_h2_2:
 				H1_H2.append(interesting_sentence)
 
-				if not interesting_sentence.is_interrogative():
+			if not interesting_sentence.is_interrogative():
+				H1_H3.append(interesting_sentence)
+				if is_h2_1 or is_h2_2:
 					H1_H2_H3.append(interesting_sentence)
 
-					if not interesting_sentence.is_first_person():
+				if not interesting_sentence.is_first_person():
+					H1_H3_H4.append(interesting_sentence)
+					if is_h2_1 or is_h2_2:
 						H1_H2_H3_H4.append(interesting_sentence)
 
-						if not interesting_sentence.is_unsure_phrase():
+					if not interesting_sentence.is_unsure_phrase():
+						H1_H3_H4_H5.append(interesting_sentence)
+						if is_h2_1 or is_h2_2:
 							H1_H2_H3_H4_H5.append(interesting_sentence)
 
-							if not interesting_sentence.is_if_in_paren():
+						if not interesting_sentence.is_if_in_paren():
+							H1_H3_H4_H5_H6.append(interesting_sentence)
+							if is_h2_1 or is_h2_2:
 								H1_H2_H3_H4_H5_H6.append(interesting_sentence)
 
-								if not interesting_sentence.has_unwanted_if_you():
+							if not interesting_sentence.has_unwanted_if_you():
+								H1_H3_H4_H5_H6_H7.append(interesting_sentence)
+								if is_h2_1 or is_h2_2:
 									H1_H2_H3_H4_H5_H6_H7.append(interesting_sentence)
 
 
@@ -229,7 +244,20 @@ def main():
 	print_output("benchmark/results/H1_H2_H3_H4_H5_H6_H7.csv", H1_H2_H3_H4_H5_H6_H7)
 	calculate_perf_metrics("H1_H2_H3_H4_H5_H6_H7", H1_H2_H3_H4_H5_H6_H7, benchmark)
 
+	print_output("benchmark/results/H1_H3.csv", H1_H3)
+	calculate_perf_metrics("H1_H3", H1_H3, benchmark)
 
+	print_output("benchmark/results/H1_H3_H4.csv", H1_H3_H4)
+	calculate_perf_metrics("H1_H3_H4", H1_H3_H4, benchmark)
+
+	print_output("benchmark/results/H1_H3_H4_H5.csv", H1_H3_H4_H5)
+	calculate_perf_metrics("H1_H3_H4_H5", H1_H3_H4_H5, benchmark)
+
+	print_output("benchmark/results/H1_H3_H4_H5_H6.csv", H1_H3_H4_H5_H6)
+	calculate_perf_metrics("H1_H3_H4_H5_H6", H1_H3_H4_H5_H6, benchmark)
+
+	print_output("benchmark/results/H1_H3_H4_H5_H6_H7.csv", H1_H3_H4_H5_H6_H7)
+	calculate_perf_metrics("H1_H3_H4_H5_H6_H7", H1_H3_H4_H5_H6_H7, benchmark)
 
 if __name__ == "__main__":
 	main()
