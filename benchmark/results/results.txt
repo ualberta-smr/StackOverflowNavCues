@@ -1,4 +1,15 @@
-Benchmark size: 113
+##### Heuristics:
+	#########Heuristic 1: If any noun in the conditional phrase is a SO tag, then this is a "useful" sentence
+	#########Heuristic 2: Grammatical Relationships
+	#############Heuristic 2.1: The "if" must be related to a verb and that verb must have a dependency on a noun
+	#############Heuristic 2.2: OR the "if" must be related to a noun
+	#########Herustic 3: Conditional sentences that are actually question phrases are not "useful"
+	#########Heursitc 4: If there is a first person reference "I" after the "if", this sentence is not "useful"
+	#########Heurstic 5: Sentences containing uncertainty with phrases like "I don't know" or "I'm not sure" are not useful
+	#########Heuristic 6: ignore if sentences in parentheses
+	#########Heuristic 7: ignore sentences with "if you" unless it's if you have, if you want, if you are, if you need
+
+
 =========== Calculating for basic_H1
 predicted size: 279
 basic_H1, intersection size = 52
@@ -43,4 +54,33 @@ H1_H2_H3_H4_H5_H6, precision=0.25
 predicted size: 80
 H1_H2_H3_H4_H5_H6_H7, intersection size = 21
 H1_H2_H3_H4_H5_H6_H7, recall=0.2692307692307692
+<<<<<<< Updated upstream
 H1_H2_H3_H4_H5_H6_H7, precision=0.2625
+=======
+H1_H2_H3_H4_H5_H6_H7, precision=0.25301204819277107
+=========== Calculating for H1_H3
+predicted size: 277
+H1_H3, intersection size = 51
+H1_H3, recall=0.6538461538461539
+H1_H3, precision=0.18411552346570398
+=========== Calculating for H1_H3_H4
+predicted size: 264
+H1_H3_H4, intersection size = 50
+H1_H3_H4, recall=0.6410256410256411
+H1_H3_H4, precision=0.1893939393939394
+=========== Calculating for H1_H3_H4_H5
+predicted size: 257
+H1_H3_H4_H5, intersection size = 50
+H1_H3_H4_H5, recall=0.6410256410256411
+H1_H3_H4_H5, precision=0.19455252918287938
+=========== Calculating for H1_H3_H4_H5_H6
+predicted size: 245
+H1_H3_H4_H5_H6, intersection size = 50
+H1_H3_H4_H5_H6, recall=0.6410256410256411
+H1_H3_H4_H5_H6, precision=0.20408163265306123
+=========== Calculating for H1_H3_H4_H5_H6_H7
+predicted size: 213
+H1_H3_H4_H5_H6_H7, intersection size = 45
+H1_H3_H4_H5_H6_H7, recall=0.5769230769230769
+H1_H3_H4_H5_H6_H7, precision=0.2112676056338028
+>>>>>>> Stashed changes
