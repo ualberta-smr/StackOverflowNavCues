@@ -98,7 +98,7 @@ def read_patterns_file():
 
 def main():
 	load_tags()
-	SITE = StackAPI('stackoverflow', key='CWwV4ERW0DDkc6tgjdAjGg((')
+	SITE = StackAPI('stackoverflow', key='add your key here')
 	#based on the equivalent query on StackExchange DataExplorer directly (https://data.stackexchange.com/stackoverflow/query/edit/1019759), 
 	# we should have 33343 threads returned by query below for last 1 year (8508 having at least 2 answers)
 	# and 111,026 for last 3 years
