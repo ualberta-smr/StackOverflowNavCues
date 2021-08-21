@@ -1,4 +1,4 @@
-from SOSentence import SOSentence
+from src.SOSentence import SOSentence
 import csv
 
 class ConditionalSentence(SOSentence):

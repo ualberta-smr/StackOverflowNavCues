@@ -1,4 +1,6 @@
-pycorenlp>=0.3.3
+pycorenlp>=0.3.0
 bs4>=0.0.1
 stackapi>=0.1.9
 lexrank>=0.1.0
+nltk==3.6.2
+pyquery==1.4.3

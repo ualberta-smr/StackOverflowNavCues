@@ -1,9 +1,9 @@
-from ConditionalSentence import ConditionalSentence
-from SOSentence import SOSentence
+from src.ConditionalSentence import ConditionalSentence
+from src.SOSentence import SOSentence
 from pycorenlp import StanfordCoreNLP as pycorenlp_StanfordCoreNLP
 import re
-from regex import REGEX_LIST
-from tags import load_tags, TAGS_LIST, QUALITY_WORDS
+from src.regex import REGEX_LIST
+from src.tags import load_tags, TAGS_LIST, QUALITY_WORDS
 import sys
 from nltk.stem.porter import *
 import traceback

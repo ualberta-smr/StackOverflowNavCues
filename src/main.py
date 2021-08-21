@@ -1,10 +1,12 @@
 from stackapi import StackAPI
 from datetime import datetime
-from so_helper import get_paragraphs
-from corenlp_helper import *
-from ConditionalSentence import ConditionalSentence
-from tags import load_tags
+from src.corenlp_helper import *
+from src.ConditionalSentence import ConditionalSentence
+from src.so_helper import get_paragraphs
+from src.tags import load_tags
 from statistics import mean, median, mode
+
+STACK_APPS_API_KEY = "<STACK_APPS_API_KEY>"
 
 
 def find_interesting_sentences(questions):
@@ -98,7 +100,7 @@ def read_patterns_file():
 
 def main():
 	load_tags()
-	SITE = StackAPI('stackoverflow', key='add your key here')
+	SITE = StackAPI('stackoverflow', key=STACK_APPS_API_KEY)
 	#based on the equivalent query on StackExchange DataExplorer directly (https://data.stackexchange.com/stackoverflow/query/edit/1019759), 
 	# we should have 33343 threads returned by query below for last 1 year (8508 having at least 2 answers)
 	# and 111,026 for last 3 years
